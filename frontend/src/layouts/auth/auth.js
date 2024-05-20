@@ -9,6 +9,17 @@ function Auth() {
 
   return (
     <div className='auth-container'>
+      {/* <Welcome/> */}
+      <div className='auth-wrapper' >
+        <div className='auth-box'>
+          <h1></h1>
+        </div>
+        <div className='auth-btn-container'>
+          <button className='first-btn'>Log In</button>
+          <button>Create Account</button>
+        </div>
+      </div>
+
       <Welcome/>
      {
       form === "login" ?
@@ -19,3 +30,4 @@ function Auth() {
 }
 
 export default Auth
+//#eaecd1
