@@ -6,6 +6,7 @@ function Auth() {
   return (
     <div className='auth-container'>
       <Welcome/>
+      
     </div>
   )
 }
