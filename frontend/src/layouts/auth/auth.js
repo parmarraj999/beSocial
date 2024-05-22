@@ -14,8 +14,10 @@ function Auth() {
       {/* <Welcome/> */}
       <div className='auth-wrapper' >
         <div className='auth-box'>
-          
-          
+          <h1>BeSocial</h1>
+          <div className='auth-img' >
+            
+          </div>
         </div>
         <div className='auth-btn-container'>
           <button className='first-btn'>Log In</button>

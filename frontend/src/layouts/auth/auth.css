@@ -15,6 +15,69 @@
     border-radius: 0 0 20px 20px;
     width: 96%;
     background-color: #eae3d1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.auth-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid red;
+}
+
+.auth-btn-container button{
+    text-decoration: none;
+    padding: 1rem 3rem;
+    font-size: 18px;
+    font-weight: 600;
+    /* background-color: #80ff00; */
+    border: none;
+    border-radius: 10px;
+
+}
+.auth-img{
+    width: auto;
+    height: auto;
+    border: 1px solid red;
+    background: url("../../../public/image/doodle-one.png");
+    background-position: center;
+    background-size: cover;
+}
+.auth-btn-container .first-btn{
+    background-color: #80ff00;
+}
+
+@media screen and (max-width:765px) {
+    .auth-box{
+        width: 93%;
+    }
+    .auth-container{
+        height: calc(100vh - 4rem);
+    }
+    .auth-wrapper{
+        height: calc(100vh - 4rem);
+    }
+}
+.auth-container{
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+}
+.auth-wrapper{
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 10.5fr 1.5fr;
+}
+.auth-box{
+    margin: 0 auto;
+    border-radius: 0 0 20px 20px;
+    width: 96%;
+    background-color: #eae3d1;
 }
 .auth-btn-container{
     display: flex;
