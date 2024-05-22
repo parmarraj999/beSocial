@@ -23,7 +23,7 @@ function Auth() {
         </div>
       </div>
 
-      <Welcome/>
+      {/* <Welcome/> */}
      {
       form === "login" ?
       <Login/> : ""

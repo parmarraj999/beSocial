@@ -38,7 +38,7 @@
     border-radius: 10px;
 
 }
-.auth-img{
+.auth-box .auth-img{
     width: auto;
     height: auto;
     border: 1px solid red;
@@ -61,3 +61,5 @@
         height: calc(100vh - 4rem);
     }
 }
+
+ 
