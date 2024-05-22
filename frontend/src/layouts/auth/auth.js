@@ -2,33 +2,39 @@ import React, { useState } from 'react'
 import "./auth.css"
 import Welcome from '../welcome/welcome'
 import Login from './Login'
-// import doodle-one from 'public/image/doodle-one.png'
-
+import Signup from './signup'
+import { useGSAP } from '@gsap/react'
 
 function Auth() {
   
-  const [form,setForm] = useState("login")
+  useGSAP(()=>{
+   
+  })
+
+  const [form,setForm] = useState("")
 
   return (
     <div className='auth-container'>
-      {/* <Welcome/> */}
       <div className='auth-wrapper' >
         <div className='auth-box'>
-          <h1>BeSocial</h1>
+          <h1>Be<span>Social</span></h1>
           <div className='auth-img' >
-            
           </div>
         </div>
         <div className='auth-btn-container'>
-          <button className='first-btn'>Log In</button>
-          <button className='second-btn'><h3>Create Account</h3></button>
+          <button className='first-btn' onClick={()=>setForm("login")}>Log In</button>
+          <button className='second-btn' onClick={()=>setForm("signup")}><h3>Create Account</h3></button>
         </div>
       </div>
 
-      {/* <Welcome/> */}
+      <Welcome/>
      {
       form === "login" ?
-      <Login/> : ""
+      <Login setForm={setForm} /> : ""
+     }
+     {
+      form === "signup" ?
+        <Signup setForm={setForm} /> :""
      }
     </div>
   )
