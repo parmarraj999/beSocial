@@ -1,5 +1,13 @@
 .home-container{
-    width: 100%;
+    width: 38%;
+    margin: 0 auto;
     height: 100vh;
-    background: red;
+    margin-top: 80px;
+}
+
+@media screen and (max-width:765px) {
+    .home-container{
+        margin-top: 0;
+        width: 95%;
+    }
 }
