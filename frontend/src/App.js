@@ -3,15 +3,17 @@ import { BrowserRouter, Routes , Route} from "react-router-dom"
 import Welcome from "./layout/welcome/welcome";
 import Home from "./layout/home/home";
 import Nav from "./layout/nav/nav";
+import Search from "./layout/search/search";
 
 function App() {
 
   return (
     <div className="App">
       <BrowserRouter>
-      {/* <Nav/> */}
+      <Nav/>  
         <Routes>
          <Route path="/" element={<Home/>} />
+         <Route path="/search" element={<Search/>}/>
         </Routes>
       </BrowserRouter>
     </div>

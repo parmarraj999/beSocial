@@ -10,7 +10,6 @@ function Home() {
   return (
     <div className='home-container' >
       {/* <Welcome/> */}
-      <Nav />
       <div className='nav4logo' >
         <div>logo</div>
         <div>
