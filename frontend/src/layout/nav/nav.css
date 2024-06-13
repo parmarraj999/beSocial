@@ -38,7 +38,8 @@
     width: 95%;
     height: 70px;
     border-radius: 20px;
-    background: white;
+    background: rgb(255,255,255);
+    backdrop-filter: blur(35px);
     display: none;
     align-items: center;
     justify-content: space-around;
@@ -46,6 +47,7 @@
     bottom: 1%;
     left: 50%;
     transform: translate(-50%,0);
+    z-index: 99999;
     /* padding: 0 1.5rem; */
 }
 .nav-mobile .add-icon{
@@ -96,14 +98,15 @@
 .search-bar-nav:hover{
     border: 1px solid black;
 }
-
+.dropShadow{
+    box-shadow: 5px 5px 18px rgba(0,0,0,.18);
+}
 @media screen and (max-width:765px) {
     .nav-container{
       display: none;
     }
     .nav-mobile{
         display: flex;
-        border: 1px solid red;
     }
     .nav-mobile .add-icon{
         position: relative;

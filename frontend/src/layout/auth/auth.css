@@ -1,14 +1,138 @@
-.auth-container{
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+
+.auth-container {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: white;
 }
-.auth-wrapper{
+
+.auth-wrapper {
     width: 30%;
-    height: 85vh;
+    height: 95vh;
     border: 2px solid black;
     border-radius: 15px;
     margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: 6fr 4fr 2fr;
+
+}
+
+.auth-wrapper>img {
+    width: 100%;
+    height: 100%;
+}
+
+.auth-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.auth-content h1,
+h2 {
+    font-size: 2.8rem;
+    font-family: "Roboto Slab", serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    line-height: 3rem;
+}
+
+.get-start-button {
+    width: 90%;
+    margin: 0 auto;
+    height: 65px;
+    background: #80ff00;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+@media screen and (max-width:765px) {
+    .auth-container{
+        height: calc(100vh - 3rem);
+    }
+    .auth-wrapper {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* ================= login ==========  */
+
+.auth-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 2rem;
+}
+.log-grid{
+    display: grid;
+    grid-template-rows: 2fr 7fr 3fr;
+}
+.auth-header h2{
+    color: grey;
+}
+.auth-header img {
+    height: 120px;
+}
+.auth-input-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 100% ;
+}
+.auth-input{
+    width: 90%;
+    margin: 0 auto;
+    height: 60px;
+    border: 2px solid rgb(177, 177, 177);
+    border-radius: 10px;
+    padding: 0 1rem;
+    font-size: 18px;
+    font-weight: 600;
+}
+.auth-btn{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+.log-btn{
+    width: 90%;
+    margin: 0 auto;
+    height: 65px;
+    background: #80ff00;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.sign-btn{
+    width: 90%;
+    margin: 0 auto;
+    height: 65px;
+    background: #000000;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border-radius: 15px;
+    cursor: pointer;
 }
