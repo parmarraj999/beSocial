@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import axios from "axios"
 import { v4 as uuidv4 } from "uuid"
 import { useNavigate } from "react-router-dom"
+import { UserIDContext } from '../../context/context'
 
 function Signup({setCurrUi}) {
 
@@ -12,6 +13,8 @@ function Signup({setCurrUi}) {
   const [email,setEmail] = useState("")
   const [errorMsg,setErrorMsg] = useState("");
   const [succMsg,setSuccMsg] = useState("");
+
+  const userID = useContext(UserIDContext);
   
   const navigate = useNavigate()
   
@@ -33,6 +36,7 @@ function Signup({setCurrUi}) {
         console.log(uuidv4())
         setSuccMsg("Account Created")
         setErrorMsg("")
+        userID.setUserID(uniqueId)
         setTimeout(() => {
           navigate("/")
         }, 3000);

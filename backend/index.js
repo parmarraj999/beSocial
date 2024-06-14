@@ -30,6 +30,31 @@ app.post("/auth/signup",(req,res)=>{
 })
 
 
+app.post("/auth/login",(req,res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  userModel.findOne({email:email,password : password})
+  .then((user)=>{
+      if(user){
+          res.json(user);
+          // if(user.password === password){
+          //     res.json("successfull");
+          //     console.log("user successfull")
+          // }
+          // else{
+          //     res.json("password is incorrect")
+          // }
+      }else{
+          res.json("No user Found !")
+      }
+  })
+  .catch((err)=>{
+      console.log(err)
+  })
+})
+
+
+
 app.listen(5000,()=>{
   console.log("sever is running on port 5000")
 })
