@@ -5,8 +5,19 @@ import Nav from '../nav/nav'
 import Stories from './stories/stories'
 import StoryBoard from './stories/storyboard'
 import Post from './post/post'
+import { useNavigate } from 'react-router'
 
 function Home() {
+
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    window.localStorage.removeItem("isLogIn")
+    navigate("/")
+    console.log(window.localStorage.getItem("isLogIn"))
+    window.location.reload();
+  }
+
   return (
     <div className='home-container' >
       {/* <Welcome/> */}
@@ -19,6 +30,9 @@ function Home() {
       <Stories />
       {/* <StoryBoard/> */}
       <Post/>
+      <button onClick={handleLogOut} >
+        Log Out
+      </button>
     </div>
   )
 }

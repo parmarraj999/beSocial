@@ -4,8 +4,9 @@ import Home from "./layout/home/home";
 import Nav from "./layout/nav/nav";
 import Search from "./layout/search/search";
 import Auth from "./layout/auth/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserDataContext, UserIDContext } from "./context/context";
+import Profile from "./layout/profile/profile";
 
 function App() {
 
@@ -13,6 +14,9 @@ function App() {
   const [userData, setUserData] = useState({})
 
   console.log(userData)
+  const isLoged = window.localStorage.getItem("isLogIn")
+  console.log(isLoged)
+
   return (
     <div className="App">
       <UserDataContext.Provider value={{userData,setUserData}} >
@@ -20,9 +24,10 @@ function App() {
           <BrowserRouter>
             <Nav />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" exact element={ isLoged ? <Home /> : <Auth/>} />
               <Route path="/search" element={<Search />} />
-              <Route path="/auth" element={<Auth />} />
+              {/* <Route path="/auth" element={<Auth />} /> */}
+              <Route path="/profile" element={<Profile/>} />
             </Routes>
           </BrowserRouter>
         </UserIDContext.Provider>

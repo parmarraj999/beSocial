@@ -25,6 +25,7 @@ function Login({setCurrUi}) {
       })
       .then(result => {
         if(result.data){
+          window.localStorage.setItem("isLogIn",true)
           setSuccMsg("Welcome"+ " " + result.data.name )
           console.log(result.data)
           userData.setUserData(result.data)
