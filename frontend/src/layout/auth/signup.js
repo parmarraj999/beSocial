@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import axios from "axios"
 import { v4 as uuidv4 } from "uuid"
 import { useNavigate } from "react-router-dom"
-import { UserIDContext } from '../../context/context'
+import { UserDataContext, UserIDContext } from '../../context/context'
 
 function Signup({setCurrUi}) {
 
@@ -15,6 +15,7 @@ function Signup({setCurrUi}) {
   const [succMsg,setSuccMsg] = useState("");
 
   const userID = useContext(UserIDContext);
+  const userData = useContext(UserDataContext);
   
   const navigate = useNavigate()
   
@@ -25,7 +26,7 @@ function Signup({setCurrUi}) {
       }
       if( name && password && username && email ){
         
-      const uniqueId = username + uuidv4() + name
+      const uniqueId = username + uuidv4();
         axios.post("http://localhost:5000/auth/signup",{
           uid : uniqueId,
           name : name,
@@ -33,10 +34,15 @@ function Signup({setCurrUi}) {
           email: email,
           password: password,
         })
+        .then(result=>{
+          userData.setUserData(result.data)
+          window.localStorage.setItem("userId",result.data._id)
+        })
         console.log(uuidv4())
         setSuccMsg("Account Created")
         setErrorMsg("")
         userID.setUserID(uniqueId)
+        window.localStorage.setItem("isLogIn",true)
         setTimeout(() => {
           navigate("/")
         }, 3000);

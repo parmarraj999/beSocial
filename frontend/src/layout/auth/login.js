@@ -29,6 +29,7 @@ function Login({setCurrUi}) {
           setSuccMsg("Welcome"+ " " + result.data.name )
           console.log(result.data)
           userData.setUserData(result.data)
+          window.localStorage.setItem("userId",result.data._id)
           setErrorMsg("")
           setTimeout(() => {
             navigate("/")

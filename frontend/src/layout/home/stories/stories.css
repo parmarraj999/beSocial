@@ -98,4 +98,10 @@
     .nav4logo{
         display: flex;
     }
+    .story-slider{
+        width: 98%;
+    }
+    .story-board{
+        width: 95%;
+    }
 }

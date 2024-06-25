@@ -1,0 +1,22 @@
+.logout-pop-container{
+    padding: .4rem;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(20px);
+    position: absolute;
+    border-radius: 15px;
+    right: 0%;
+    top: 125%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logout-pop-container button{
+    width: 120px;
+    height: 56px;
+    font-size: 18px;
+    color: white;
+    background: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}

@@ -28,7 +28,9 @@ const userSchema = new mongoose.Schema({
 
     password: String,
 
-    profile_picture: String,
+    profile_picture: {
+        type : String
+    },
 
     followers: [
         {
@@ -46,13 +48,19 @@ const userSchema = new mongoose.Schema({
 
     posts: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Posts"
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Post"
         }
     ],
+    search : [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }
+    ]
 },
 { timestamps: true }
 )
 
-const userModel = mongoose.model("User",userSchema);
-module.exports = userModel;
+const User = mongoose.model("User",userSchema);
+module.exports = User;

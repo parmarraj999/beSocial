@@ -18,7 +18,7 @@
 .profile-wrapper{
     width: 38%;
     margin: 0 auto;
-    height: 100%;
+    height: fit-content;
 }
 .profile-box-container{
     width: 100%;
@@ -59,7 +59,32 @@
 .profile-box h2{
     font-size: 22px;
 }
+.profile-username{
+    font-size: 24px;
+    color: #292929;
+    font-weight: 600;
+}
 
+.backAndUser {
+    padding: 0 1rem 0 0;
+    border-radius: 2rem;
+    transition: .2s all;
+    cursor: pointer;
+    text-decoration: none;
+}
+.backAndUser:hover{
+    background: rgba(0,0,0,.1);
+}
+
+.add-img-profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #80ff00;
+    border-radius: 10px;
+}
 @media screen and (max-width:765px) {
     .profile-header{
         padding: 0 .8rem 0 .2rem;
