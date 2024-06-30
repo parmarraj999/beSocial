@@ -92,4 +92,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.credential-notify-container .progress-bar {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+.credential-notify-container .progress-bar .bar {
+  height: 100%;
+  background: #80ff00;
+}
+.credential-notify-container .progress-bar .bar .done-img {
+  width: 100%;
+  height: 300px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.credential-notify-container .progress-bar .bar .done-img video {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=notification.css.map */

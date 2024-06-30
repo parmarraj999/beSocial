@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./profile.css"
 import { Link, Outlet } from 'react-router-dom'
 import { UserDataContext } from '../../context/context'
@@ -6,10 +6,22 @@ import ProfileNotify from '../../component/notification/profileNotify'
 import UploadPic from './uploadPic/uploadPic'
 import Logout from '../../component/logout/logout'
 import MyPosts from './myPost/myPost'
+import axios from 'axios'
 
 function Profile() {
 
     const userData = useContext(UserDataContext)
+
+    const storage = window.localStorage
+    const userIdbyLocalStorage = window.localStorage.getItem("userId")
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+          .then((result) => {
+            userData.setUserData(result.data[0])
+          })
+      }, [])
+
 
     const [showUpload, setShowUpload] = useState(false)
 

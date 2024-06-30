@@ -92,3 +92,26 @@
         justify-content: center;
     }
 }
+
+.credential-notify-container{
+    .progress-bar{
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        .bar{
+            height: 100%;
+            background: #80ff00;
+            .done-img{
+                width: 100%;
+                height: 300px;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+            .done-img video{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

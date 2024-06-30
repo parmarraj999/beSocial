@@ -46,18 +46,19 @@ const userSchema = new mongoose.Schema({
         }
     ],
 
-    posts: [
+    posts : [
         {
-            type : mongoose.Schema.Types.ObjectId,
-            ref : "Post"
+            type : String
+            // ref : 'Post'
         }
     ],
+
     search : [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         }
-    ]
+    ]   
 },
 { timestamps: true }
 )

@@ -72,18 +72,40 @@ app.get("/user/:id", (req, res) => {
     .catch(error => res.json(error))
 })
 
-app.post("/addPost/:id",(req, res) => {
+app.post("/addPost/:id",async(req, res) => {
   const {id} = req.params;
-  const title = req.body.title
-  Post.create({
+  const { caption, postedBy, mediaType, mediaUrl } = req.body;
+
+  const post = await Post.create({
+    postedBy : postedBy,
     userId : id,
-    title : title
+    caption : caption,
+    mediaUrl : mediaUrl,
+    mediaType : mediaType
   })
   .then((user) => {
     res.json(user)
     console.log("Data added")
   })
 })
+
+
+app.get('/getUserPost/:id',(req,res)=>{
+  const {id} = req.params;
+  Post.find({postedBy:id})
+  .then(result => res.json(result))
+  .catch(error => res.json(error))
+
+})
+
+
+app.put('/follow/:id',async(req,res)=>{
+  
+  const {id} = req.params;
+   User.follow.push(id)
+   console.log(userToFollow)
+})
+
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")

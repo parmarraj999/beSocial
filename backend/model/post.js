@@ -1,11 +1,28 @@
 const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    userId : {
-       type : String
+    postedBy :{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
     },
-    title : {
+    userId : {
+       type : String,
+       required: true,
+    },
+    caption : {
         type : String
+    },
+    mediaUrl : {
+        type : String,
+        required : true
+    },
+    mediaType : {
+        type : String
+    },
+    like :{
+        type :[ mongoose.Types.ObjectId],
+        ref : "User",
+        default : []
     }
 },
 { timestamps : true }
