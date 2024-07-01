@@ -16,10 +16,12 @@ function MyPosts({ id }) {
     })
   }, [])
   const handleRefresh = () => {
-    axios.get("http://localhost:5000/getUserPost/" + userIdbyLocalStorage)
-    .then((result) => {
-      setPostData(result.data)
-    })
+    setTimeout(() => {
+      axios.get("http://localhost:5000/getUserPost/" + userIdbyLocalStorage)
+      .then((result) => {
+        setPostData(result.data)
+      })
+    }, 1000);
   }
 
   const [postExtend,setPostExtend] = useState(false)

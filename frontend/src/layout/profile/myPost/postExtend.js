@@ -51,6 +51,7 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
     })
 
     const handleDeleteAnime = () => {
+        handleRefresh();
         tl.from(".delete-pop", {
             opacity: 0,
         })
@@ -88,7 +89,7 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
             background: "rgba(0,0,0,0)",
             duration: .4
         })
-        handleRefresh();
+        
     }
 
     return (
