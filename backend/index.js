@@ -106,6 +106,14 @@ app.put('/follow/:id',async(req,res)=>{
    console.log(userToFollow)
 })
 
+app.delete("/deletePost/:id",(req,res)=>{
+  const {id} = req.params;
+  Post.findByIdAndDelete({_id:id})
+  .then((result)=>{
+    res.json(result)
+  })
+})
+
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")

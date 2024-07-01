@@ -3,51 +3,100 @@ import { UserDataContext } from '../../../context/context'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import MenuExtend from './menuExtend'
+import axios from 'axios'
 
 
-function PostExtend({ data, setPostExtend }) {
+function PostExtend({ data, setPostExtend, handleRefresh }) {
 
     const userData = useContext(UserDataContext)
     const [showMenu, setShowMenu] = useState(false)
-    const [createDate,setCreateDate] = useState()
+    const [createDate, setCreateDate] = useState()
 
     console.log(data.createdAt)
 
-    
+    const storage = window.localStorage
+    const userIdbyLocalStorage = window.localStorage.getItem("userId")
+
     function convertDate() {
-        // Create a JavaScript Date object from the input string
+
         const createDate = data.createdAt
         const date = new Date(createDate);
-      
-        // Extract year, month (0-indexed), and day components
+
         const year = date.getFullYear();
-        const month = date.getMonth() + 1;  // Add 1 for zero-based indexing
+        const month = date.getMonth() + 1;
         const day = date.getDate();
-      
+
         const abc = `${day.toString().padStart(2, "0")} ${month.toString().padStart(2, "0")} ${year}`;
         console.log(abc)
         setCreateDate(abc)
-      }
+    }
 
-      useEffect(()=>{
+    useEffect(() => {
 
-          convertDate();
-      },[])
-      
-      useGSAP(()=>{
-        gsap.from(".post-extend-container",{
-            background:"rgba(0,0,0,0)",
-            duration:.4
+        convertDate();
+    }, [])
+
+    const tl = gsap.timeline();
+
+    useGSAP(() => {
+        gsap.from(".post-extend-container", {
+            background: "rgba(0,0,0,0)",
+            duration: .4
         })
-        gsap.from(".extend-post",{
-            opacity:0,
-            duration:.8,
-            ease : "expo.out"
+        gsap.from(".extend-post", {
+            opacity: 0,
+            duration: .8,
+            ease: "expo.out"
         })
-      })
+    })
+
+    const handleDeleteAnime = () => {
+        tl.from(".delete-pop", {
+            opacity: 0,
+        })
+        tl.to(".delete-pop", {
+            y: 100,
+            opacity:1
+        })
+        tl.to(".delete-pop", {
+            width: "120px",
+            height: "120px",
+            duration:.3
+        })
+        tl.to(".extend-post", {
+            scale: 0.1,
+            duration:.4,
+            top: 100,
+        })
+        tl.to(".delete-pop", {
+            border: "4px solid red",
+            duration:.1
+        })
+        tl.to(".extend-post", {
+            display: "none"
+        })
+        tl.to(".delete-pop", {
+            width: "50px",
+            height: "50px",
+            duration:.3
+        })
+        tl.to(".delete-pop", {
+            y: -80,
+            opacity: 0
+        })
+        tl.to(".post-extend-container", {
+            background: "rgba(0,0,0,0)",
+            duration: .4
+        })
+        handleRefresh();
+    }
 
     return (
         <div className='post-extend-container' >
+
+            <div className='delete-pop' >
+                <svg className='delete-icon' style={{ width: "25px", color: "red" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4 8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8ZM6 10V20H18V10H6ZM9 12H11V18H9V12ZM13 12H15V18H13V12ZM7 5V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V5H22V7H2V5H7ZM9 4V5H15V4H9Z"></path></svg>
+            </div>
             <div className='close-container' onClick={() => setPostExtend(false)} ></div>
             <div className='extend-post' >
                 <div className='extend-post-header'>
@@ -56,10 +105,10 @@ function PostExtend({ data, setPostExtend }) {
                         <h2 className='extend-post-name' >
                             {userData.userData.username}</h2>
                     </div>
-                    <div className='extend-post-menu-icon' onClick={()=>setShowMenu(!showMenu)}>
+                    <div className='extend-post-menu-icon' onClick={() => setShowMenu(!showMenu)}>
                         {
                             showMenu ?
-                            <MenuExtend/> : ""
+                                <MenuExtend postId={data._id} handleDeleteAnime={handleDeleteAnime} /> : ""
                         }
                         <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path></svg>
                     </div>

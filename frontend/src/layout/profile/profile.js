@@ -22,7 +22,6 @@ function Profile() {
           })
       }, [])
 
-
     const [showUpload, setShowUpload] = useState(false)
 
     const [showPopLog, setShowPopLog] = useState(false)
@@ -87,7 +86,7 @@ function Profile() {
                     </div>
                 </div>
             </div>
-            <MyPosts id={userData.userData._id} />
+            <MyPosts  id={userData.userData._id} />
             <Outlet />
         </div>
     )

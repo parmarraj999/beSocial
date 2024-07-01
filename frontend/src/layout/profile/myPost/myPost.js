@@ -5,7 +5,6 @@ import PostExtend from './postExtend'
 
 function MyPosts({ id }) {
 
-  
   const [postData,setPostData] = useState()
   
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
@@ -16,6 +15,12 @@ function MyPosts({ id }) {
       setPostData(result.data)
     })
   }, [])
+  const handleRefresh = () => {
+    axios.get("http://localhost:5000/getUserPost/" + userIdbyLocalStorage)
+    .then((result) => {
+      setPostData(result.data)
+    })
+  }
 
   const [postExtend,setPostExtend] = useState(false)
   const [singlePost,setSinglePost] = useState({})
@@ -23,7 +28,7 @@ function MyPosts({ id }) {
   return (  
     <div className='my-post-container' >
       {
-        postExtend ? <PostExtend setPostExtend={setPostExtend} data={singlePost} /> : ""
+        postExtend ? <PostExtend handleRefresh={handleRefresh} setPostExtend={setPostExtend} data={singlePost} /> : ""
       }
       {
         postData?.map((data,key)=>{
