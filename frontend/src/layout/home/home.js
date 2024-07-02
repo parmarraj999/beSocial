@@ -18,11 +18,13 @@ function Home() {
   const navigate = useNavigate()
   const storage = window.localStorage
 
-  const handleFollow = () => {
-    axios.put("http://localhost:5000/follow/" + userData.userData._id)
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+  const handleLogOut = () => {
+    storage.removeItem("isLogIn")
+    navigate("/")
+    window.location.reload();
+    storage.removeItem("userId")
   }
+
 
   const userData = useContext(UserDataContext);
 
@@ -50,12 +52,12 @@ function Home() {
       </div>
       <Stories />
       {/* <StoryBoard/> */}
-      <Post /> 
+      <Post />
       {
         showPost ?
-          <Create setShowPost={setShowPost} id={userData.userData._id}  /> : ""
+          <Create setShowPost={setShowPost} id={userData.userData._id} /> : ""
       }
-      <button className='follow' onClick={handleFollow} >
+      <button className='follow' onClick={handleLogOut} >
         follow
       </button>
       <div onClick={() => setShowPost(!showPost)} className='post-create-btn' >

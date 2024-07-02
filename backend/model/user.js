@@ -52,13 +52,11 @@ const userSchema = new mongoose.Schema({
             // ref : 'Post'
         }
     ],
-
-    search : [
+    search: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            Name : String ,
         }
-    ]   
+    ]
 },
 { timestamps: true }
 )

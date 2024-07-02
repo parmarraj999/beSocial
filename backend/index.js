@@ -114,6 +114,34 @@ app.delete("/deletePost/:id",(req,res)=>{
   })
 })
 
+app.put("/search/:id", async(req,res)=>{
+  const {id} = req.params;
+  const { searchData } = req.body;
+  try {
+    const result = await User.findByIdAndUpdate({_id:id},{$push :{search : {Name : searchData}}},{new:true})
+    console.log(result)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+app.get("/getSearchList/:id", (req, res) => {
+  const { id } = req.params;
+  User.find({ _id: id })
+    .then(result => res.json(result))
+    .catch(error => res.json(error))
+})
+
+// app.put("/deleteRecent/:id", async(req,res)=>{
+//   const {id} = req.params;
+//   const { deleteData } = req.body;
+//   try {
+//     const result = await User.findByIdAndUpdate({_id:id},{$pull :{search : {Name : deleteData}}},{new:true})
+//     console.log(result)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")

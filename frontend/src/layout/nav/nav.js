@@ -4,6 +4,7 @@ import { gsap } from "gsap"
 import { useLocation, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { UserDataContext } from '../../context/context';
+import axios from "axios"
 
 function Nav() {
 
@@ -14,9 +15,20 @@ function Nav() {
   const location = useLocation();
   const { pathname } = location;
 
+  const [searchText,setSearchText] = useState("")
+
+  const handleSearch = () => {
+    console.log("clicked search")
+    axios.put("http://localhost:5000/search/"+ userData.userData._id ,{
+      searchData : searchText
+    })
+  }
+  const handleSearchInput = (e) => {
+    setSearchText(e.target.value)
+  }
+
   useEffect(() => {
     if (pathname === "/search") {
-
       gsap.to(".search-bar-container", {
         display: "flex",
         delay: .8
@@ -199,8 +211,8 @@ const handleMobileSearchClick = () => {
                   <svg className="back-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
                 </Link>
               </div>
-              <input className='search-bar-nav' placeholder='Search' />
-              <div className='search-btn'>
+              <input className='search-bar-nav' placeholder='Search' onChange={handleSearchInput} />
+              <div className='search-btn' onClick={handleSearch}>
                 <svg className='search-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
               </div>
             </div>
@@ -245,8 +257,8 @@ const handleMobileSearchClick = () => {
               <svg className="back-icon-nav2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
             </Link>
           </div>
-          <input className='search-bar-nav2' placeholder='Search' />
-          <div className='search-btn'>
+          <input className='search-bar-nav2' placeholder='Search' onChange={handleSearchInput} />
+          <div className='search-btn' onClick={handleSearch}>
             <svg className='search-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
           </div>
         </div>
