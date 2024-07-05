@@ -62,7 +62,7 @@
 
 
 /* =========== search bar ========  */
-.search-bar-container,.search-bar-container2{
+/* .search-bar-container,.search-bar-container2{
     display: none;
     gap: 1rem;
     align-items: center;
@@ -97,7 +97,7 @@
 }
 .search-bar-nav:hover{
     border: 1px solid black;
-}
+} */
 .dropShadow{
     box-shadow: 5px 5px 18px rgba(0,0,0,.18);
 }

@@ -15,78 +15,18 @@ function Nav() {
   const location = useLocation();
   const { pathname } = location;
 
-  const [searchText,setSearchText] = useState("")
-
-  const handleSearch = () => {
-    console.log("clicked search")
-    axios.put("http://localhost:5000/search/"+ userData.userData._id ,{
-      searchData : searchText
-    })
-  }
-  const handleSearchInput = (e) => {
-    setSearchText(e.target.value)
-  }
 
   useEffect(() => {
     if (pathname === "/search") {
-      gsap.to(".search-bar-container", {
-        display: "flex",
-        delay: .8
-      })
-      gsap.to(".search-bar-nav", {
-        width: "350px",
-        duration: .4,
-        delay: 1
-      })
       gsap.to(".upIconAnime", {
         y: -20,
         opacity: 0,
         duration: .2,
         stagger: .2,
       })
-      gsap.fromTo(".back-btn", {
-        y: -20,
-        opacity: 0,
-        delay: 1.4
-      }, {
-        y: 0,
-        opacity: 1,
-        delay: 1.4
-      })
-      gsap.fromTo(".search-btn", {
-        y: -20,
-        opacity: 0,
-        delay: 1.6
-      }, {
-        y: 0,
-        opacity: 1,
-        delay: 1.6
-      })
       gsap.to(".nav-mobile .nav-icon",{
-        y:-20,
         opacity:0,
-        duration:.2,
-        stagger:.1,
-        display:"none"
        })
-      
-       gsap.to(".nav-mobile .add-icon",{
-        y:-20,
-        opacity:0,
-        delay:.2,
-        display:"none"
-       })
-       gsap.to(".search-bar-container2",{
-        display:"flex",
-        width:"100%",
-        delay:.8
-       })
-       gsap.to(".search-bar-nav2",{
-        width:"70%",
-        duration:.6,
-        delay:1.8
-       })
-       
     }
   })
 
@@ -96,37 +36,13 @@ function Nav() {
     // navigate("/search")
   }
 
-  const backClick = () => {
-    gsap.to(".search-btn", {
-      y: -20,
-      opacity: 0,
-    })
-    gsap.to(".back-btn", {
-      y: -20,
-      opacity: 0,
-      delay: .2
-    })
-    gsap.to(".search-bar-nav", {
-      width: "0px",
-      duration: .3,
-      delay: .4
-    })
-
-
-    gsap.to(".search-bar-nav2", {
-      width: "0px",
-      duration: .5,
-      delay: .3
-    })
-    gsap.to(".search-bar-container", {
-      display: "none",
-      delay: .7
-    })
+  if (pathname !== "/search") {
+   
     gsap.to(".upIconAnime", {
       y: 0,
       opacity: 1,
       duration: .2,
-      delay: 1.4,
+      delay: .5,
       stagger: .2
     })
     gsap.to(".nav-mobile .nav-icon",{
@@ -143,12 +59,6 @@ function Nav() {
       display:"flex"
      })
 
-     gsap.to(".search-bar-container2",{
-      display:"none",
-      width:"100%",
-      delay: .8
-     })
-
   }
 
 const handleMobileSearchClick = () => {
@@ -158,23 +68,6 @@ const handleMobileSearchClick = () => {
     duration:.2,
     stagger:.1,
     display:"none"
-   })
-  
-   gsap.to(".nav-mobile .add-icon",{
-    y:-20,
-    opacity:0,
-    delay:.2,
-    display:"none"
-   })
-   gsap.to(".search-bar-container2",{
-    display:"flex",
-    width:"100%",
-    delay:.8
-   })
-   gsap.to(".search-bar-nav2",{
-    width:"70%",
-    duration:.6,
-    delay:1.8
    })
    
 }
@@ -204,18 +97,6 @@ const handleMobileSearchClick = () => {
                   <svg className='nav-icon upIconAnime' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
               }
             </Link>
-
-            <div className='search-bar-container' >
-              <div className='back-btn' onClick={backClick} >
-                <Link to="/">
-                  <svg className="back-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
-                </Link>
-              </div>
-              <input className='search-bar-nav' placeholder='Search' onChange={handleSearchInput} />
-              <div className='search-btn' onClick={handleSearch}>
-                <svg className='search-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-              </div>
-            </div>
 
             <Link to="/notificaton" onClick={() => setNavPath("notification")}>
               {
@@ -251,18 +132,7 @@ const handleMobileSearchClick = () => {
         <Link onClick={handleMobileSearchClick} to="/search">
           <svg className='nav-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
         </Link>
-        <div className='search-bar-container2'  >
-          <div className='back-btn' onClick={backClick} >
-            <Link to="/">
-              <svg className="back-icon-nav2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
-            </Link>
-          </div>
-          <input className='search-bar-nav2' placeholder='Search' onChange={handleSearchInput} />
-          <div className='search-btn' onClick={handleSearch}>
-            <svg className='search-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
-          </div>
-        </div>
-
+       
         <div className='add-icon '>
           <svg className='nav-icon ' style={{ width: "40px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
         </div>

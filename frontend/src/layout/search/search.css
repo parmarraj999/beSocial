@@ -1,8 +1,9 @@
 .search-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     margin-top: 80px;
     position: relative;
+    overflow: hidden;
 }
 
 .search-wrapper {
@@ -21,7 +22,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    opacity: .25;
+    opacity: .15;
 }
 
 .recent-search {
@@ -29,6 +30,8 @@
     display: flex;
     flex-direction: column;
     gap: .8rem;
+    height: 100%;
+    overflow: scroll;
 }
 
 .recent-search h4 {
@@ -43,6 +46,51 @@
     gap: .5rem;
 }
 
+
+.search-input-container{
+    width: fit-content;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    position: fixed;
+    top: 1%;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 99999999;
+}
+.back-icon-nav,.back-icon-nav2{
+    width: 45px;
+    color: grey;
+    display: block;
+}
+.search-bar-nav,.search-bar-nav2{
+    width: 300px;
+    height: 45px;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid transparent;
+    border-radius: 2rem;
+    padding: 0 1rem;
+    font-size: 18px;
+    display: block;
+}
+.search-bar-nav:hover{
+    border: 1px solid black;
+}
+.search-btn{
+    min-width: 45px;
+    height: 45px;
+    background: #80ff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.search-icon{
+    width: 20px;
+}
+
 @media screen and (max-width:765px) {
     .search-container {
         margin-top: 0;
@@ -54,5 +102,17 @@
 
     .search-wrapper {
         width: 100%;
+    }
+    .search-input-container{
+        width: 96%;
+        background: white;
+        height: 70px;
+        top: 90%;
+        display: flex;
+        border-radius: 15px;
+        padding: 0 .5rem;
+    }
+    .search-bar-nav,.search-bar-nav2{
+        width: 90%;
     }
 }

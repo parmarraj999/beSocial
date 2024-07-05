@@ -4,13 +4,17 @@ import Welcome from '../welcome/welcome'
 import Stories from './stories/stories'
 import StoryBoard from './stories/storyboard'
 import Post from './post/post'
-import { useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import CredentialNotify from '../../component/notification/credentialNotify'
 import { UserDataContext } from '../../context/context'
 import axios from "axios"
 import Create from './create/create'
+import gsap from 'gsap'
 
 function Home() {
+
+  const location = useLocation();
+  const { pathname } = location;
 
   const [showPop, setShowPop] = useState(true)
   const [showPost, setShowPost] = useState(false)
@@ -25,6 +29,11 @@ function Home() {
     storage.removeItem("userId")
   }
 
+  if (pathname === "/search") {
+    gsap.to(".post-create-btn",{
+      display:"none"
+    })
+  }
 
   const userData = useContext(UserDataContext);
 
@@ -35,7 +44,7 @@ function Home() {
       .then((result) => {
         userData.setUserData(result.data[0])
       })
-  }, [])
+  })
 
   return (
     <div className='home-container' >

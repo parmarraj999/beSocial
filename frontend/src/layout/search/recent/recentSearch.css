@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: .6rem;
 }
+
 .search-text {
     width: 100%;
     height: 50px;

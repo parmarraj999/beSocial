@@ -22,7 +22,8 @@ app.post("/auth/signup", (req, res) => {
     email: email,
     password: password,
     bio: "null",
-    profile_picture: ""
+    profile_picture: "",
+    search : {}
   })
     .then((user) => {
       res.json(user)
@@ -118,7 +119,7 @@ app.put("/search/:id", async(req,res)=>{
   const {id} = req.params;
   const { searchData } = req.body;
   try {
-    const result = await User.findByIdAndUpdate({_id:id},{$push :{search : {Name : searchData}}},{new:true})
+    const result = await User.findByIdAndUpdate({_id:id},{$push :{search : {Name : searchData}}})
     console.log(result)
   } catch (error) {
     console.log(error)
@@ -128,20 +129,34 @@ app.put("/search/:id", async(req,res)=>{
 app.get("/getSearchList/:id", (req, res) => {
   const { id } = req.params;
   User.find({ _id: id })
-    .then(result => res.json(result))
+    .then(result => {res.json(result)}
+  )
     .catch(error => res.json(error))
 })
 
-// app.put("/deleteRecent/:id", async(req,res)=>{
-//   const {id} = req.params;
-//   const { deleteData } = req.body;
-//   try {
-//     const result = await User.findByIdAndUpdate({_id:id},{$pull :{search : {Name : deleteData}}},{new:true})
-//     console.log(result)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
+app.put("/deleteRecent/:id", async(req,res)=>{
+  const {id} = req.params;
+  const { deleteData } = req.body;
+  try {
+    const result = await User.findOneAndUpdate({_id:id},{$pull :{search : {Name : deleteData}}},{new:true})
+    console.log(result)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+app.post("/getSearchUser",async(req,res)=>{
+  const {searchText} = req.body;
+  console.log("data",searchText)
+  await User.find({ username: { $regex: searchText, $options: 'i' } })
+  .then(user => {
+    res.json(user)
+    console.log(user)
+  })
+  .catch((error)=>{
+    console.log(error)
+  })
+})
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
