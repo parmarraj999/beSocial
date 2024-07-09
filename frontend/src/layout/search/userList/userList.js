@@ -29,10 +29,11 @@ function UserList({ }) {
         })
     })
 
-    const handleFollow = (userId, userName) => {
+    const handleFollow = (userId, userName,) => {
         console.log(userId)
         axios.put("http://localhost:5000/follow/" + userId, {
-            followerUsername: userName
+            followerUsername: userName,
+            followerId: userData._id
         }).then((result) => {
             console.log(result)
         })

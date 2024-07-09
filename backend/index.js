@@ -102,8 +102,11 @@ app.get('/getUserPost/:id',(req,res)=>{
 app.put('/follow/:id',async(req,res)=>{
   const {id} = req.params;
   const followerUsername = req.body.followerUsername;
+  const followerId = req.body.followerId
   try {
-    const result = await User.findByIdAndUpdate({_id:id},{$push :{followers : {followerId : id, followerUsername: followerUsername }}})
+     await User.findByIdAndUpdate({_id:id},{$push :{followers : {followerId : id, followerUsername: followerUsername }}})
+    
+    await User.findByIdAndUpdate({_id:followerId},{$push :{following : {followingId : id, followingUsername: followerUsername }}})
     .then((result)=>{
       res.json(result)
       console.log(result)
@@ -163,6 +166,26 @@ app.post("/getSearchUser",async(req,res)=>{
     console.log(error)
   })
 })
+
+// app.get('/isFollow/:id',(req,res)=>{
+//    const {userId,username} = req.body;
+//    User.find({
+//     following: {
+//       $elemMatch: {
+//         followingId: userId,
+//         followerUsername: username
+//       }
+//     }
+//    })
+//    .then((result)=>{
+//     console.log("user found")
+//     res.json("user found")
+//    })
+//    .catch(err=>{
+//     console.log("user not found")
+//    })
+// })
+
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
