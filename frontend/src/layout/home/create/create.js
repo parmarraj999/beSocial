@@ -36,7 +36,7 @@ function Create({ setShowPost, id }) {
         }
     }
 
-    console.log(percent)
+    // console.log(percent)
 
     const tl = gsap.timeline();
     useGSAP(()=>{

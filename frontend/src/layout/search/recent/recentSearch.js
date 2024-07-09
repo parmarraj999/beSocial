@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './recentSearch.css'
 import axios from "axios"
 
-function RecentSearch({ data, setData, getList }) {
+function RecentSearch({ data, setData, getList,setSearchText }) {
 
   const id = window.localStorage.getItem("userId")
   // const getRecentData = () => {
@@ -11,18 +11,20 @@ function RecentSearch({ data, setData, getList }) {
   //     console.log(res.data[0].search)
   //   })
   // }
-  useEffect(() => {
+  // useEffect(() => {
     // getRecentData();
-    getList();
-  }, [])
+    // getList();
+  // }, [])
 
   return (
     <div className='recent-search-container' >
       {
         data?.map((data) => {
           return (
-            <div className='search-text'>
+            <div className='search-text' >
+              <div style={{widht:"100%",height:"100%",display:"flex",alignItems:"center"}} onClick={()=>setSearchText(data?.Name)}>
               <h5>{data?.Name}</h5>
+                </div>
               <svg onClick={() => {
                 axios.put("http://localhost:5000/deleteRecent/" + id, {
                   deleteData: data.Name

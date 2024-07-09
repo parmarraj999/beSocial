@@ -29,7 +29,7 @@ function Profile() {
     return (
         <div className='profile-container' >
             {
-                userData.userData.profile_picture && userData.userData.bio ? "" :
+                userData.userData?.profile_picture && userData.userData?.bio ? "" :
                     <ProfileNotify />
             }
             <div className='profile-header' >

@@ -34,22 +34,21 @@ const userSchema = new mongoose.Schema({
 
     followers: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            followerId : String,
+            followerUsername:String
         }
     ],
 
     following: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
+            followingId : String,
+            followingUsername:String
         }
     ],
 
     posts : [
         {
-            type : String
-            // ref : 'Post'
+           postId: String
         }
     ],
     search: [

@@ -27,7 +27,6 @@ app.post("/auth/signup", (req, res) => {
   })
     .then((user) => {
       res.json(user)
-      console.log(user)
       console.log("signed up")
     })
 
@@ -101,10 +100,17 @@ app.get('/getUserPost/:id',(req,res)=>{
 
 
 app.put('/follow/:id',async(req,res)=>{
-  
   const {id} = req.params;
-   User.follow.push(id)
-   console.log(userToFollow)
+  const followerUsername = req.body.followerUsername;
+  try {
+    const result = await User.findByIdAndUpdate({_id:id},{$push :{followers : {followerId : id, followerUsername: followerUsername }}})
+    .then((result)=>{
+      res.json(result)
+      console.log(result)
+    })
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 app.delete("/deletePost/:id",(req,res)=>{
