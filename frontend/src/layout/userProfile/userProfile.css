@@ -19,7 +19,15 @@
     font-size: 18px;
     color: grey;
 }
-
+.follow-btn{
+    width: 50px;
+    height: 50px;
+    background: #80ff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
 .user-page-wrapper{
     width: 35%;
     margin: 0 auto;
@@ -45,7 +53,7 @@
 }
 .user-page-wrapper .profile-pic{
     border-radius: 50%;
-    border: 3px solid rgb(165, 165, 165);
+    border: 3px solid #a5a5a5;
     padding: .4rem;
 }
 .user-page-wrapper .profile-pic img{
@@ -64,4 +72,48 @@
     .user-page-wrapper{
         width: 100%;
     }
+}
+
+.follow-pop{
+    width: 50px;
+    height: 50px;
+    background: black;
+    border-radius: 2rem;
+    position: absolute;
+    top: 1.5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 9999999;
+    padding: 0 .3rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.follow-pop .pop-pic{
+    width: 36px;
+    height: 36px;
+    background: grey;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.follow-pop h3{
+    font-size: 18px;
+}
+.anime-pop-img{
+    width: 95px;
+    height: 95px;
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%,0);
+    border: 2px solid #80ff00;
+    overflow: hidden;
+    display: block;
+}
+.anime-pop-img img{
+    width: 100%;
+    height: 100%;
 }
