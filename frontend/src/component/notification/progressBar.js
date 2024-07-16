@@ -3,7 +3,7 @@ import '../notification.css'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
-function ProgressBar({percent,setShowProgress ,setShowPost}) {
+function ProgressBar({percent,setShowProgress ,setShowCreate}) {
 
     const tl = gsap.timeline();
     useGSAP(()=>{
@@ -62,7 +62,7 @@ function ProgressBar({percent,setShowProgress ,setShowPost}) {
               })
             }, 500);
             setTimeout(() => {
-                setShowPost(false)
+              setShowCreate(false)
             }, 7000);
     }
 

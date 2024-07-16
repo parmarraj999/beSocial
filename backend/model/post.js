@@ -6,8 +6,15 @@ const postSchema = new mongoose.Schema({
         ref : "User",
     },
     userId : {
-       type : String,
+       type : mongoose.Schema.Types.ObjectId,
        required: true,
+    },
+    creatorName: {
+        type: String,
+        required : true,
+    },
+    userProfile : {
+        type : String
     },
     caption : {
         type : String
@@ -19,11 +26,19 @@ const postSchema = new mongoose.Schema({
     mediaType : {
         type : String
     },
-    like :{
-        type :[ mongoose.Types.ObjectId],
-        ref : "User",
-        default : []
-    }
+    like :[
+        {
+            userName : String,
+            userId : String
+        }
+    ],
+    comments : [
+        {
+            userName : String,
+            commentText : String,
+            profileImg : String
+        }
+    ]
 },
 { timestamps : true }
 )

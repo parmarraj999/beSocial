@@ -74,14 +74,16 @@ app.get("/user/:id", (req, res) => {
 
 app.post("/addPost/:id", async (req, res) => {
   const { id } = req.params;
-  const { caption, postedBy, mediaType, mediaUrl } = req.body;
+  const { caption, postedBy, mediaType, mediaUrl, creatorName, userProfile } = req.body;
 
   const post = await Post.create({
     postedBy: postedBy,
     userId: id,
+    creatorName: creatorName,
+    userProfile : userProfile,
     caption: caption,
     mediaUrl: mediaUrl,
-    mediaType: mediaType
+    mediaType: mediaType,
   })
     .then((user) => {
       res.json(user)
@@ -107,6 +109,22 @@ app.put('/follow/:id', async (req, res) => {
     await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: id, followerUsername: followerUsername } } })
 
     await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername } } })
+      .then((result) => {
+        res.json(result)
+        console.log(result)
+      })
+  } catch (error) {
+    console.log(error)
+  }
+})
+app.put('/unfollow/:id', async (req, res) => {
+  const { id } = req.params;
+  const followerUsername = req.body.followerUsername;
+  const followerId = req.body.followerId
+  try {
+    await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: id, followerUsername: followerUsername } } })
+
+    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: id, followingUsername: followerUsername } } })
       .then((result) => {
         res.json(result)
         console.log(result)
@@ -167,7 +185,32 @@ app.post("/getSearchUser", async (req, res) => {
     })
 })
 
+setTimeout(() => {
+  app.post("/getAllPosts", async (req, res) => {
+
+    const data = req.body;
+    // console.log(data)
+    try {
+      const posts = await Post.find({ userId: { $in: data } });
+      res.json(posts);
+      // console.log(posts)
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error fetching posts' });
+    }
+  })
+}, 5000)
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
 })
+// await Post.find({
+//   userId : { $in: followingIds}
+// }).then((result)=>{
+//   res.json(result)
+//   console.log(result)
+// })
+// const data = [
+//   "668e727f75f2c35d0014abad",
+//   "668d43f81d54ab8ca4f6c83a"
+// ]

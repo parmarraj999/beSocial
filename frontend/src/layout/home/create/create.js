@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./create.css"
 import axios from 'axios'
 import gsap from 'gsap';
@@ -7,8 +7,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { firebaseStorage } from '../../firebase/firebaseConfig';
 import ProgressBar from '../../../component/notification/progressBar';
 import { useGSAP } from '@gsap/react';
+import { UserDataContext } from '../../../context/context';
 
-function Create({ setShowPost, id }) {
+function Create({ setShowCreate, id ,userName }) {
 
     const [caption, setCaption] = useState();
 
@@ -21,6 +22,8 @@ function Create({ setShowPost, id }) {
 
     const [showProgress, setShowProgress] = useState(false);
 
+    const userData = useContext(UserDataContext)
+    const data = userData.userData
 
     const navigate = useNavigate();
 
@@ -64,6 +67,8 @@ function Create({ setShowPost, id }) {
                         if (progress === 100) {
                             axios.post("http://localhost:5000/addPost/" + id, {
                                 postedBy: id,
+                                creatorName: userName,
+                                userProfile: data.profile_picture,
                                 caption: caption,
                                 mediaUrl: url,
                                 mediaType: mediaType
@@ -92,7 +97,7 @@ function Create({ setShowPost, id }) {
         <div className='create-container' >
             {
                 showProgress ?
-                    <ProgressBar setShowPost={setShowPost} percent={percent} setShowProgress={setShowProgress} /> : ""
+                    <ProgressBar setShowCreate={setShowCreate} percent={percent} setShowProgress={setShowProgress} /> : ""
             }
             <div className='create-card' >
                 <div className='line'></div>
@@ -114,7 +119,7 @@ function Create({ setShowPost, id }) {
                     }
                     <input type='file' id="fileInput" onChange={handleFile} />
                     <div style={{ display: "flex", alignItems: "center", gap: ".8rem" }}>
-                        <button className='cancel-btn' onClick={() => setShowPost(false)}>Cancel</button>
+                        {/* <button className='cancel-btn' onClick={() => setShowCreate(false)}>Cancel</button> */}
                         <button className='post-btn' onClick={handleAdd}>Post</button>
                     </div>
                 </div>

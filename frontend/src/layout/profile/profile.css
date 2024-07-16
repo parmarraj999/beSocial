@@ -7,6 +7,24 @@
     left: 0;
     z-index: 999999;
 }
+.top-layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.circle-top{
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 1;
+    width: 600px;
+    height: 500px;
+    background: radial-gradient(#80ff0035 20%,transparent,transparent);
+}
 .profile-header{
     display: flex;
     justify-content: space-between;
