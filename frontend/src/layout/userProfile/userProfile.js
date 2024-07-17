@@ -133,9 +133,9 @@ function UserProfilePage() {
       y: -80,
       opacity: 0
     })
-    tl.from(".unfollow-btn",{
-      opacity:0,
-      delay:1
+    tl.from(".unfollow-btn", {
+      opacity: 0,
+      delay: 1
     })
     setTimeout(() => {
       handleUserProfile();
@@ -213,8 +213,8 @@ function UserProfilePage() {
                   <h2>{data?.following?.length}</h2>
                 </div>
               </div>
-              <UserPosts postData={postData} userData={data} />
             </div>
+            <UserPosts postData={postData} userData={data} />
           </>
       }
     </div>

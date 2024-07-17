@@ -39,8 +39,11 @@
 }
 .user-page-wrapper{
     width: 35%;
-    margin: 0 auto;
-    height: calc(100% - 60px);
+    margin: 1rem auto;
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    justify-content: center;  
 }
 .user-page-wrapper .profile-circle2{
     width: 130px;
