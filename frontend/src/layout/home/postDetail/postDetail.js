@@ -10,6 +10,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
     const [showClose, setShowClose] = useState(false)
     const [comment, setComment] = useState();
     const [postComments, setPostComments] = useState([])
+    const reverseComment = [...postComments].reverse();
 
     const userData = useContext(UserDataContext);
     const data = userData.userData
@@ -65,8 +66,8 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
         setPostComments(postComments[0].comments);
     }
 
-    const handleCommit = () => {
-        axios.post("http://localhost:5000/comment/" + onePost._id, {
+    const handleComment = () => {
+        axios.put("http://localhost:5000/comment/" + onePost._id, {
             userId: data._id,
             userName: data.username,
             commentText: comment,
@@ -75,6 +76,21 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
             .then(result => {
                 getSinglePost();
                 setComment("")
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    const handleCommentDelete = (userId ,text, username ,profileImg) => {
+        axios.put("http://localhost:5000/commentDelete/" + onePost._id, {
+            userId: userId,
+            userName : username,
+            commentText: text,
+            profileImg : profileImg
+        })
+            .then(result => {
+                console.log(result)
+                getSinglePost();
             })
             .catch((error) => {
                 console.log(error)
@@ -96,7 +112,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                     {/* comment box input  */}
                     <div className='comment-input-box' >
                         <input value={comment} placeholder='Comment' onChange={(e) => setComment(e.target.value)} />
-                        <button onClick={handleCommit}>
+                        <button onClick={handleComment}>
                             <svg style={{ width: "25px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M1.94619 9.31543C1.42365 9.14125 1.41953 8.86022 1.95694 8.68108L21.0431 2.31901C21.5716 2.14285 21.8747 2.43866 21.7266 2.95694L16.2734 22.0432C16.1224 22.5716 15.8178 22.59 15.5945 22.0876L12 14L18 6.00005L10 12L1.94619 9.31543Z"></path></svg>
                         </button>
                     </div>
@@ -127,7 +143,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                         <p style={{ color: "white" }}>No comments</p> :
                         <div className='comments-container' >
                             {
-                                postComments.map((data) => {
+                                reverseComment.map((data) => {
                                     return (
                                         <div className='comment-box' >
                                             <div className='comment-profile'>
@@ -139,7 +155,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                                             </div>
                                             {
                                                 data.userId === userData.userData._id ?
-                                                    <div className='comment-delete' >
+                                                    <div className='comment-delete' onClick={()=>handleCommentDelete(data.usreId,data.commentText,data.userName, data.profileImg)} >
                                                         <svg style={{width:"20px",color:"white"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
                                                     </div> : ""
                                             }

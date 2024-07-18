@@ -86,11 +86,12 @@
 }
 .comment-detail h4{
     font-size: 18px;
+    color: #80ff00;
 }
 .comment-detail p{
     font-size: 18px;
     font-weight: 600;
-    color: rgb(190, 190, 190);
+    color: rgb(255, 255, 255);
     width: 100%;
 }
 .comment-delete{

@@ -35,7 +35,7 @@ function Home() {
   const following = userData.userData.following
 
   const [onePost,setOnePost] = useState({})  
-  console.log(onePost)
+  // console.log(onePost)
 
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
@@ -43,7 +43,7 @@ function Home() {
   const followingIds = following?.map((data) => data.followingId)
   const followingString = followingIds?.map(userId => userId.toString());
 
-  console.log(followingIds)
+  // console.log(followingIds)
 
   const handleGetPost = async () => {
     console.log(followingIds)

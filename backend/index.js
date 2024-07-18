@@ -210,10 +210,23 @@ setTimeout(() => {
   })
 }, 5000)
 
-app.post("/comment/:id",async(req,res)=>{
+app.put("/comment/:id",async(req,res)=>{
   const {id} = req.params;
   const {userId ,userName, commentText, profileImg } = req.body;
   await Post.findByIdAndUpdate({ _id: id }, { $push: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
+  .then(result => {
+    res.json(result)
+    console.log(result)
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+})
+
+app.put("/commentDelete/:id",async(req,res)=>{
+  const {id} = req.params;
+  const {userId ,userName, commentText, profileImg } = req.body;
+  await Post.findByIdAndUpdate({ _id: id }, { $pull: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
   .then(result => {
     res.json(result)
     console.log(result)
