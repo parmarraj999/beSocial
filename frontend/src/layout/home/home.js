@@ -10,6 +10,7 @@ import { UserDataContext } from '../../context/context'
 import axios from "axios"
 import Create from './create/create'
 import gsap from 'gsap'
+import PostDetail from './postDetail/postDetail'
 
 function Home() {
 
@@ -18,6 +19,7 @@ function Home() {
 
   const [showPop, setShowPop] = useState(true)
   const [showCreate,setShowCreate] = useState(false)
+  const [showDetail,setShowDetail] = useState(false)
 
   const navigate = useNavigate()
   const storage = window.localStorage
@@ -32,7 +34,8 @@ function Home() {
   const userData = useContext(UserDataContext)
   const following = userData.userData.following
 
-
+  const [onePost,setOnePost] = useState({})  
+  console.log(onePost)
 
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
@@ -83,7 +86,7 @@ function Home() {
       {/* <StoryBoard/> */}
       {
         showPost ? 
-        <Post handleGetPost={handleGetPost} data={data} /> : ""
+        <Post setOnePost={setOnePost} setShowDetail={setShowDetail} handleGetPost={handleGetPost} data={data} /> : ""
       }
       {
         showCreate ?
@@ -97,6 +100,10 @@ function Home() {
             <svg style={{ width: "30px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.0001 10.9999L22.0002 10.9997L22.0002 12.9997L13.0001 12.9999L13.0001 21.9998L11.0001 21.9998L11.0001 12.9999L2.00004 13.0001L2 11.0001L11.0001 10.9999L11 2.00025L13 2.00024L13.0001 10.9999Z"></path></svg>
         }
       </div>
+      {
+        showDetail ? 
+        <PostDetail handleGetPost={handleGetPost} onePost={onePost} setShowDetail={setShowDetail} /> : ""
+      }
     </div>
   )
 }

@@ -34,6 +34,7 @@ const postSchema = new mongoose.Schema({
     ],
     comments : [
         {
+            userId : mongoose.Schema.Types.ObjectId,
             userName : String,
             commentText : String,
             profileImg : String
