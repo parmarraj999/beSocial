@@ -34,6 +34,8 @@ function Home() {
   const userData = useContext(UserDataContext)
   const following = userData.userData.following
 
+  const [commentLength,setCommentLength] = useState();
+
   const [onePost,setOnePost] = useState({})  
   // console.log(onePost)
 

@@ -71,7 +71,7 @@ function Create({ setShowCreate, id ,userName }) {
                                 userProfile: data.profile_picture,
                                 caption: caption,
                                 mediaUrl: url,
-                                mediaType: mediaType
+                                mediaType: mediaType,
                             })
                                 .then(() => {
                                     console.log("done ")

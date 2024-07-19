@@ -81,12 +81,13 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                 console.log(error)
             })
     }
-    const handleCommentDelete = (userId ,text, username ,profileImg) => {
+    const handleCommentDelete = (userId, text, username, profileImg) => {
+        console.log(userId, text, username, profileImg)
         axios.put("http://localhost:5000/commentDelete/" + onePost._id, {
             userId: userId,
-            userName : username,
+            userName: username,
             commentText: text,
-            profileImg : profileImg
+            profileImg: profileImg
         })
             .then(result => {
                 console.log(result)
@@ -145,21 +146,26 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                             {
                                 reverseComment.map((data) => {
                                     return (
-                                        <div className='comment-box' >
-                                            <div className='comment-profile'>
-                                                <img src={data.profileImg} />
-                                            </div>
-                                            <div className='comment-detail'>
-                                                <h4>{data.userName}</h4>
-                                                <p>{data.commentText}</p>
-                                            </div>
+                                        <>
                                             {
-                                                data.userId === userData.userData._id ?
-                                                    <div className='comment-delete' onClick={()=>handleCommentDelete(data.usreId,data.commentText,data.userName, data.profileImg)} >
-                                                        <svg style={{width:"20px",color:"white"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
-                                                    </div> : ""
+                                                data.userId === undefined ? "" :
+                                                <div className='comment-box' >
+                                                    <div className='comment-profile'>
+                                                        <img src={data.profileImg} />
+                                                    </div>
+                                                    <div className='comment-detail'>
+                                                        <h4>{data.userName}</h4>
+                                                        <p>{data.commentText}</p>
+                                                    </div>
+                                                    {
+                                                        data.userId === userData.userData._id ?
+                                                            <div className='comment-delete' onClick={() => handleCommentDelete(data.userId, data.commentText, data.userName, data.profileImg)} >
+                                                                <svg style={{ width: "20px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
+                                                            </div> : ""
+                                                    }
+                                                </div>
                                             }
-                                        </div>
+                                        </>
                                     )
                                 })
                             }

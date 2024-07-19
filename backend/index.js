@@ -74,7 +74,7 @@ app.get("/user/:id", (req, res) => {
 
 app.post("/addPost/:id", async (req, res) => {
   const { id } = req.params;
-  const { caption, postedBy, mediaType, mediaUrl, creatorName, userProfile } = req.body;
+  const { caption, postedBy, mediaType, mediaUrl, creatorName, userProfile, comment } = req.body;
 
   const post = await Post.create({
     postedBy: postedBy,
@@ -84,6 +84,7 @@ app.post("/addPost/:id", async (req, res) => {
     caption: caption,
     mediaUrl: mediaUrl,
     mediaType: mediaType,
+    comments : {}
   })
     .then((user) => {
       res.json(user)
@@ -226,10 +227,10 @@ app.put("/comment/:id",async(req,res)=>{
 app.put("/commentDelete/:id",async(req,res)=>{
   const {id} = req.params;
   const {userId ,userName, commentText, profileImg } = req.body;
-  await Post.findByIdAndUpdate({ _id: id }, { $pull: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
+  await Post.updateOne({ _id: id }, { $pull: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
   .then(result => {
     res.json(result)
-    console.log(result)
+    console.log("delete")
   })
   .catch(error=>{
     console.log(error)
