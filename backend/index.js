@@ -237,6 +237,22 @@ app.put("/commentDelete/:id",async(req,res)=>{
   })
 })
 
+app.put("/like/:id",async(req,res)=>{
+  const { userId, userName } = req.body;
+  const { id } = req.params;
+  await Post.findByIdAndUpdate({ _id: id }, { $push: { like : {
+    userId : userId,
+    userName : userName,
+  }} })
+  .then(result => {
+    res.json(result)
+    console.log(result)
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+})
+
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
 })
