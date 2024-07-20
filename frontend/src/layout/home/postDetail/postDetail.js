@@ -10,7 +10,10 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
     const [showClose, setShowClose] = useState(false)
     const [comment, setComment] = useState();
     const [postComments, setPostComments] = useState([])
+    const [postLikes, setPostLikes] = useState()
     const reverseComment = [...postComments].reverse();
+
+    const [isLike, setIsLike] = useState(false)
 
     const userData = useContext(UserDataContext);
     const data = userData.userData
@@ -49,7 +52,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
             })
         }
         tl.to(".details-btns", {
-            width: "70%"
+            width: "90%"
         })
         tl.to(".detail-btn", {
             y: 0,
@@ -62,8 +65,17 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
 
     const getSinglePost = async () => {
         const response = await axios.post("http://localhost:5000/getSinglePost/" + onePost._id)
-        const postComments = response.data;
-        setPostComments(postComments[0].comments);
+        const postData = response.data;
+        setPostComments(postData[0].comments);
+        setPostLikes(postData[0].like)
+    }
+
+    console.log(postLikes)
+    const likeIds = postLikes?.map((data) => data.userId)
+    console.log(likeIds)
+    if (likeIds.include(data._id)) {
+        console.log("present")
+        
     }
 
     const handleComment = () => {
@@ -98,21 +110,25 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
             })
     }
 
+
+
     const handleLike = () => {
-            console.log(data.username)
-            axios.put("http://localhost:5000/like/"+onePost._id,{
-                userId: data._id,
-                userName : data.username,
-            })
-        .then(result=>{
-            console.log(result)
+        console.log(data.username)
+        axios.put("http://localhost:5000/like/" + onePost._id, {
+            userId: data._id,
+            userName: data.username,
         })
+            .then(result => {
+                console.log(result)
+                getSinglePost();
+            })
     }
 
     useEffect(() => {
         getSinglePost();
     }, [])
 
+    // const likeIds = postLikes?.map((data) => data.userId)
     return (
         <div className='post-detail-container' >
             <div className='post-detail-wrapper' >
@@ -130,14 +146,17 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                     </div>
                     <div style={{ display: "flex", gap: ".5rem" }} >
                         {/* all buttons  */}
-                        <div className="like-btn" onClick={handleLike} className='detail-btn' >
-                            <svg style={{ width: "27px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736ZM5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701C17.3397 4.67979 14.9458 4.60806 13.3743 5.98376L9.17157 10.1869L7.75736 8.77264L10.582 5.946L10.5002 5.87701C8.92545 4.61197 6.62322 4.71993 5.17157 6.17157Z"></path></svg>
-                        </div>
+                        {
+                            isLike ? "" :
+                                <div onClick={handleLike} className='detail-btn likebtn' >
+                                    <svg style={{ width: "27px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736ZM5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701C17.3397 4.67979 14.9458 4.60806 13.3743 5.98376L9.17157 10.1869L7.75736 8.77264L10.582 5.946L10.5002 5.87701C8.92545 4.61197 6.62322 4.71993 5.17157 6.17157Z"></path></svg>
+                                </div>
+                        }
                         <div onClick={hanldeCommentAnime} className='detail-btn' >
-                            <svg style={{ width: "27px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
+                            <svg style={{ width: "27px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10 3H14C18.4183 3 22 6.58172 22 11C22 15.4183 18.4183 19 14 19V22.5C9 20.5 2 17.5 2 11C2 6.58172 5.58172 3 10 3ZM12 17H14C17.3137 17 20 14.3137 20 11C20 7.68629 17.3137 5 14 5H10C6.68629 5 4 7.68629 4 11C4 14.61 6.46208 16.9656 12 19.4798V17Z"></path></svg>
                         </div>
                         <div className='detail-btn' >
-                            <svg style={{ width: "27px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5759 17.2714L8.46576 14.484C7.83312 15.112 6.96187 15.5 6 15.5C4.067 15.5 2.5 13.933 2.5 12C2.5 10.067 4.067 8.5 6 8.5C6.96181 8.5 7.83301 8.88796 8.46564 9.51593L13.5759 6.72855C13.5262 6.49354 13.5 6.24983 13.5 6C13.5 4.067 15.067 2.5 17 2.5C18.933 2.5 20.5 4.067 20.5 6C20.5 7.933 18.933 9.5 17 9.5C16.0381 9.5 15.1669 9.11201 14.5343 8.48399L9.42404 11.2713C9.47382 11.5064 9.5 11.7501 9.5 12C9.5 12.2498 9.47383 12.4935 9.42408 12.7285L14.5343 15.516C15.167 14.888 16.0382 14.5 17 14.5C18.933 14.5 20.5 16.067 20.5 18C20.5 19.933 18.933 21.5 17 21.5C15.067 21.5 13.5 19.933 13.5 18C13.5 17.7502 13.5262 17.5064 13.5759 17.2714Z"></path></svg>
+                            <svg style={{ width: "23px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5759 17.2714L8.46576 14.484C7.83312 15.112 6.96187 15.5 6 15.5C4.067 15.5 2.5 13.933 2.5 12C2.5 10.067 4.067 8.5 6 8.5C6.96181 8.5 7.83301 8.88796 8.46564 9.51593L13.5759 6.72855C13.5262 6.49354 13.5 6.24983 13.5 6C13.5 4.067 15.067 2.5 17 2.5C18.933 2.5 20.5 4.067 20.5 6C20.5 7.933 18.933 9.5 17 9.5C16.0381 9.5 15.1669 9.11201 14.5343 8.48399L9.42404 11.2713C9.47382 11.5064 9.5 11.7501 9.5 12C9.5 12.2498 9.47383 12.4935 9.42408 12.7285L14.5343 15.516C15.167 14.888 16.0382 14.5 17 14.5C18.933 14.5 20.5 16.067 20.5 18C20.5 19.933 18.933 21.5 17 21.5C15.067 21.5 13.5 19.933 13.5 18C13.5 17.7502 13.5262 17.5064 13.5759 17.2714Z"></path></svg>
                         </div>
                     </div>
                     {
@@ -160,21 +179,21 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                                         <>
                                             {
                                                 data.userId === undefined ? "" :
-                                                <div className='comment-box' >
-                                                    <div className='comment-profile'>
-                                                        <img src={data.profileImg} />
+                                                    <div className='comment-box' >
+                                                        <div className='comment-profile'>
+                                                            <img src={data.profileImg} />
+                                                        </div>
+                                                        <div className='comment-detail'>
+                                                            <h4>{data.userName}</h4>
+                                                            <p>{data.commentText}</p>
+                                                        </div>
+                                                        {
+                                                            data.userId === userData.userData._id ?
+                                                                <div className='comment-delete' onClick={() => handleCommentDelete(data.userId, data.commentText, data.userName, data.profileImg)} >
+                                                                    <svg style={{ width: "20px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
+                                                                </div> : ""
+                                                        }
                                                     </div>
-                                                    <div className='comment-detail'>
-                                                        <h4>{data.userName}</h4>
-                                                        <p>{data.commentText}</p>
-                                                    </div>
-                                                    {
-                                                        data.userId === userData.userData._id ?
-                                                            <div className='comment-delete' onClick={() => handleCommentDelete(data.userId, data.commentText, data.userName, data.profileImg)} >
-                                                                <svg style={{ width: "20px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path></svg>
-                                                            </div> : ""
-                                                    }
-                                                </div>
                                             }
                                         </>
                                     )

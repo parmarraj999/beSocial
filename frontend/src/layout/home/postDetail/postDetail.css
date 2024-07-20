@@ -25,26 +25,30 @@
     border-radius: 2rem;
 }
 .details-btns{
-
     width: 70%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: .2rem;
 }
 .detail-btn{
-    min-width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    background: rgb(175, 175, 175);
+    min-width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: rgba(175, 175, 175,.25);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.detail-btn:hover{
+    background: rgba(175, 175, 175,.6);
+    transition: .3s all;
 }
 .delete-btn{
     min-width: 55px;
     height: 55px;
     border-radius: 50%;
-    background: rgb(175, 175, 175);
+    /* background: rgba(175, 175, 175,.3); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +123,7 @@
 }   
 .comment-input-box{
     width: 0%;
-    height: 56px;
+    height: 50px;
     border: 2px solid white;
     display: none;
     border-radius: 2rem;
@@ -138,8 +142,8 @@
     font-size: 18px;
 }
 .comment-input-box button{
-    min-width: 50px;
-    height: 50px;
+    min-width: 45px;
+    height: 100%;
     background: #80ff00;
     border-radius: 50%;
     border: none;
@@ -153,5 +157,11 @@
  }
  .details-btns{
     width: 95%;
+ }
+ .comments-container{
+    width: 95%;
+ }
+ .comment-box{
+    width: 100%;
  }
 }
