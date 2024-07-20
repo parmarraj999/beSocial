@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import axios from "axios";
 import gsap from 'gsap';
 import { UserDataContext } from '../../../context/context';
+import { Link } from 'react-router-dom';
 
 function PostDetail({ onePost, setShowDetail, handleGetPost }) {
 
@@ -151,9 +152,9 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
     return (
         <div className='post-detail-container' >
             <div className='post-detail-wrapper' >
-                <div className='post-detail-profile' >
+                <Link to={"/user-profile/" + onePost.userId} className='post-detail-profile' >
                     <img src={onePost.userProfile} />
-                </div>
+                </Link>
                 <img className='main-img' src={onePost.mediaUrl} />
                 <div className='details-btns' >
                     {/* comment box input  */}
