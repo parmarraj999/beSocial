@@ -53,6 +53,10 @@
     align-items: center;
     justify-content: center;
 }
+.liked-btn{
+    background: transparent;
+    
+}
 .comments-container{
     margin-top: 1rem;
     width: 90%;

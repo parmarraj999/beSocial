@@ -253,6 +253,22 @@ app.put("/like/:id",async(req,res)=>{
   })
 })
 
+app.put("/unlike/:id",async(req,res)=>{
+  const { userId, userName } = req.body;
+  const { id } = req.params;
+  await Post.findByIdAndUpdate({ _id: id }, { $pull: { like : {
+    userId : userId,
+    userName : userName,
+  }} })
+  .then(result => {
+    res.json(result)
+    console.log(result)
+  })
+  .catch(error=>{
+    console.log(error)
+  })
+})
+
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
 })
