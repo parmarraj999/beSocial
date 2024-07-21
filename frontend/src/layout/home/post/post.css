@@ -24,6 +24,10 @@
     flex-direction: column;
     border-radius: 1rem;
 }
+.liked-btn{
+    background: transparent;
+    
+}
 .post-card-header{
     /* border-bottom: 1px solid white; */
     height: 70px;
@@ -55,6 +59,7 @@
 }
 .post-btns{
     width: 100%;
+    margin-top: .2rem;
     display: flex;
     gap: .6rem;
     align-items: center;

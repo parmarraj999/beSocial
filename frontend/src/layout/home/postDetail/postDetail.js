@@ -20,6 +20,14 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
     const data = userData.userData
 
     const tl = gsap.timeline();
+
+    useGSAP(()=>{
+        tl.from(".post-detail-container",{
+            background:"rgba(0,0,0,.2)",
+            duration:.4
+        })
+    })
+    
     const hanldeCommentAnime = () => {
         setShowClose(true)
         tl.to(".detail-btn", {
