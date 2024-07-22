@@ -12,18 +12,31 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
     const [showMenu, setShowMenu] = useState(false)
     const [createDate, setCreateDate] = useState()
 
-    function convertDate() {
+    // function convertDate() {
 
-        const createDate = data.createdAt
-        const date = new Date(createDate);
+    //     const createDate = data.createdAt
+    //     const date = new Date(createDate);
 
+    //     const year = date.getFullYear();
+    //     const month = date.getMonth() + 1;
+    //     const day = date.getDate();
+
+    //     const abc = `${day.toString().padStart(2, "0")} ${month.toString().padStart(2, "0")} ${year}`;
+    //     setCreateDate(abc)
+    // }
+
+    function convertDate(dateText) {
+
+        const date = new Date(dateText);
+    
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-
-        const abc = `${day.toString().padStart(2, "0")} ${month.toString().padStart(2, "0")} ${year}`;
-        setCreateDate(abc)
-    }
+    
+        const formattedDate = `${day} ${month} ${year}`;
+        return formattedDate;
+        // console.log(formattedDate)
+      }
 
     useEffect(() => {
         convertDate();
@@ -84,7 +97,7 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
         })
 
     }
-
+   
     return (
         <div className='post-extend-container' >
 
@@ -100,7 +113,7 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
                             {userData.userData.username}</h2>
                     </div>
                     <div style={{display:"flex",alignItems:"center"}}>
-                    <p style={{color:"white"}} >{createDate}</p>
+                    <p className='date-text' >{convertDate(data.createdAt)}</p>
                         <div className='extend-post-menu-icon' onClick={() => setShowMenu(!showMenu)}>
                             {
                                 showMenu ?

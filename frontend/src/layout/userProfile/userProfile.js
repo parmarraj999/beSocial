@@ -63,7 +63,7 @@ function UserProfilePage() {
   useEffect(() => {
     handleUserProfile();
     getUserPost();
-    console.log(data)
+    // console.log(data)
   }, [])
 
   const navigate = useNavigate();

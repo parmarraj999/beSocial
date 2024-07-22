@@ -4,11 +4,12 @@ import Home from "./layout/home/home";
 import Nav from "./layout/nav/nav";
 import Search from "./layout/search/search";
 import Auth from "./layout/auth/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchListData, UserDataContext, UserIDContext, UserProfileContext } from "./context/context";
 import Profile from "./layout/profile/profile";
 import UserCenter from "./layout/profile/userCenter/userCenter";
 import UserProfilePage from "./layout/userProfile/userProfile";
+import axios from "axios";
 
 function App() {
 
@@ -20,10 +21,16 @@ function App() {
   // console.log(searchData)
 
   const isLoged = window.localStorage.getItem("isLogIn")
+  const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
-  // console.log(userData)
+  useEffect(() => {
 
-
+    axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+      .then((result) => {
+        setUserData(result.data[0])
+        console.log("data getted")
+      })
+  }, [])
 
   return (
     <div className="App">

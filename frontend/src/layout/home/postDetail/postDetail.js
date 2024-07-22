@@ -72,6 +72,17 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
         setShowClose(false)
     }
 
+    const handleClose = () => {
+        tl.to(".post-detail-container",{
+            background:"rgba(0,0,0,.2)",
+            duration:.4,
+            opacity:0
+        })
+        setTimeout(() => {
+            setShowDetail(false)
+        }, 300);
+    }
+
     const getSinglePost = async () => {
         const response = await axios.post("http://localhost:5000/getSinglePost/" + onePost._id)
         const postData = response.data;
@@ -79,9 +90,9 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
         setPostLikes(postData[0].like)
     }
 
-    console.log(postLikes)
+    // console.log(postLikes)
     const likeIds = postLikes?.map((data) => data.userId)
-    console.log(likeIds)
+    // console.log(likeIds)
 
     useEffect(() => {
         if (likeIds?.includes(data._id)) {
@@ -196,7 +207,7 @@ function PostDetail({ onePost, setShowDetail, handleGetPost }) {
                             <div style={{ background: "red" }} onClick={hanldeCloseComment} className='delete-btn' >
                                 <svg style={{ width: "28px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
                             </div> :
-                            <div onClick={() => setShowDetail(false)} style={{ background: "red" }} className='delete-btn' >
+                            <div onClick={handleClose} style={{ background: "red" }} className='delete-btn' >
                                 <svg style={{ width: "28px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
                             </div>
                     }
