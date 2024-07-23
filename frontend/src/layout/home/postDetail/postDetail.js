@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { UserDataContext } from '../../../context/context';
 import { Link } from 'react-router-dom';
 
-function PostDetail({ onePost, setShowDetail, handleGetPost }) {
+function PostDetail({ onePost, setShowDetail }) {
 
     const [showClose, setShowClose] = useState(false)
     const [comment, setComment] = useState();
