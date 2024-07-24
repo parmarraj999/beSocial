@@ -28,15 +28,15 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
     function convertDate(dateText) {
 
         const date = new Date(dateText);
-    
+
         const day = date.getDate().toString().padStart(2, '0');
         const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear();
-    
+
         const formattedDate = `${day} ${month} ${year}`;
         return formattedDate;
         // console.log(formattedDate)
-      }
+    }
 
     useEffect(() => {
         convertDate();
@@ -97,7 +97,7 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
         })
 
     }
-   
+
     return (
         <div className='post-extend-container' >
 
@@ -106,34 +106,36 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
             </div>
             <div className='close-container' onClick={() => setPostExtend(false)} ></div>
             <div className='extend-post-container' >
-
-            <div className='extend-post' >
-                <div className='extend-post-header'>
-                    <div className='extend-post-profile' >
-                        <img className='extend-post-img-profile' src={userData.userData.profile_picture} />
-                        <h2 className='extend-post-name' >
-                            {userData.userData.username}</h2>
-                    </div>
-                    <div style={{display:"flex",alignItems:"center"}}>
-                    <p className='date-text' >{convertDate(data.createdAt)}</p>
-                        <div className='extend-post-menu-icon' onClick={() => setShowMenu(!showMenu)}>
-                            {
-                                showMenu ?
-                                    <MenuExtend postId={data._id} handleDeleteAnime={handleDeleteAnime} /> : ""
-                            }
-                            <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path></svg>
+                <div className='extend-post' >
+                    <div className='extend-post-header'>
+                        <div className='extend-post-profile' >
+                            <img className='extend-post-img-profile' src={userData.userData.profile_picture} />
+                            <h2 className='extend-post-name' >
+                                {userData.userData.username}</h2>
+                        </div>
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                            <p className='date-text' >{convertDate(data.createdAt)}</p>
+                            <div className='extend-post-menu-icon' onClick={() => setShowMenu(!showMenu)}>
+                                {
+                                    showMenu ?
+                                        <MenuExtend postId={data._id} handleDeleteAnime={handleDeleteAnime} /> : ""
+                                }
+                                <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path></svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <img className='extend-post-img' src={data.mediaUrl} />
-                {/* <div style={{ padding: "0 .5rem" }}>
+                    <img className='extend-post-img' src={data.mediaUrl} />
+                    {/* <div style={{ padding: "0 .5rem" }}>
                     <svg style={{ width: "30px", color: "#80ff00" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3C19.5376 3 22 5.5 22 9C22 16 14.5 20 12 21.5C9.5 20 2 16 2 9C2 5.5 4.5 3 7.5 3C9.35997 3 11 4 12 5C13 4 14.64 3 16.5 3Z"></path></svg>
                 </div> */}
-                <div className='extend-post-details' >
-                    <h3>{data.caption}</h3>
+                    <div className='extend-post-details' >
+                        <h3>{data.caption}</h3>
+                    </div>
                 </div>
-            </div>
-            
+                <div className='analytics-btns' style={{display:"flex",alignItems:"center",gap:'1rem'}} >
+                <button>likes <svg style={{width:"25px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg> </button>
+                <button>Comments <svg style={{width:"25px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg></button>
+                </div>
             </div>
         </div >
     )

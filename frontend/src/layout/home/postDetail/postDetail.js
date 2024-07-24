@@ -223,9 +223,9 @@ function PostDetail({ onePost, setShowDetail }) {
                                             {
                                                 data.userId === undefined ? "" :
                                                     <div className='comment-box' >
-                                                        <div className='comment-profile'>
+                                                        <Link to={"/user-profile/" + data.userId}className='comment-profile'>
                                                             <img src={data.profileImg} />
-                                                        </div>
+                                                        </Link>
                                                         <div className='comment-detail'>
                                                             <h4>{data.userName}</h4>
                                                             <p>{data.commentText}</p>

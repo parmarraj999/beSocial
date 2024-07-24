@@ -1,4 +1,4 @@
-.my-post-container{
+.my-post-container {
     width: 38%;
     margin: 1rem auto;
     display: flex;
@@ -6,31 +6,35 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-.post-small{
+
+.post-small {
     max-width: 140px;
     width: 140px;
     height: 140px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: .3s all;
 }
-.post-small:hover{
+
+.post-small:hover {
     opacity: .7;
 }
-.post-small-img{
+
+.post-small-img {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.post-small-img img{
+
+.post-small-img img {
     height: 100%;
     width: 100%;
 }
 
-.delete-pop{
+.delete-pop {
     position: absolute;
     top: -10%;
     left: 50%;
@@ -38,7 +42,7 @@
     height: 50px;
     background: black;
     border-radius: 2rem;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,10 +52,10 @@
 }
 
 /* ========= post extend ========  */
-.post-extend-container{
+.post-extend-container {
     width: 100%;
     height: 100vh;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,21 +65,23 @@
     z-index: 99;
     overflow: scroll;
 }
-.extend-post-container{
+
+.extend-post-container {
     width: 30%;
     position: absolute;
     height: fit-content;
     top: 50%;
     left: 50%;
     z-index: 999;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     gap: .4rem;
     padding: 1rem 0;
     height: 94vh;
 }
-.extend-post{
+
+.extend-post {
     width: 100%;
     height: fit-content;
     padding: .5rem 1rem;
@@ -86,64 +92,74 @@
     flex-direction: column;
     gap: .4rem;
 }
-.extend-post-header{
+
+.extend-post-header {
     padding: 0rem .5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.extend-post-profile{
+
+.extend-post-profile {
     display: flex;
     align-content: center;
     gap: .5rem;
 }
-.extend-post-img-profile{
+
+.extend-post-img-profile {
     width: 50px;
     height: 50px;
     border-radius: 10px;
     border: 2px solid #80ff00;
     padding: .2rem;
 }
-.extend-post-header h2{
+
+.extend-post-header h2 {
     font-size: 22px;
     color: white;
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
-.extend-post-header .date-text{
+
+.extend-post-header .date-text {
     font-weight: 600;
     color: white;
     padding: .4rem 1rem;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
 }
-.extend-post-img{
+
+.extend-post-img {
     width: 100%;
     max-height: 600px;
     border-radius: 1rem;
 }
-.extend-post-details{
+
+.extend-post-details {
     padding: 0 .5rem;
     display: flex;
     flex-direction: column;
     gap: .2rem;
 }
-.extend-post-details h3{
+
+.extend-post-details h3 {
     font-size: 18px;
     font-weight: 500;
     color: rgb(255, 255, 255);
 }
-.close-container{
+
+.close-container {
     width: 100%;
     height: 100vh;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 99;
 }
-.extend-post-menu-icon{
+
+.extend-post-menu-icon {
     width: 40px;
     height: 40px;
     display: flex;
@@ -152,12 +168,13 @@
     cursor: pointer;
     position: relative;
 }
-.extend-post-menu{
+
+.extend-post-menu {
     display: flex;
     flex-direction: column;
     width: 180px;
     height: fit-content;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(15px);
     border: 1px solid grey;
     position: absolute;
@@ -166,7 +183,8 @@
     border-radius: 1rem;
     padding: .2rem;
 }
-.menu-btn{
+
+.menu-btn {
     width: 100%;
     height: 50px;
     display: flex;
@@ -175,16 +193,48 @@
     padding: 0 .8rem;
     color: white;
 }
-.comment-container-user{
+
+.comment-container-user {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.analytics-btns{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.analytics-btns button{
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    /* color: rgb(224, 224, 224); */
+    /* background: rg
+    ba(73, 73, 73, 0.7); */
+    background: rgba(73, 73, 73, 0.7);
+    color: #80ff00;
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    transition: .3s all;
+}
+.analytics-btns button:hover{
+    color: white;
+    background: rgba(73, 73, 73, 0.6);
+}
+
 @media screen and (max-width:765px) {
-    .my-post-container{
+    .my-post-container {
         width: 100%;
     }
-    .extend-post-container{
+
+    .extend-post-container {
         width: 95%;
     }
 }
