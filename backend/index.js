@@ -118,7 +118,7 @@ app.put('/follow/:id', async (req, res) => {
   try {
     await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: id, followerUsername: followerUsername, followerName : followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername, followingName : followerName } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername, followName : followerName } } })
       .then((result) => {
         res.json(result)
         console.log(result)
