@@ -24,6 +24,7 @@ function Login({setCurrUi}) {
         password : password
       })
       .then(result => {
+        console.log(result)
         if(result.data){
           window.localStorage.setItem("isLogIn",true)
           setSuccMsg("Welcome"+ " " + result.data.name )

@@ -32,7 +32,7 @@ function Home() {
 
   const [data, setData] = useState([])
   const userData = useContext(UserDataContext)
-  const following = userData.userData.following
+  const following = userData.userData?.following
 
   const [commentLength,setCommentLength] = useState();
 
@@ -66,6 +66,9 @@ function Home() {
         userData.setUserData(result.data[0])
         console.log("data getted")
         setShowPost(true)
+      })
+      .catch((error)=>{
+        console.log(error)
       })
   }, [])
 

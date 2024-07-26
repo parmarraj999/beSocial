@@ -66,7 +66,6 @@ function Create({ setShowCreate, id ,userName }) {
                         setPercent(progress)
                         if (progress === 100) {
                             axios.post("http://localhost:5000/addPost/" + id, {
-                                postedBy: id,
                                 creatorName: userName,
                                 userProfile: data.profile_picture,
                                 caption: caption,

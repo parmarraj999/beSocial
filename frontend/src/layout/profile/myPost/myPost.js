@@ -13,6 +13,7 @@ function MyPosts({ id }) {
     axios.get("http://localhost:5000/getUserPost/" + userIdbyLocalStorage)
     .then((result) => {
       setPostData(result.data)
+      console.log(postData)
     })
   }, [])
   const handleRefresh = () => {

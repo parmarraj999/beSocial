@@ -13,7 +13,7 @@ import PostDetail from '../home/postDetail/postDetail';
 function UserProfilePage() {
 
   const { id } = useParams();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [loader, setLoader] = useState(true)
   const [showAnimeImg, setShowAnimeImg] = useState(true)
 
@@ -87,7 +87,8 @@ function UserProfilePage() {
   const handleFollow = (userId, userName,) => {
     axios.put("http://localhost:5000/follow/" + userId, {
       followerUsername: userName,
-      followerId: myData._id
+      followerId: myData._id,
+      followerName : myData.name
     }).then((result) => {
       console.log(result)
       axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
@@ -147,7 +148,8 @@ function UserProfilePage() {
     console.log("clicked")
     axios.put("http://localhost:5000/unfollow/" + userId, {
       followerUsername: userName,
-      followerId: myData._id
+      followerId: myData._id,
+      followerName: myData.name
     }).then((result) => {
       console.log(result)
       axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)

@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import MenuExtend from './menuExtend'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 
 function PostExtend({ data, setPostExtend, handleRefresh }) {
@@ -11,19 +12,15 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
     const userData = useContext(UserDataContext)
     const [showMenu, setShowMenu] = useState(false)
     const [createDate, setCreateDate] = useState()
+    const [likeList, setLikeList] = useState(data.like)
+    const [commentList, setCommentList] = useState(data.comments)
 
-    // function convertDate() {
+    const [showLike, setShowLike] = useState(false);
+    const [showComment, setShowComment] = useState(false);
 
-    //     const createDate = data.createdAt
-    //     const date = new Date(createDate);
+    const [currentRoute, setCurrentRoute] = useState("")
 
-    //     const year = date.getFullYear();
-    //     const month = date.getMonth() + 1;
-    //     const day = date.getDate();
-
-    //     const abc = `${day.toString().padStart(2, "0")} ${month.toString().padStart(2, "0")} ${year}`;
-    //     setCreateDate(abc)
-    // }
+    console.log(likeList)
 
     function convertDate(dateText) {
 
@@ -70,7 +67,13 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
             height: "120px",
             duration: .3
         })
-        tl.to(".extend-post", {
+        tl.to(".analytics-btns", {
+           opacity:0
+        })
+        tl.to(".likes-list-container", {
+           opacity:0
+        })
+        tl.to(".extend-post-container", {
             scale: 0.1,
             duration: .4,
             top: 100,
@@ -97,6 +100,44 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
         })
 
     }
+    
+    const getSinglePost = async () => {
+        const response = await axios.post("http://localhost:5000/getSinglePost/" + data._id)
+        const postData = response.data;
+        console.log(postData)
+        setLikeList(postData[0].like);
+        setCommentList(postData[0].comments)
+    }
+
+    const handleLikesList = () => {
+        setShowLike(true)
+        setShowComment(false)
+    }
+    const handleCommentList = () => {
+        setShowComment(true)
+        setShowLike(false)
+    }
+
+    const handleCommentDelete = (dataUser) => {
+        console.log(dataUser)
+        axios.put("http://localhost:5000/commentDelete/" + data._id, {
+            userId: dataUser.userId,
+            userName: dataUser.userName,
+            commentText: dataUser.commentText,
+            profileImg: dataUser.profileImg
+        })
+            .then(result => {
+                console.log(result)
+                getSinglePost();
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(()=>{
+        getSinglePost();
+    },[])
 
     return (
         <div className='post-extend-container' >
@@ -132,10 +173,72 @@ function PostExtend({ data, setPostExtend, handleRefresh }) {
                         <h3>{data.caption}</h3>
                     </div>
                 </div>
-                <div className='analytics-btns' style={{display:"flex",alignItems:"center",gap:'1rem'}} >
-                <button>likes <svg style={{width:"25px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg> </button>
-                <button>Comments <svg style={{width:"25px"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg></button>
+                <div className='analytics-btns' style={{ display: "flex", alignItems: "center", gap: '1rem' }} >
+                    {
+                        showLike ?
+                            <button className='like-list-btn cancel' onClick={() => setShowLike(false)}>Cacnel </button>
+                            :
+                            <button className='like-list-btn' onClick={handleLikesList}>likes <svg style={{ width: "25px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg> </button>
+                    }
+                    {
+                        showComment ? <button className='like-list-btn cancel' onClick={() => setShowComment(false)}>Cacnel </button> :
+                            <button className='comment-list-btn' onClick={handleCommentList}>Comments <svg style={{ width: "25px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg></button>
+                    }
+
+                    <button className='list-cancel-btn' style={{ color: "white", maxWidth: "50px", display: "none", background: "red" }}><svg style={{ width: "30px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg></button>
                 </div>
+                {
+                    showLike ?
+                        <div className='likes-list-container' >
+                            <div className='likes-list-header' >
+                                <h3>Likes</h3>
+                                <h3>{data.like.length}</h3>
+                            </div>
+                            <div className='likes-list' >
+                                {
+                                    likeList.map((data) => {
+                                        return (
+                                            <Link to={"/user-profile/" + data.userId} className='likes-list-item' >
+                                                <h4>{data.userName}</h4>
+                                                <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div> : ""
+                }
+                {
+                    showComment ?
+                        <div className='likes-list-container' >
+                            <div className='likes-list-header' >
+                                <h3>Commnets</h3>
+                                <h3>{`${data.comments.length}`-1}</h3>
+                            </div>
+                            <div className='likes-list' >
+                                {
+                                    commentList.map((data) => {
+                                        return ( 
+                                            <>
+                                                {
+                                                    data.userId === undefined ? "" :
+                                                        <div className='comment-list-item' >
+                                                            <div style={{display:"flex",alignItems:'center',justifyContent:"space-between"}}>
+                                                                <Link to={"/user-profile/" + data.userId} style={{ textDecoration: "none", color: "white", fontSize: "18px", fontWeight: "600" }}>{data.userName}</Link>
+                                                                <div onClick={() => handleCommentDelete(data)}>
+                                                                    <svg style={{ width: "30px", color: "tomato" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"></path></svg>
+                                                                </div>
+                                                            </div>
+                                                            <p style={{fontSize:'16px',color:"rgb(218, 218, 218)",fontWeight:"600"}}>{data.commentText}</p>
+                                                        </div>
+                                                }
+                                            </>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div> : ""
+                }
             </div>
         </div >
     )

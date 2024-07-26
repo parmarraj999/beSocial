@@ -93,7 +93,7 @@ function ProfileNotify() {
             </div>
             <div className='complete-task-list' >
                 {
-                    userData.userData.profile_picture === "" ? <li>Add Profile Picture</li> : ""
+                    userData.userData?.profile_picture === "" ? <li>Add Profile Picture</li> : ""
                         
                 }
                 {

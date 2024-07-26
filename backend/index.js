@@ -74,10 +74,9 @@ app.get("/user/:id", (req, res) => {
 
 app.post("/addPost/:id", async (req, res) => {
   const { id } = req.params;
-  const { caption, postedBy, mediaType, mediaUrl, creatorName, userProfile, comment } = req.body;
+  const { caption, mediaType, mediaUrl, creatorName, userProfile, comment } = req.body;
 
   const post = await Post.create({
-    postedBy: postedBy,
     userId: id,
     creatorName: creatorName,
     userProfile : userProfile,
@@ -95,7 +94,7 @@ app.post("/addPost/:id", async (req, res) => {
 
 app.get('/getUserPost/:id', (req, res) => {
   const { id } = req.params;
-  Post.find({ postedBy: id })
+  Post.find({ userId: id })
     .then(result => res.json(result))
     .catch(error => res.json(error))
 
@@ -115,10 +114,11 @@ app.put('/follow/:id', async (req, res) => {
   const { id } = req.params;
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId
+  const followerName = req.body.followerName
   try {
-    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: id, followerUsername: followerUsername } } })
+    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: id, followerUsername: followerUsername, followerName : followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername, followingName : followerName } } })
       .then((result) => {
         res.json(result)
         console.log(result)
@@ -130,11 +130,12 @@ app.put('/follow/:id', async (req, res) => {
 app.put('/unfollow/:id', async (req, res) => {
   const { id } = req.params;
   const followerUsername = req.body.followerUsername;
-  const followerId = req.body.followerId
+  const followerId = req.body.followerId;
+  const followerName = req.body.followerName;
   try {
-    await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: id, followerUsername: followerUsername } } })
+    await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: id, followerUsername: followerUsername, followerName: followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: id, followingUsername: followerUsername } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: id, followingUsername: followerUsername, followingName: followerName } } })
       .then((result) => {
         res.json(result)
         console.log(result)

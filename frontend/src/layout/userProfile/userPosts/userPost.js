@@ -6,6 +6,7 @@ import '../userProfile.css'
 
 function UserPosts({ postData, userData }) {
 
+  console.log(postData)
 
   const [postExtend, setPostExtend] = useState(false)
   const [singlePost, setSinglePost] = useState({})

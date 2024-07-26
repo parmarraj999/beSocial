@@ -1,10 +1,6 @@
 const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    postedBy :{
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User",
-    },
     userId : {
        type : mongoose.Schema.Types.ObjectId,
        required: true,

@@ -35,14 +35,16 @@ const userSchema = new mongoose.Schema({
     followers: [
         {
             followerId : String,
-            followerUsername:String
+            followerUsername:String,
+            followerName: String,
         }
     ],
 
     following: [
         {
             followingId : String,
-            followingUsername:String
+            followingUsername:String,
+            followingName : String,
         }
     ],
 
