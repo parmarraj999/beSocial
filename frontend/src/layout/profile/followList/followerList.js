@@ -16,7 +16,7 @@ function FollowerList({setShowList, data}) {
               {
                 data.map((data)=>{
                   return(
-                    <Link  to={"/user-profile/" + data._id} className='follow-list-item' >
+                    <Link to={"/user-profile/" + data._id} className='follow-list-item' >
                       <div>
                         <h3>{data.followerUsername}</h3>
                         <h4>{data.followerName}</h4>

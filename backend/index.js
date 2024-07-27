@@ -116,9 +116,9 @@ app.put('/follow/:id', async (req, res) => {
   const followerId = req.body.followerId
   const followerName = req.body.followerName
   try {
-    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: id, followerUsername: followerUsername, followerName : followerName } } })
+    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: followerId, followerUsername: followerUsername, followerName : followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: id, followingUsername: followerUsername, followName : followerName } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: followerId, followingUsername: followerUsername, followingName : followerName } } })
       .then((result) => {
         res.json(result)
         console.log(result)
@@ -133,9 +133,9 @@ app.put('/unfollow/:id', async (req, res) => {
   const followerId = req.body.followerId;
   const followerName = req.body.followerName;
   try {
-    await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: id, followerUsername: followerUsername, followerName: followerName } } })
+    await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: id, followingUsername: followerUsername, followingName: followerName } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: followerId, followingUsername: followerUsername, followingName: followerName } } })
       .then((result) => {
         res.json(result)
         console.log(result)

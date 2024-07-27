@@ -24,11 +24,12 @@ function UserList({ }) {
         gsap.from(".search-user-box", {
             opacity: 0,
             duration: .6,
-            stagger: .2
+            stagger: .2 
         })
     })
 
     const isFollowing = (username, id) => {
+        console.log(myFollowing)
         return myFollowing.some(follow => follow.followingUsername === username && follow.followingId === id);
     };
 

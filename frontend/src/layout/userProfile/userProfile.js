@@ -19,8 +19,7 @@ function UserProfilePage() {
   const myDataContext = useContext(UserDataContext)
   const myData = myDataContext.userData
 
-  console.log(id)
-
+  // console.log(id)
   
   const userData = useContext(UserDataContext)
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
@@ -29,7 +28,7 @@ function UserProfilePage() {
   const handleUserProfile = () => {
     axios.get("http://localhost:5000/user/" + id)
       .then((user) => {
-        console.log(user.data)
+        // console.log(user.data)
         setData(user.data[0])
       })
   }
@@ -80,18 +79,17 @@ function UserProfilePage() {
     navigate(-1)
   }
 
-  console.log(myData.following)
-
   const isFollowing = (username, id) => {
     const following = myData.following
-    return following?.some(follow => follow.followingUsername === username && follow.followingId === id);
+    return following?.some(follow => follow.followingUsername === myData.username && follow.followingId === myData._id);
+    // return following?.some(follow => follow.followingUsername === username && follow.followingId === id);
   };
 
   // to follow user 
 
-  const handleFollow = (userId, userName,) => {
+  const handleFollow = (userId) => {
     axios.put("http://localhost:5000/follow/" + userId, {
-      followerUsername: userName,
+      followerUsername: myData.username,
       followerId: myData._id,
       followerName : myData.name
     }).then((result) => {
@@ -150,9 +148,8 @@ function UserProfilePage() {
   }
 
   const handleUnfollow = (userId, userName) => {
-    console.log("clicked")
     axios.put("http://localhost:5000/unfollow/" + userId, {
-      followerUsername: userName,
+      followerUsername: myData.username,
       followerId: myData._id,
       followerName: myData.name
     }).then((result) => {
@@ -169,8 +166,6 @@ function UserProfilePage() {
         console.log(error)
       })
   }
-
-  console.log(data)
 
   return (
     <div className='user-page-container' >
