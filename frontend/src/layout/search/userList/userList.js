@@ -31,6 +31,7 @@ function UserList({ }) {
     const isFollowing = (username, id) => {
         console.log(myFollowing)
         return myFollowing.some(follow => follow.followingUsername === username && follow.followingId === id);
+        // return true;
     };
 
     const userIdbyLocalStorage = window.localStorage.getItem("userId")
