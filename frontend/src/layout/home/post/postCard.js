@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+  import React, { useContext, useEffect, useState } from 'react'
 import './post.css'
 import { UserDataContext } from '../../../context/context'
 import axios from 'axios';
