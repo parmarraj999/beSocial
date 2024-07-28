@@ -6,17 +6,23 @@ function FollowerList({setShowList, data}) {
 
     console.log(data)
 
+    const followList = [...data].reverse()
+
   return (
     <div className='follow-list-container' >
         <div className='cancel-layer' onClick={()=>setShowList("")} ></div>
         <div className='follow-list-wrapper' >
-            <div className='box-line' ></div>
+            {/* <div className='box-line' ></div> */}
+            <div style={{display:"flex",alignItems:"center",justifyContent:'space-between',width:"90%"}}>
             <h2>Your Followers</h2>
+              <h3>{data.length}</h3>
+            </div>
             <div className='follow-list'>
+              
               {
-                data.map((data)=>{
+                followList.map((data)=>{
                   return(
-                    <Link to={"/user-profile/" + data._id} className='follow-list-item' >
+                    <Link to={"/user-profile/" + data.followerId} className='follow-list-item' >
                       <div>
                         <h3>{data.followerUsername}</h3>
                         <h4>{data.followerName}</h4>
