@@ -18,7 +18,6 @@ function FollowerList({setShowList, data}) {
               <h3>{data.length}</h3>
             </div>
             <div className='follow-list'>
-              
               {
                 followList.map((data)=>{
                   return(
