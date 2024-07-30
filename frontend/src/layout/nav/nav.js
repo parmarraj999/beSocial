@@ -24,12 +24,15 @@ function Nav() {
         duration: .2,
         stagger: .2,
       })
-      gsap.to(".nav-mobile .nav-icon",{
-        opacity:0,
-       })
+      gsap.to(".nav-mobile .nav-icon", {
+        opacity: 0,
+      })
     }
   })
-
+  
+  const backNavigate = () => {
+    navigate(-1)
+  }
 
   const handleSearchClick = () => {
     setNavPath("search")
@@ -37,7 +40,7 @@ function Nav() {
   }
 
   if (pathname !== "/search") {
-   
+
     gsap.to(".upIconAnime", {
       y: 0,
       opacity: 1,
@@ -45,32 +48,32 @@ function Nav() {
       delay: .5,
       stagger: .2
     })
-    gsap.to(".nav-mobile .nav-icon",{
-      y:0,
-      opacity:1,
-      stagger:.2,
+    gsap.to(".nav-mobile .nav-icon", {
+      y: 0,
+      opacity: 1,
+      stagger: .2,
       delay: 1.5,
-      display:"flex"
-     })
-     gsap.to(".nav-mobile .add-icon",{
-      y:0,
-      opacity:1,
-      delay:2,
-      display:"flex"
-     })
+      display: "flex"
+    })
+    gsap.to(".nav-mobile .add-icon", {
+      y: 0,
+      opacity: 1,
+      delay: 2,
+      display: "flex"
+    })
 
   }
 
-const handleMobileSearchClick = () => {
-   gsap.to(".nav-mobile .nav-icon",{
-    y:-20,
-    opacity:0,
-    duration:.2,
-    stagger:.1,
-    display:"none"
-   })
-   
-}
+  const handleMobileSearchClick = () => {
+    gsap.to(".nav-mobile .nav-icon", {
+      y: -20,
+      opacity: 0,
+      duration: .2,
+      stagger: .1,
+      display: "none"
+    })
+
+  }
 
   const userData = useContext(UserDataContext)
 
@@ -78,7 +81,20 @@ const handleMobileSearchClick = () => {
     <>
       <div className='nav-container' >
         <div className='nav-wrapper'>
-          <div className='logo' >logo</div>
+          {
+            pathname !== "/" ?
+              <>
+                {
+                  pathname === "/search" ? 
+                  <div className='logo' >logo</div> :
+                    <div onClick={backNavigate}>
+                      <svg style={{ width: "35px", color: "black" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+                    </div>
+                }
+              </>
+              :
+              <div className='logo' >logo</div>
+          }
           <ul>
             <Link to="/" onClick={() => setNavPath("home")}>
               {
@@ -98,9 +114,9 @@ const handleMobileSearchClick = () => {
               }
             </Link>
 
-            <Link to="/notificaton" onClick={() => setNavPath("notification")}>
+            <Link to="/notification" onClick={() => setNavPath("notification")}>
               {
-                pathname === "/notificaton" ?
+                pathname === "/notification" ?
                   <svg className='nav-icon upIconAnime' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
                   :
                   <svg className='nav-icon upIconAnime' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
@@ -132,7 +148,7 @@ const handleMobileSearchClick = () => {
         <Link onClick={handleMobileSearchClick} to="/search">
           <svg className='nav-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path></svg>
         </Link>
-       
+
         <div className='add-icon '>
           <svg className='nav-icon ' style={{ width: "40px" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path></svg>
         </div>

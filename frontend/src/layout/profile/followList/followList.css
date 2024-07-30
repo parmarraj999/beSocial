@@ -72,3 +72,9 @@
     color: grey;
     line-height: 1rem;
 }
+@media screen and (max-width:765px) {
+    .follow-list-wrapper{
+        width: 95%;
+        border-radius: 1.5rem;
+    }
+}

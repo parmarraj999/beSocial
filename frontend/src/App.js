@@ -10,6 +10,7 @@ import Profile from "./layout/profile/profile";
 import UserCenter from "./layout/profile/userCenter/userCenter";
 import UserProfilePage from "./layout/userProfile/userProfile";
 import axios from "axios";
+import Notification from "./layout/notification/notification";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                     <Route path="user-center" element={<UserCenter />} />
                   </Route>
                   <Route path="/user-profile/:id" element={<UserProfilePage />} />
+                  <Route path='/notification' element={<Notification/>}/>
                 </Routes>
               </BrowserRouter>
             </UserIDContext.Provider>
