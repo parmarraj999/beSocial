@@ -45,8 +45,8 @@
     gap: 1rem;
 }
 .LikeSvg{
-    height: 55px;
-    width: 55px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -54,8 +54,16 @@
     background: #80ff00;
 }
 .like-notification h4{
-    font-size: 20px;
+    font-size: 18px;
 }
-@media screen and (m) {
-    
+.like-notification h4 span{
+    font-family: 600
+}
+@media screen and (max-width:765px) {
+    .notification-container{
+        padding: .5rem 0;
+    }
+    .notification-wrapper{
+        width: 98%;
+    }
 }
