@@ -6,6 +6,7 @@ import PostExtend from './postExtend'
 function MyPosts({ id }) {
 
   const [postData,setPostData] = useState()
+  const [postId,setPostId] = useState("")
   
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
   
@@ -31,14 +32,15 @@ function MyPosts({ id }) {
   return (  
     <div className='my-post-container' >
       {
-        postExtend ? <PostExtend handleRefresh={handleRefresh} setPostExtend={setPostExtend} data={singlePost} /> : ""
+        postExtend ? <PostExtend handleRefresh={handleRefresh} setPostExtend={setPostExtend} data={singlePost} postId={postId} /> : ""
       }
       {
         postData?.map((data,key)=>{
           return(
             
-            <div className='post-small' onClick={()=>{setPostExtend(true)
-             setSinglePost(data)}}>
+            <div className='post-small' onClick={()=>{setPostExtend(true) 
+             setSinglePost(data)
+             setPostId(data._id)}}>
 
               <div className='post-small-img' >
                 <img src={data.mediaUrl} />
