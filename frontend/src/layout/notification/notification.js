@@ -15,7 +15,7 @@ function Notification() {
         </div>
         <div className='notification-items-list' >
           {
-            data.map((data) => {
+            data?.map((data) => {
               return (
                 <>
                   {

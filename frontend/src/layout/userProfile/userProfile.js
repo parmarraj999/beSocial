@@ -88,6 +88,15 @@ function UserProfilePage() {
 
   // to follow user 
 
+  const time = new Date
+  const hour = time.getHours();
+  const minute = time.getMinutes()
+  const date = time.getDate()
+  const month = time.getMonth();
+  const monthName = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
+
+  const timeDate = `${hour}:${minute}, ${date} ${monthName[month]}`
+
   const handleFollow = (userId, followingUsername, followingName) => {
     console.log(myData._id, myData.username)
     axios.put("http://localhost:5000/follow/" + userId, {
@@ -96,7 +105,9 @@ function UserProfilePage() {
       followerName : myData.name,
       followingId : userId,
       followingUsername : followingUsername,
-      followingName : followingName
+      followingName : followingName,
+      profile_picture : myData.profile_picture,
+      timeData : timeDate
     }).then((result) => {
       console.log(result)
       axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
@@ -159,7 +170,9 @@ function UserProfilePage() {
       followerName: myData.name,
       followingId : userId,
       followingUsername : followingUsername,
-      followingName : followingName
+      followingName : followingName,
+      profile_picture : myData.profile_picture,
+      timeData : timeDate
     }).then((result) => {
       console.log(result)
       axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)

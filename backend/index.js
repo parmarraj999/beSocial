@@ -115,7 +115,7 @@ app.put('/follow/:id', async (req, res) => {
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId
   const followerName = req.body.followerName
-  const { followingId, followingUsername, followingName } = req.body;
+  const { followingId, followingUsername, followingName,profile_picture, timeDate } = req.body;
   try {
     await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
@@ -123,6 +123,17 @@ app.put('/follow/:id', async (req, res) => {
       .then((result) => {
         res.json(result)
         console.log(result)
+      })
+      await User.findByIdAndUpdate({_id : followingId},{
+        $push: {
+          notifications:{
+            notificationType : "Follow",
+            userId : followerId,
+            username : followerUsername ,
+            profile_picture: profile_picture,
+            timeData : timeDate
+          }
+        }
       })
   } catch (error) {
     console.log(error)
@@ -133,7 +144,7 @@ app.put('/unfollow/:id', async (req, res) => {
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId;
   const followerName = req.body.followerName;
-  const { followingId, followingUsername, followingName } = req.body;
+  const { followingId, followingUsername, followingName, profile_picture, timeDate } = req.body;
   try {
     await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
@@ -143,19 +154,18 @@ app.put('/unfollow/:id', async (req, res) => {
         console.log(result)
       })
 
-      await User.findByIdAndUpdate({_id : authorId},{
-        $push: {
+      await User.findByIdAndUpdate({_id : followingId},{
+        $pull: {
           notifications:{
-            notificationType : "Like",
-            userId : userId,
-            username : userName ,
-            postId : id,
-            postUrl: postUrl,
+            notificationType : "Follow",
+            userId : followerId,
+            username : followerUsername ,
+            profile_picture: profile_picture,
             timeData : timeDate
           }
         }
       })
-      
+
   } catch (error) {
     console.log(error)
   }
@@ -174,7 +184,6 @@ app.put("/search/:id", async (req, res) => {
   const { searchData } = req.body;
   try {
     const result = await User.findByIdAndUpdate({ _id: id }, { $push: { search: { Name: searchData } } })
-    console.log(result)
   } catch (error) {
     console.log(error)
   }
@@ -193,7 +202,6 @@ app.put("/deleteRecent/:id", async (req, res) => {
   const { deleteData } = req.body;
   try {
     const result = await User.findOneAndUpdate({ _id: id }, { $pull: { search: { Name: deleteData } } }, { new: true })
-    console.log(result)
   } catch (error) {
     console.log(error)
   }
@@ -205,7 +213,6 @@ app.post("/getSearchUser", async (req, res) => {
   await User.find({ username: { $regex: searchText, $options: 'i' } })
     .then(user => {
       res.json(user)
-      console.log(user)
     })
     .catch((error) => {
       console.log(error)

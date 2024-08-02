@@ -124,6 +124,7 @@
     padding: .2rem; 
     gap: 1rem;
     transition: .3s all;
+    background: linear-gradient(90deg,transparent,#80ff0020);
 }
 .follow-notification h4{
     font-size: 18px;
