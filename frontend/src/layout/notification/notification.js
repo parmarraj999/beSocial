@@ -5,8 +5,14 @@ import { UserDataContext } from '../../context/context'
 function Notification() {
 
   const userData = useContext(UserDataContext).userData;
-  const data = userData.notifications;
-  // const [data,setData] = useState([[...dataArray].reverse()])
+  const dataArray = userData.notifications;
+  const [data,setData] = useState()
+
+  useEffect(()=>{
+    if(dataArray){
+      setData([...dataArray].reverse())
+    }
+  })
 
   return (
     <div className='notification-container'>
