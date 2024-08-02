@@ -57,6 +57,16 @@ const userSchema = new mongoose.Schema({
         {
             Name : String ,
         }
+    ],
+    notificatoins:[
+        {
+            notificationType : String,
+            userId: String,
+            username : String,
+            postId : String,
+            commentText : String,
+            profile_picture: String
+        }
     ]
 },
 { timestamps: true }

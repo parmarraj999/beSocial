@@ -272,6 +272,12 @@ app.put("/unlike/:id",async(req,res)=>{
   })
 })
 
+app.post("/notification/:id",async(req,res)=>{
+  const {id} = req.params;
+  const { userId, username , postId, commentText, profile_picture} = req.body;
+  User
+})
+
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
 })

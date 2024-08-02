@@ -45,6 +45,7 @@
     justify-content: space-between;
     padding: .2rem; 
     gap: 1rem;
+    transition: .3s all;
 }
 .LikeSvg{
     height: 50px;
@@ -89,6 +90,7 @@
     display: flex;
     padding: .2rem; 
     gap: 1rem;
+    transition: .3s all;
 }
 .comment-notification-text{
     width: 100%;
@@ -121,9 +123,19 @@
     align-items: center;
     padding: .2rem; 
     gap: 1rem;
+    transition: .3s all;
 }
 .follow-notification h4{
     font-size: 18px;
+}
+.follow-notification:hover{
+    border: 1px solid black;
+}
+.comment-notification:hover{
+    border: 1px solid black;
+}
+.like-notification:hover{
+    border: 1px solid black;
 }
 @media screen and (max-width:765px) {
     .notification-container{
