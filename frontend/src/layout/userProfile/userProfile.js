@@ -83,7 +83,6 @@ function UserProfilePage() {
     const following = myData.following
     console.log(following)
     return following?.some(follow => follow.followingUsername === data.username && follow.followingId === data._id);
-    // return following?.some(follow => follow.followingUsername === username && follow.followingId === id);
   };
 
   // to follow user 
