@@ -19,13 +19,25 @@
 .notification-header{
     width: 100%;
     height: fit-content;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+.notification-header .back-btn{
+    width: 45px;
+    height: 45px;
+    background: rgb(227, 227, 227);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .notification-header h2{
     font-size: 30px;
     font-weight: 700;
     font-family: "IBM Plex Sans", sans-serif;
     font-weight: 700;
-    color: rgb(146, 146, 146);
+    color: rgb(116, 116, 116);
     line-height: 1.5rem;
 }
 .notification-items-list{
@@ -105,7 +117,7 @@
 .comment-text-box{
     width: 97%;
     height: 50px;
-    border: 2px solid #7af500;
+    border: 2px solid #a8a8a8;
     border-radius: 10px;
     padding: .3rem;
 }

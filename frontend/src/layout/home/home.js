@@ -11,6 +11,7 @@ import axios from "axios"
 import Create from './create/create'
 import gsap from 'gsap'
 import PostDetail from './postDetail/postDetail'
+import { Link } from 'react-router-dom'
 
 function Home() {
 
@@ -18,8 +19,8 @@ function Home() {
   const { pathname } = location;
 
   const [showPop, setShowPop] = useState(true)
-  const [showCreate,setShowCreate] = useState(false)
-  const [showDetail,setShowDetail] = useState(false)
+  const [showCreate, setShowCreate] = useState(false)
+  const [showDetail, setShowDetail] = useState(false)
 
   const navigate = useNavigate()
   const storage = window.localStorage
@@ -34,9 +35,9 @@ function Home() {
   const userData = useContext(UserDataContext)
   const following = userData.userData?.following
 
-  const [commentLength,setCommentLength] = useState();
+  const [commentLength, setCommentLength] = useState();
 
-  const [onePost,setOnePost] = useState({})  
+  const [onePost, setOnePost] = useState({})
   // console.log(onePost)
 
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
@@ -57,7 +58,7 @@ function Home() {
 
   // handleGetPost();
 
-  const [showPost,setShowPost] = useState(false)
+  const [showPost, setShowPost] = useState(false)
 
   useEffect(() => {
 
@@ -67,7 +68,7 @@ function Home() {
         console.log("data getted")
         setShowPost(true)
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error)
       })
   }, [])
@@ -83,15 +84,18 @@ function Home() {
       }
       <div className='nav4logo' >
         <div>logo</div>
-        <div>
+        <div style={{ display: "flex", gap: '1rem' }}>
+          <Link to="/notification">
+            <svg className='nav-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z"></path></svg>
+          </Link>
           <svg className='nav-icon' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M21.7267 2.95694L16.2734 22.0432C16.1225 22.5716 15.7979 22.5956 15.5563 22.1126L11 13L1.9229 9.36919C1.41322 9.16532 1.41953 8.86022 1.95695 8.68108L21.0432 2.31901C21.5716 2.14285 21.8747 2.43866 21.7267 2.95694ZM19.0353 5.09647L6.81221 9.17085L12.4488 11.4255L15.4895 17.5068L19.0353 5.09647Z"></path></svg>
         </div>
       </div>
       <Stories />
       {/* <StoryBoard/> */}
       {
-        showPost ? 
-        <Post setOnePost={setOnePost} setShowDetail={setShowDetail} handleGetPost={handleGetPost} data={data} /> : ""
+        showPost ?
+          <Post setOnePost={setOnePost} setShowDetail={setShowDetail} handleGetPost={handleGetPost} data={data} /> : ""
       }
       {
         showCreate ?
@@ -106,8 +110,8 @@ function Home() {
         }
       </div>
       {
-        showDetail ? 
-        <PostDetail handleGetPost={handleGetPost} onePost={onePost} setShowDetail={setShowDetail} /> : ""
+        showDetail ?
+          <PostDetail handleGetPost={handleGetPost} onePost={onePost} setShowDetail={setShowDetail} /> : ""
       }
     </div>
   )
