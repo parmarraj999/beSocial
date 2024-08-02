@@ -89,6 +89,7 @@ function UserProfilePage() {
   // to follow user 
 
   const handleFollow = (userId, followingUsername, followingName) => {
+    console.log(myData._id, myData.username)
     axios.put("http://localhost:5000/follow/" + userId, {
       followerUsername: myData.username,
       followerId: myData._id,

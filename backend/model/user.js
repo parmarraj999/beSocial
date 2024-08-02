@@ -58,14 +58,16 @@ const userSchema = new mongoose.Schema({
             Name : String ,
         }
     ],
-    notificatoins:[
+    notifications:[
         {
             notificationType : String,
             userId: String,
             username : String,
-            postId : String,
+            postId: String,
             commentText : String,
-            profile_picture: String
+            postUrl: String,
+            profile_picture: String,
+            timeData : String
         }
     ]
 },

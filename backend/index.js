@@ -79,11 +79,11 @@ app.post("/addPost/:id", async (req, res) => {
   const post = await Post.create({
     userId: id,
     creatorName: creatorName,
-    userProfile : userProfile,
+    userProfile: userProfile,
     caption: caption,
     mediaUrl: mediaUrl,
     mediaType: mediaType,
-    comments : {}
+    comments: {}
   })
     .then((user) => {
       res.json(user)
@@ -100,13 +100,13 @@ app.get('/getUserPost/:id', (req, res) => {
 
 })
 
-app.post("/getSinglePost/:id",(req,res)=>{
-  const {id} = req.params;
-  Post.find({_id : id})
-  .then((result)=>{
-    res.json(result)
-    console.log(result)
-  })
+app.post("/getSinglePost/:id", (req, res) => {
+  const { id } = req.params;
+  Post.find({ _id: id })
+    .then((result) => {
+      res.json(result)
+      console.log(result)
+    })
 })
 
 
@@ -115,11 +115,11 @@ app.put('/follow/:id', async (req, res) => {
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId
   const followerName = req.body.followerName
-  const {followingId, followingUsername, followingName } = req.body;
+  const { followingId, followingUsername, followingName } = req.body;
   try {
-    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: followerId, followerUsername: followerUsername, followerName : followerName } } })
+    await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: followingId, followingUsername: followingUsername, followingName : followingName } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $push: { following: { followingId: followingId, followingUsername: followingUsername, followingName: followingName } } })
       .then((result) => {
         res.json(result)
         console.log(result)
@@ -133,15 +133,29 @@ app.put('/unfollow/:id', async (req, res) => {
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId;
   const followerName = req.body.followerName;
-  const {followingId, followingUsername, followingName } = req.body;
+  const { followingId, followingUsername, followingName } = req.body;
   try {
     await User.findByIdAndUpdate({ _id: id }, { $pull: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
-    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: followingId, followingUsername: followingUsername, followingName : followingName } } })
+    await User.findByIdAndUpdate({ _id: followerId }, { $pull: { following: { followingId: followingId, followingUsername: followingUsername, followingName: followingName } } })
       .then((result) => {
         res.json(result)
         console.log(result)
       })
+
+      await User.findByIdAndUpdate({_id : authorId},{
+        $push: {
+          notifications:{
+            notificationType : "Like",
+            userId : userId,
+            username : userName ,
+            postId : id,
+            postUrl: postUrl,
+            timeData : timeDate
+          }
+        }
+      })
+      
   } catch (error) {
     console.log(error)
   }
@@ -214,69 +228,125 @@ setTimeout(() => {
   })
 }, 5000)
 
-app.put("/comment/:id",async(req,res)=>{
-  const {id} = req.params;
-  const {userId ,userName, commentText, profileImg } = req.body;
-  await Post.findByIdAndUpdate({ _id: id }, { $push: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
-  .then(result => {
-    res.json(result)
-    console.log(result)
-  })
-  .catch(error=>{
-    console.log(error)
-  })
-})
-
-app.put("/commentDelete/:id",async(req,res)=>{
-  const {id} = req.params;
-  const {userId ,userName, commentText, profileImg } = req.body;
-  await Post.updateOne({ _id: id }, { $pull: {  comments: {userId: userId, userName: userName, commentText : commentText, profileImg : profileImg } } })
-  .then(result => {
-    res.json(result)
-    console.log("delete")
-  })
-  .catch(error=>{
-    console.log(error)
-  })
-})
-
-app.put("/like/:id",async(req,res)=>{
-  const { userId, userName } = req.body;
+app.put("/comment/:id", async (req, res) => {
   const { id } = req.params;
-  await Post.findByIdAndUpdate({ _id: id }, { $push: { like : {
-    userId : userId,
-    userName : userName,
-  }} })
-  .then(result => {
-    res.json(result)
-    console.log(result)
-  })
-  .catch(error=>{
-    console.log(error)
-  })
+  const { userId, userName, commentText, profileImg, authorId, postUrl, timeDate } = req.body;
+  await Post.findByIdAndUpdate({ _id: id }, { $push: { comments: { userId: userId, userName: userName, commentText: commentText, profileImg: profileImg } } })
+    .then(result => {
+      res.json(result)
+      console.log(result)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    await User.findByIdAndUpdate({_id : authorId},{
+      $push: {
+        notifications:{
+          notificationType : "Comment",
+          userId : userId,
+          username : userName ,
+          postId : id,
+          commentText : commentText,
+          postUrl: postUrl,
+          timeData : timeDate
+        }
+      }
+    })
 })
 
-app.put("/unlike/:id",async(req,res)=>{
-  const { userId, userName } = req.body;
+app.put("/commentDelete/:id", async (req, res) => {
   const { id } = req.params;
-  await Post.findByIdAndUpdate({ _id: id }, { $pull: { like : {
-    userId : userId,
-    userName : userName,
-  }} })
-  .then(result => {
-    res.json(result)
-    console.log(result)
-  })
-  .catch(error=>{
-    console.log(error)
-  })
+  const { userId, userName, commentText, profileImg,  authorId, postUrl, timeDate  } = req.body;
+  await Post.updateOne({ _id: id }, { $pull: { comments: { userId: userId, userName: userName, commentText: commentText, profileImg: profileImg } } })
+    .then(result => {
+      res.json(result)
+      console.log("delete")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    await User.findByIdAndUpdate({_id : authorId},{
+      $pull: {
+        notifications:{
+          notificationType : "Comment",
+          userId : userId,
+          username : userName ,
+          postId : id,
+          commentText : commentText,
+          postUrl: postUrl,
+          timeData : timeDate
+        }
+      }
+    })
 })
 
-app.post("/notification/:id",async(req,res)=>{
-  const {id} = req.params;
-  const { userId, username , postId, commentText, profile_picture} = req.body;
-  User
+app.put("/like/:id", async (req, res) => {
+  const { userId, userName ,authorId, postUrl, timeDate} = req.body;
+  const { id } = req.params;
+  await Post.findByIdAndUpdate({ _id: id }, {
+    $push: {
+      like: {
+        userId: userId,
+        userName: userName,
+      }
+    }
+  })
+    .then(result => {
+      res.json(result)
+      console.log(result)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    await User.findByIdAndUpdate({_id : authorId},{
+      $push: {
+        notifications:{
+          notificationType : "Like",
+          userId : userId,
+          username : userName ,
+          postId : id,
+          postUrl: postUrl,
+          timeData : timeDate
+        }
+      }
+    })
 })
+
+app.put("/unlike/:id", async (req, res) => {
+  const { userId, userName,authorId, postUrl, timeDate } = req.body;
+  const { id } = req.params;
+  await Post.findByIdAndUpdate({ _id: id }, {
+    $pull: {
+      like: {
+        userId: userId,
+        userName: userName,
+      }
+    }
+  })
+    .then(result => {
+      res.json(result)
+      console.log(result)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    await User.findByIdAndUpdate({_id : authorId},{
+      $pull: {
+        notifications:{
+          notificationType : "Like",
+          userId : userId,
+          username : userName ,
+          postId : id,
+          postUrl: postUrl,
+          timeData : timeDate
+        }
+      }
+    })
+})
+
+// app.post("/notification/:id", async (req, res) => {
+
+// })
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")

@@ -96,21 +96,32 @@ function PostDetail({ onePost, setShowDetail }) {
 
     useEffect(() => {
         if (likeIds?.includes(data._id)) {
-            console.log("present")
+            // console.log("present")
             setIsLike(true)
-            console.log(isLike)
+            // console.log(isLike)
         }else{
             setIsLike(false)
         }
     })
 
+    const time = new Date
+    const hour = time.getHours();
+    const minute = time.getMinutes()
+    const date = time.getDate()
+    const month = time.getMonth();
+    const monthName = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
+
+    const timeDate = `${hour}:${minute}, ${date} ${monthName[month]}`
 
     const handleComment = () => {
         axios.put("http://localhost:5000/comment/" + onePost._id, {
+            authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
             commentText: comment,
-            profileImg: data.profile_picture
+            profileImg: data.profile_picture,
+            postUrl: onePost.mediaUrl,
+            timeDate : timeDate
         })
             .then(result => {
                 getSinglePost();
@@ -123,10 +134,13 @@ function PostDetail({ onePost, setShowDetail }) {
     const handleCommentDelete = (userId, text, username, profileImg) => {
         console.log(userId, text, username, profileImg)
         axios.put("http://localhost:5000/commentDelete/" + onePost._id, {
+            authorId : onePost.userId,
             userId: userId,
             userName: username,
             commentText: text,
-            profileImg: profileImg
+            profileImg: profileImg,
+            postUrl: onePost.mediaUrl,
+            timeDate : timeDate
         })
             .then(result => {
                 console.log(result)
@@ -140,10 +154,13 @@ function PostDetail({ onePost, setShowDetail }) {
 
 
     const handleLike = () => {
-        console.log(data.username)
+        // console.log(data.username)
         axios.put("http://localhost:5000/like/" + onePost._id, {
+            authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
+            postUrl : onePost.mediaUrl,
+            timeDate : timeDate
         })
             .then(result => {
                 console.log(result)
@@ -151,10 +168,13 @@ function PostDetail({ onePost, setShowDetail }) {
             })
     }
     const handleUnlike = () => {
-        console.log(data.username)
+        // console.log(data.username)
         axios.put("http://localhost:5000/unlike/" + onePost._id, {
+            authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
+            postUrl : onePost.mediaUrl,
+            timeDate : timeDate
         })
             .then(result => {
                 console.log(result)
