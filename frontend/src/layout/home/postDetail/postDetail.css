@@ -229,7 +229,7 @@
     height: 60px;
     background: red;
     color: black;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
@@ -254,5 +254,8 @@
 
     .comment-box {
         width: 100%;
+    }
+    .cancel-btn-post-extend{
+        display: "flex";
     }
 }

@@ -28,7 +28,7 @@
     height: 45px;
     background: rgb(227, 227, 227);
     border-radius: 5px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
@@ -157,5 +157,8 @@
     }
     .notification-wrapper{
         width: 98%;
+    }
+    .notification-header .back-btn{
+        display: flex;
     }
 }

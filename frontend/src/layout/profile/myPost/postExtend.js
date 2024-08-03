@@ -97,8 +97,12 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
         })
 
     }
+
+    console.log(data)
+    console.log(postId)
     
     const getSinglePost = async () => {
+        console.log(postId)
         const response = await axios.post("http://localhost:5000/getSinglePost/" + postId)
         const postData = response.data;
         console.log(postData)
@@ -118,7 +122,7 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
 
     const handleCommentDelete = (dataUser) => {
         console.log(dataUser)
-        axios.put("http://localhost:5000/commentDelete/" + data._id, {
+        axios.put("http://localhost:5000/commentDeleteOwn/" + postId, {
             userId: dataUser.userId,
             userName: dataUser.userName,
             commentText: dataUser.commentText,
@@ -188,7 +192,7 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
                         <div className='likes-list-container' >
                             <div className='likes-list-header' >
                                 <h3>Likes</h3>
-                                <h3>{data.like.length}</h3>
+                                <h3>{likeList.length}</h3>
                             </div>
                             <div className='likes-list' >
                                 {
@@ -209,7 +213,7 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
                         <div className='likes-list-container' >
                             <div className='likes-list-header' >
                                 <h3>Commnets</h3>
-                                <h3>{`${data.comments.length}`-1}</h3>
+                                <h3>{`${commentList.length}`-1}</h3>
                             </div>
                             <div className='likes-list' >
                                 {

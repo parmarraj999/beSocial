@@ -261,6 +261,18 @@ app.put("/comment/:id", async (req, res) => {
     })
 })
 
+app.put("/commentDeleteOwn/:id", async (req, res) => {
+  const { id } = req.params;
+  const { userId, userName, commentText, profileImg,  authorId, postUrl, timeDate  } = req.body;
+  await Post.updateOne({ _id: id }, { $pull: { comments: { userId: userId, userName: userName, commentText: commentText, profileImg: profileImg } } })
+    .then(result => {
+      res.json(result)
+      console.log("delete")
+    })
+    .catch(error => {
+      console.log(error)
+    })
+})
 app.put("/commentDelete/:id", async (req, res) => {
   const { id } = req.params;
   const { userId, userName, commentText, profileImg,  authorId, postUrl, timeDate  } = req.body;
