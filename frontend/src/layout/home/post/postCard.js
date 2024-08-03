@@ -2,8 +2,9 @@
 import './post.css'
 import { UserDataContext } from '../../../context/context'
 import axios from 'axios';
+import PostProfile from './postProfile/postProfile';
 
-function PostCard({ data, setOnePost, setShowDetail }) {
+function PostCard({ data, setOnePost, setShowDetail, key }) {
 
   function ConvertDate(dateText) {
 
@@ -61,12 +62,20 @@ function PostCard({ data, setOnePost, setShowDetail }) {
       })
   }
 
+  const [elementId,setElementId] = useState();
+
+  console.log(data)
 
   return (
     <div className='post-card' >
+      {
+        elementId ===  postData._id ?
+        <PostProfile userId={data.userId} image={data.userProfile} setElementId={setElementId}/>
+        : ""
+      }
       <div className='post-card-header' >
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <div className='post-profile'>
+          <div className='post-profile' onClick={()=>setElementId(postData._id)}>
             <img src={postData?.userProfile} />
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: ".2rem" }}>

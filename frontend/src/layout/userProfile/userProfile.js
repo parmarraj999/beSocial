@@ -66,6 +66,7 @@ function UserProfilePage() {
       width: "95px",
       height: "95px"
     })
+    
   })
 
   useEffect(() => {
