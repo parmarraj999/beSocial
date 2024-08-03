@@ -39,11 +39,10 @@ function PostProfile({userId,setElementId, image}) {
 
   return (
     <div className='post-profile-container' >
-        {/* <div className='post-profile-cover'>
-
-        </div> */}
       <div className='post-profile-wrapper'>
+        <div style={{minHeight:"250px"}} >
         <img src={image} />
+        </div>
         <div>
           <Link to={"/user-profile/" + userId} className='visit-btn'>Visit Profile</Link>
         </div>

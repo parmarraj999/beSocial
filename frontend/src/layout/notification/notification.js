@@ -14,7 +14,7 @@ function Notification() {
     if (dataArray) {
       setData([...dataArray].reverse())
     }
-  })
+  },[])
 
   return (
     <div className='notification-container'>
