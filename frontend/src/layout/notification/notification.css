@@ -116,7 +116,7 @@
 
 .comment-text-box{
     width: 97%;
-    height: 50px;
+    height: fit-content;
     border: 2px solid #a8a8a8;
     border-radius: 10px;
     padding: .3rem;

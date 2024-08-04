@@ -3,6 +3,7 @@ const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 const User = require("./model/user");
 const Post = require("./model/post")
+const cron = require('node-cron');
 
 const app = express();
 app.use(cors())
@@ -363,20 +364,26 @@ app.put("/unlike/:id", async (req, res) => {
     })
 })
 
-// app.post("/notification/:id", async (req, res) => {
+// delete notification after 24 hours
 
-// })
+cron.schedule('0 0 * * *', async () => { // Runs every day at midnight
+  try {
+    // Find documents with array elements close to the 24-hour threshold
+    const documentsToUpdate = await User.find({
+      'notifications': {
+        $elemMatch: { createdAt: { $lt: new Date(Date.now() - 24 * 60 * 60 * 1000) } }
+      }
+    });
+
+    for (const doc of documentsToUpdate) {
+      doc.user = doc.user.filter(item => item.createdAt >= new Date(Date.now() - 24 * 60 * 60 * 1000));
+      await doc.save();
+    }
+  } catch (error) {
+    console.error('Error deleting array elements:', error);
+  }
+});
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
 })
-// await Post.find({
-//   userId : { $in: followingIds}
-// }).then((result)=>{
-//   res.json(result)
-//   console.log(result)
-// })
-// const data = [
-//   "668e727f75f2c35d0014abad",
-//   "668d43f81d54ab8ca4f6c83a"
-// ]

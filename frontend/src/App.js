@@ -34,6 +34,8 @@ function App() {
       })
   }, [])
 
+  console.log(userData)
+
   return (
     <div className="App">
       <SearchListData.Provider value={{ searchData, setSearchData, searchText ,setSearchText }}>

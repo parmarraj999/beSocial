@@ -67,12 +67,15 @@ const userSchema = new mongoose.Schema({
             commentText : String,
             postUrl: String,
             profile_picture: String,
-            timeData : String
+            timeData : String,
+            createdAt: {
+                type: Date, default: Date.now
+            }
         }
     ]
 },
 { timestamps: true }
 )
-
+userSchema.index({ "notifications": 1, "notifications.createdAt": 1 }, { expireAfterSeconds: 86400 });
 const User = mongoose.model("User",userSchema);
 module.exports = User;
