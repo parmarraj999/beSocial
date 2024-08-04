@@ -11,5 +11,12 @@ const storySchema = new mongoose.Schema({
     },
     userProfile : {
         type: String,
-    }
+    },
+    mediaType : {
+        type: String,
+    },
+    mediaUrl : {
+         type : String,
+    },
+    
 })
