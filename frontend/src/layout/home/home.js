@@ -24,7 +24,7 @@ function Home() {
   const [showDetail, setShowDetail] = useState(false)
   const [showStory,setShowStory] = useState(false)
   const [storyId,setStoryId] = useState("")
-  const [showAddStory,setShowAddStory] = useState(true)
+  const [showAddStory,setShowAddStory] = useState(false)
 
   const navigate = useNavigate()
   const storage = window.localStorage

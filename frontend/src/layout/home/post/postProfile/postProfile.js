@@ -56,7 +56,7 @@ function PostProfile({ userId, setElementId, image }) {
   return (
     <div className='post-profile-container' >
       <div className='post-profile-wrapper'>
-        <div style={{ minHeight: "250px",maxHeight:"fit-content" }} >
+        <div style={{ minHeight: "200px",maxHeight:"fit-content" }} >
           <img src={image} />
         </div>
         <div style={{display:"flex",alignItems:"center",gap:".8rem"}}>

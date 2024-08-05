@@ -124,6 +124,7 @@
     height: 60px;
     border-radius: 15px;
     border: none;
+    background: white;
 }
 .story-reaction-container h4{
     font-size: 20px;
@@ -132,15 +133,75 @@
 .story-like-btn{
     background: #80ff00;
 }
-.position-btn{
-    position: absolute;
-    bottom: 5%;
+
+/* ======== story create page css ========  */
+
+.create-story{
+    grid-template-rows: 1.1fr 9.8fr 1.1fr;
+}
+
+.story-header{
+    width: 30%;
+    margin: 0 auto;
+    height: 100%;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-function{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.story-reaction-container .increase-btn{
+    background: #AFD198;
+}
+.story-reaction-container .decrease-btn{
+    background: #F19ED2;
+}
+.story-reaction-container .rotate-btn{
+    background: #ffffff;
+}
+.story-reaction-container .done-btn{
+    background : #80ff00;   
+}
+.story-reaction-container .upload-story-btn{
+    background : #80ff00;   
+    width: 100%;
+    height: 50px;
+    border-radius: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+}
+.story-reaction-container .edit-story-btn{
+    width: 100%;
+    height: 50px;
+    border-radius: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+}
+.story-reaction-container .close-story-btn{
+    min-width: 50px;
+    height: 50px;
+    border-radius: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    background: red;
 }
 @media screen and (max-width:765px) {
     .nav4logo{
         display: flex;
     }
     .story-slider{
+        width: 98%;
+    }
+    .story-header{
         width: 98%;
     }
     .story-board{
