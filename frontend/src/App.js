@@ -12,6 +12,7 @@ import UserProfilePage from "./layout/userProfile/userProfile";
 import axios from "axios";
 import Notification from "./layout/notification/notification";
 import PostExtend from "./layout/profile/myPost/postExtend";
+import Feedback from "./layout/firebase/feedback";
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
                   <Route path="/user-profile/:id" element={<UserProfilePage />} />
                   <Route path="/post/:id" element={<PostExtend/>} />
                   <Route path='/notification' element={<Notification/>}/>
+                  <Route path='/community' element={<Feedback/>}/>
                 </Routes>
               </BrowserRouter>
             </UserIDContext.Provider>

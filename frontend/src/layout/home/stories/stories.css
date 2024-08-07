@@ -144,10 +144,27 @@
     width: 30%;
     margin: 0 auto;
     height: 100%;
-    border: 1px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.story-header h3{
+    font-size: 22px;
+    color: white;
+}
+.story-header h4{
+    font-size: 16px;
+    color: white;
+}
+.story-header-profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.story-header-profile img{
+    width: 100%;
+    height: 100%;
 }
 
 .text-function{

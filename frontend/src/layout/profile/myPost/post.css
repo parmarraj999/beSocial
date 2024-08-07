@@ -65,7 +65,7 @@
     top: 0;
     left: 0;
     z-index: 999999;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 .extend-post-container {
@@ -81,6 +81,7 @@
     gap: .4rem;
     padding: 1rem 0;
     height: 94vh;
+    /* overflow: scroll;     */
 }
 
 .extend-post {
@@ -290,5 +291,6 @@
 
     .extend-post-container {
         width: 95%;
+        overflow: hidden;;
     }
 }

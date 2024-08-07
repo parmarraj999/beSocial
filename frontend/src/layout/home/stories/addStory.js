@@ -35,13 +35,15 @@ function AddStory({setShowAddStory}) {
         }
     };
 
-    const uploadScreenshot = async (dataUrl) => {
+    const uploadStory = async (dataUrl) => {
+        const math = Math.floor(Math.random()*190238409238)
+        console.log(math)
         handleCaptureClick();
         const response = await fetch(screenShot);
         const blob = await response.blob();
         const file = new File([blob], 'image.jpg', { type: blob.type })
         console.log(file)
-        const storageRef = ref(firebaseStorage, `/stories/${file.name}-${userData.username}`)
+        const storageRef = ref(firebaseStorage, `/stories/${file.name}-${userData.username}-${math}`)
         const uploadTask = uploadBytesResumable(storageRef, file)
         uploadTask.on("state_changed", (snapshot) => {
             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
@@ -50,16 +52,17 @@ function AddStory({setShowAddStory}) {
         })
     };
 
-
-
     return (
         <div className='story-board-container create-story'>
             <div className='story-header'>
-                <div className='text-function'>
-                  <div>
-                    
-                  </div>
-                  <button>Aa</button>
+                <div style={{display:"flex",alignItems:'center',gap:".8rem"}}>
+                    <div className='story-header-profile'>
+                        <img src={userData.profile_picture} />
+                    </div>
+                    <h3 >{userData.username}</h3>
+                </div>
+                <div style={{display:"flex",alignItems:'center',gap:".4rem"}}>
+                <svg style={{width:"30px",color:"grey"}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12H4C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C9.25022 4 6.82447 5.38734 5.38451 7.50024L8 7.5V9.5H2V3.5H4L3.99989 5.99918C5.82434 3.57075 8.72873 2 12 2ZM13 7L12.9998 11.585L16.2426 14.8284L14.8284 16.2426L10.9998 12.413L11 7H13Z"></path></svg>
                 </div>
             </div>
             <div className='story-board' ref={captureRef}>
@@ -77,7 +80,7 @@ function AddStory({setShowAddStory}) {
                                 <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg>
                             </button>
                             <button className='edit-story-btn' onClick={()=>setShowUploadBtn(false)}> Edit</button>
-                            <button className='upload-story-btn'> upload</button>
+                            <button className='upload-story-btn' onClick={uploadStory}> upload</button>
                         </div>
                         :
                         <>

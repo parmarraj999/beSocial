@@ -6,6 +6,7 @@
     top: 0;
     left: 0;
     z-index: 999999;
+    /* border: 1px solid red; */
 }
 .top-layer{
     position: absolute;
@@ -112,6 +113,9 @@
         padding: 0 .8rem 0 .2rem;
     }
     .profile-wrapper{
+        width: 100%;
+    }
+    .circle-top{
         width: 100%;
     }
 }
