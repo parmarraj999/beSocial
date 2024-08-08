@@ -21,7 +21,9 @@ function FeedbackForm({ setShowForm }) {
                         <div onClick={() => {setFeedbackType("feature")
                             setStep(false)
                         }} className='feature-type'>Feauture</div>
-                        <div onClick={() => setFeedbackType("bug")} className='bug-type'>Bug</div>
+                        <div onClick={() => {setFeedbackType("Bug")
+                            setStep(false)
+                        }} className='bug-type'>Bug</div>
                     </div>
                 </div> :
                     <div className='feedback-card' >

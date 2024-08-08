@@ -17,6 +17,9 @@ const storySchema = new mongoose.Schema({
     },
     mediaUrl : {
          type : String,
-    },
-    
+    },  
 })
+
+const Story = mongoose.model('Story',storySchema)
+
+module.exports = Story;

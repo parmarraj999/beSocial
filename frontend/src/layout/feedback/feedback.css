@@ -104,6 +104,7 @@
 .feedback-type div{
     display: flex;
     gap: 1rem;
+    cursor: pointer;
 }
 .feedback-card textarea{
     width: 100%;
