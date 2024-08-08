@@ -12,7 +12,7 @@ import UserProfilePage from "./layout/userProfile/userProfile";
 import axios from "axios";
 import Notification from "./layout/notification/notification";
 import PostExtend from "./layout/profile/myPost/postExtend";
-import Feedback from "./layout/firebase/feedback";
+import Feedback from "./layout/feedback/feedback";
 
 function App() {
 
