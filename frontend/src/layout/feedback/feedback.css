@@ -4,17 +4,14 @@
     width: 100%;
     margin: 0 auto;
     height: 100vh;
-    padding-top: 80px;
     display: flex;
-    position: absolute;
     flex-direction: column;
-    top: 0%;
-    left: 0%;
-    z-index: 99999;
+    padding-top: 80px;
     background: white;
 }
 .feedback-header{
-    width: 100%;
+    width: 38%;
+    margin: 0 auto;
     height: 60px;
     display: flex;
     align-items: center;
@@ -208,6 +205,9 @@
         width: 95%;
     }
     .feedback-box{
+        width: 100%;
+    }
+    .feedback-header{
         width: 100%;
     }
 }

@@ -13,9 +13,15 @@ const feedbackSchema = new mongoose.Schema({
         type : String,
         required: true
     },
+    userProfile :{
+        type : String
+    },
     feedback: {
         type: String,
-        required: true,
+        // required: true,
+    },
+    feedbackType : {
+        type: String
     },
     uploadDate : {
         type : String,

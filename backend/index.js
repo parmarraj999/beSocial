@@ -2,7 +2,8 @@ const express = require("express")
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
 const User = require("./model/user");
-const Post = require("./model/post")
+const Post = require("./model/post");
+const Feedback = require("./model/feedback");
 const cron = require('node-cron');
 
 const app = express();
@@ -383,6 +384,36 @@ cron.schedule('0 0 * * *', async () => { // Runs every day at midnight
     console.error('Error deleting array elements:', error);
   }
 });
+
+// feedback section
+
+app.post("/add-feedback",async(req,res)=>{
+  const { userId, username, name, feedback, uploadDate, feedbackType, userProfile } = req.body;
+  await Feedback.create({
+    userId : userId,
+    username : username,
+    name : name,
+    userProfile : userProfile,
+    feedback : feedback,
+    feedbackType : feedbackType,
+    uploadDate : uploadDate,
+    done : false
+  })
+  .then((result)=>{
+    res.json(result)
+  })
+})
+
+app.get("/get-feedbacks",async(req,res)=>{
+  Feedback.find({})
+  .then(result=>{
+    res.json(result)
+  })
+  .catch(error=>{
+    console.log(error)
+    res.json({message : "feedback not found"})
+  })
+})
 
 app.listen(5000, () => {
   console.log("sever is running on port 5000")
