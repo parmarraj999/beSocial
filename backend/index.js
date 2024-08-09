@@ -5,12 +5,13 @@ const User = require("./model/user");
 const Post = require("./model/post");
 const Feedback = require("./model/feedback");
 const cron = require('node-cron');
+require("dotenv").config();
 
 const app = express();
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/beSocial")
+mongoose.connect(process.env.MONGODB_URL)
   .then(() =>
     console.log("connected to db")
   )
