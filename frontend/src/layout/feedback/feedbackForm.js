@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { UserDataContext } from '../../context/context';
 import axios from "axios"
 
-function FeedbackForm({ setShowForm }) {
+function FeedbackForm({ setShowForm, getData }) {
 
     const [step, setStep] = useState(true)
     const date = new Date();
@@ -34,6 +34,8 @@ function FeedbackForm({ setShowForm }) {
         })
         .then((result)=>{
             console.log(result)
+            getData();
+            setShowForm(false)
         })
     }
 

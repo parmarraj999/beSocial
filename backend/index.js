@@ -10,7 +10,7 @@ const app = express();
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect("mongodb://localhost:27017/beSocial")
+mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/beSocial")
   .then(() =>
     console.log("connected to db")
   )
@@ -413,6 +413,15 @@ app.get("/get-feedbacks",async(req,res)=>{
     console.log(error)
     res.json({message : "feedback not found"})
   })
+})
+
+app.delete("/delete-feedback/:id",async(req,res)=>{
+  const {id} = req.params;
+  Feedback.findByIdAndDelete({ _id: id })
+  .then((result) => {
+    res.json(result)
+  })
+
 })
 
 app.listen(5000, () => {
