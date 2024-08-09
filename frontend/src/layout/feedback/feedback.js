@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
 import './feedback.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FeedbackForm from './feedbackForm';
 
 function Feedback() {
+
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false)
   return (
     <div className='feedback-container'>
+      <div className='feedback-header'>
+        <div className='feedback-back' onClick={()=>navigate(-1)}>
+        <svg style={{width:"30px",color:'black'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+        </div>
+        <h3>Community</h3>
+      </div>
       {
         showForm ? <FeedbackForm setShowForm={setShowForm} /> : ""
       }
       <div className='feeds-container' >
         <div className='feedback-box' >
-          <div className='feedback-header' >
+          <div className='feed-header' >
             <Link className='feedback-profile'>
               <img src='https://i.pinimg.com/564x/71/3a/3c/713a3c42781fe63b9d3bd644f780cce7.jpg' />
               <div>

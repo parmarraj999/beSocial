@@ -27,7 +27,7 @@ function FeedbackForm({ setShowForm }) {
                     </div>
                 </div> :
                     <div className='feedback-card' >
-                        <div className='feedback-header' >
+                        <div className='feed-header' >
                             <Link className='feedback-profile'>
                                 <img src='https://i.pinimg.com/564x/71/3a/3c/713a3c42781fe63b9d3bd644f780cce7.jpg' />
                                 <div>
