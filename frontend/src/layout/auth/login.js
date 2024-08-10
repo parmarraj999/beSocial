@@ -17,9 +17,10 @@ function Login({setCurrUi}) {
   const userData = useContext(UserDataContext)
 
   const handleLogin = () => {
+  
     if(email && password){
-
-      axios.post("http://localhost:5000/auth/login",{
+      console.log("clicked")
+      axios.post("https://besocial-bg2h.onrender.com/auth/login" ,{
         email : email,
         password : password
       })
@@ -69,7 +70,7 @@ function Login({setCurrUi}) {
           Log In
         </button>
         <button className='sign-btn' onClick={()=>setCurrUi("signup")} >
-          Don't Have any Account ?
+          Don't Have any Account  ?
         </button>
       </div>
       <Welcome/>

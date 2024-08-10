@@ -28,10 +28,10 @@ function App() {
 
   useEffect(() => {
 
-    axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+    axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         setUserData(result.data[0])
-        console.log("data getted")
+        // console.log("data getted")
       })
   }, [])
 

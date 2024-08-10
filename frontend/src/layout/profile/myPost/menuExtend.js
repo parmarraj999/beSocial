@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import axios from 'axios'
 
-function MenuExtend({postId, handleDeleteAnime}) {
+function MenuExtend({postId, handleDeleteAnime, setPostExtend}) {
 
     useGSAP(()=>{
         gsap.from('.extend-post-menu',{
@@ -14,7 +14,7 @@ function MenuExtend({postId, handleDeleteAnime}) {
     })
 
     const hanldePostDelete = () => {
-        axios.delete("http://localhost:5000/deletePost/"+postId)
+        axios.delete("https://besocial-bg2h.onrender.com/deletePost/"+postId)
         .then(()=>{
             console.log("post delete successfully")
         })

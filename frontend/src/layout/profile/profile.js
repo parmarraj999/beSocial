@@ -28,13 +28,6 @@ function Profile() {
     const storage = window.localStorage
     const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
-    //         .then((result) => {
-    //             userData.setUserData(result.data[0])
-    //         })
-    // }, [])
-
     const [showUpload, setShowUpload] = useState(false)
 
     const [showPopLog, setShowPopLog] = useState(false)

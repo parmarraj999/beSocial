@@ -27,7 +27,7 @@ function Signup({setCurrUi}) {
       if( name && password && username && email ){
         
       const uniqueId = username + uuidv4();
-        axios.post("http://localhost:5000/auth/signup",{
+        axios.post(`${process.env.API_URL}auth/signup`,{
           uid : uniqueId,
           name : name,
           username : username,

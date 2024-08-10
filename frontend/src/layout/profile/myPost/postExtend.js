@@ -24,10 +24,10 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
         const date = new Date(dateText);
 
         const day = date.getDate().toString().padStart(2, '0');
-        const month = date.toLocaleString('default', { month: 'long' });
+        const month = date.toLocaleString('default', { month: 'short' });
         const year = date.getFullYear();
 
-        const formattedDate = `${day} ${month} ${year}`;
+        const formattedDate = `${day}, ${month} ${year}`;
         return formattedDate;
         // console.log(formattedDate)
     }
@@ -95,18 +95,16 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
             background: "rgba(0,0,0,0)",
             duration: .4
         })
+        setTimeout(() => {
+            setPostExtend(false)
+            handleRefresh();
+        }, 4000);
 
     }
-
-    console.log(data)
-    console.log(postId)
     
     const getSinglePost = async () => {
-        console.log(postId)
         const response = await axios.post("http://localhost:5000/getSinglePost/" + postId)
         const postData = response.data;
-        console.log(postData)
-        // setData(postData[0])
         setLikeList(postData[0].like);
         setCommentList(postData[0].comments)
     }
@@ -129,7 +127,6 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
             profileImg: dataUser.profileImg
         })
             .then(result => {
-                console.log(result)
                 getSinglePost();
             })
             .catch((error) => {
@@ -159,7 +156,7 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
                             <div className='extend-post-menu-icon' onClick={() => setShowMenu(!showMenu)}>
                                 {
                                     showMenu ?
-                                        <MenuExtend postId={data?._id} handleDeleteAnime={handleDeleteAnime} /> : ""
+                                        <MenuExtend setPostExtend={setPostExtend} postId={data?._id} handleDeleteAnime={handleDeleteAnime} /> : ""
                                 }
                                 <svg style={{ width: "25px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path></svg>
                             </div>
@@ -186,6 +183,7 @@ function PostExtend({data, postId, setPostExtend, handleRefresh }) {
                     }
 
                     <button className='list-cancel-btn' style={{ color: "white", maxWidth: "50px", display: "none", background: "red" }}><svg style={{ width: "30px", color: "white" }} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path></svg></button>
+                    <div>Cancel</div>
                 </div>
                 {
                     showLike ?
