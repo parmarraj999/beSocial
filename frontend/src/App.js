@@ -21,18 +21,26 @@ function App() {
   const [userProfile, setUserProfile] = useState("")
   const [searchData, setSearchData] = useState([])
   const [searchText,setSearchText] = useState("")
+
+  const [isLoading,setIsLoading] = useState(true);
+
   // console.log(searchData)
 
   const isLoged = window.localStorage.getItem("isLogIn")
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
+
 
   useEffect(() => {
 
     axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         setUserData(result.data[0])
+        setIsLoading(false)
         // console.log("data getted")
       })
+    
+      
+
   }, [])
 
   console.log(userData)
@@ -41,7 +49,7 @@ function App() {
     <div className="App">
       <SearchListData.Provider value={{ searchData, setSearchData, searchText ,setSearchText }}>
         <UserProfileContext.Provider value={{ userProfile, setUserProfile }} >
-          <UserDataContext.Provider value={{ userData, setUserData }} >
+          <UserDataContext.Provider value={{ userData, setUserData, isLoading }} >
             <UserIDContext.Provider value={{ userID, setUserID }} >
               <BrowserRouter>
                 <Nav />

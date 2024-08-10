@@ -19,7 +19,7 @@ function Search() {
   const handleSearchInput = (e) => {
     searchDataContext.setSearchText(e.target.value)
     setSearchText(e.target.value)
-    axios.post("http://localhost:5000/getSearchUser", {
+    axios.post("https://besocial-bg2h.onrender.com/getSearchUser", {
       searchText: `${e.target.value}`
     })
       .then(result => {
@@ -68,41 +68,6 @@ function Search() {
     setTimeout(() => {
       navigate("/")
     }, 600);
-  }
-
-  // console.log(userData.userData._id)
-
-  // const getList = () => {
-  //   axios.get("http://localhost:5000/getSearchList/" + userData.userData?._id).then((res) => {
-  //     if (res) {
-  //       setData(res.data[0]?.search)
-  //     }
-  //     else {
-  //       console.log('data not fetched')
-  //     }
-  //     console.log(res.data[0]?.search)
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   getList();
-  // }, [])
-
-  const handleSearch = () => {
-    // axios.post("http://localhost:5000/getSearchUser", {
-    //   searchText: `${searchText}` 
-    // })
-    //   .then(result => {
-    //     console.log(result.data)
-    //     if(result.data.length === 0){
-    //       console.log("user Not Found")
-    //     }
-    //     setSearchData(result.data)
-    //   })
-    // axios.put("http://localhost:5000/search/" + userData.userData._id, {
-    //   searchData: searchText
-    // })
-    // getList();
   }
 
   return (

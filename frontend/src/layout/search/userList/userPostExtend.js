@@ -58,7 +58,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
 
     const getSinglePost = async () => {
-        const response = await axios.post("http://localhost:5000/getSinglePost/" + data._id)
+        const response = await axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + data._id)
         const postData = response.data;
         setPostComments(postData[0].comments);
         setPostLikes(postData[0].like)
@@ -80,7 +80,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     // like section 
     const handleLike = () => {
         console.log(userData.username)
-        axios.put("http://localhost:5000/like/" + data._id, {
+        axios.put("https://besocial-bg2h.onrender.com/like/" + data._id, {
             userId: userData._id,
             userName: userData.username,
         })
@@ -91,7 +91,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
 
     const handleUnlike = () => {
-        axios.put("http://localhost:5000/unlike/" + data._id, {
+        axios.put("https://besocial-bg2h.onrender.com/unlike/" + data._id, {
             userId: userData._id,
             userName: userData.username,
         })
@@ -104,7 +104,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
 
     // comment section
     const handleComment = () => {
-        axios.put("http://localhost:5000/comment/" + data._id, {
+        axios.put("https://besocial-bg2h.onrender.com/comment/" + data._id, {
             userId: userData._id,
             userName: userData.username,
             commentText: comment,
@@ -120,7 +120,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
     const handleCommentDelete = (userId, text, username, profileImg) => {
         console.log(userId, text, username, profileImg)
-        axios.put("http://localhost:5000/commentDelete/" + data._id, {
+        axios.put("https://besocial-bg2h.onrender.com/commentDelete/" + data._id, {
             userId: userId,
             userName: username,
             commentText: text,

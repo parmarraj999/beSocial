@@ -39,10 +39,7 @@ function Home() {
   const userData = useContext(UserDataContext)
   const following = userData.userData?.following
 
-  const [commentLength, setCommentLength] = useState();
-
   const [onePost, setOnePost] = useState({})
-  // console.log(onePost)
 
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
@@ -54,7 +51,7 @@ function Home() {
 
   const handleGetPost = async () => {
     console.log(followingIds)
-    const response = await axios.post("http://localhost:5000/getAllPosts", followingIds)
+    const response = await axios.post("https://besocial-bg2h.onrender.com/getAllPosts", followingIds)
     console.log(response.data)
     setData(response.data)
     console.log(data.length)
@@ -66,7 +63,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+    axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         userData.setUserData(result.data[0])
         console.log("data getted")

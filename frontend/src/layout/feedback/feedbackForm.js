@@ -10,7 +10,7 @@ function FeedbackForm({ setShowForm, getData }) {
     const date = new Date();
     const hour = date.getHours();
     const minute = date.getMinutes();
-    const day = date.getDay();
+    const day = date.getDate();
     const month = date.getMonth();
 
     const monthArray = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
@@ -23,7 +23,7 @@ function FeedbackForm({ setShowForm, getData }) {
     const [feedback, setFeedback] = useState("");
 
     const handleUploadFeedback = async() => {
-        axios.post("http://localhost:5000/add-feedback",{
+        axios.post("https://besocial-bg2h.onrender.com/add-feedback",{
             userId : userData._id,
             username : userData.username,
             userProfile : userData.profile_picture,

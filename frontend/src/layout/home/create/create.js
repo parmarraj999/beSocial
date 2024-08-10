@@ -65,7 +65,7 @@ function Create({ setShowCreate, id ,userName }) {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                         setPercent(progress)
                         if (progress === 100) {
-                            axios.post("http://localhost:5000/addPost/" + id, {
+                            axios.post("https://besocial-bg2h.onrender.com/addPost/" + id, {
                                 creatorName: userName,
                                 userProfile: data.profile_picture,
                                 caption: caption,

@@ -2,7 +2,7 @@
     width: 340px;
     height: fit-content;
     border-radius: 2rem;
-    background: rgba(0,0,0,.55);
+    background: rgba(0,0,0,.75);
     backdrop-filter: blur(10px);
     position: absolute;
     top: 10%;

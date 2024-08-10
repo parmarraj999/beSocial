@@ -26,7 +26,7 @@ function UserProfilePage() {
 
 
   const handleUserProfile = () => {
-    axios.get("http://localhost:5000/user/" + id)
+    axios.get("https://besocial-bg2h.onrender.com/user/" + id)
       .then((user) => {
         // console.log(user.data)
         setData(user.data[0])
@@ -37,7 +37,7 @@ function UserProfilePage() {
 
   const [postData, setPostData] = useState([])
   const getUserPost = () => {
-    axios.get("http://localhost:5000/getUserPost/" + id)
+    axios.get("https://besocial-bg2h.onrender.com/getUserPost/" + id)
       .then((result) => {
         setPostData(result.data)
         setLoader(false)
@@ -99,7 +99,7 @@ function UserProfilePage() {
 
   const handleFollow = (userId, followingUsername, followingName) => {
     console.log(myData._id, myData.username)
-    axios.put("http://localhost:5000/follow/" + userId, {
+    axios.put("https://besocial-bg2h.onrender.com/follow/" + userId, {
       followerUsername: myData.username,
       followerId: myData._id,
       followerName : myData.name,
@@ -110,7 +110,7 @@ function UserProfilePage() {
       timeData : timeDate
     }).then((result) => {
       console.log(result)
-      axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+      axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
         .then((result) => {
           userData.setUserData(result.data[0])
         })
@@ -164,7 +164,7 @@ function UserProfilePage() {
   }
 
   const handleUnfollow = (userId, followingUsername, followingName) => {
-    axios.put("http://localhost:5000/unfollow/" + userId, {
+    axios.put("https://besocial-bg2h.onrender.com/unfollow/" + userId, {
       followerUsername: myData.username,
       followerId: myData._id,
       followerName: myData.name,
@@ -175,7 +175,7 @@ function UserProfilePage() {
       timeData : timeDate
     }).then((result) => {
       console.log(result)
-      axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+      axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
         .then((result) => {
           userData.setUserData(result.data[0])
           setTimeout(() => {

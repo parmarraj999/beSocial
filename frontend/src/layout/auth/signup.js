@@ -27,7 +27,7 @@ function Signup({setCurrUi}) {
       if( name && password && username && email ){
         
       const uniqueId = username + uuidv4();
-        axios.post(`${process.env.API_URL}auth/signup`,{
+        axios.post(`https://besocial-bg2h.onrender.com/auth/signup`,{
           uid : uniqueId,
           name : name,
           username : username,

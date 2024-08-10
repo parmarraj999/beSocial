@@ -32,7 +32,7 @@ function PostCard({ data, setOnePost, setShowDetail, key }) {
   }
 
   const getSinglePost = () => {
-    axios.post("http://localhost:5000/getSinglePost/" + data._id)
+    axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + data._id)
       .then(result => {
         console.log(result)
         setPostData(result.data)
@@ -40,7 +40,7 @@ function PostCard({ data, setOnePost, setShowDetail, key }) {
   }
 
   const handleLike = (postId) => {
-    axios.put("http://localhost:5000/like/" + postId, {
+    axios.put("https://besocial-bg2h.onrender.com/like/" + postId, {
       userId: userData._id,
       userName: userData.username,
     })
@@ -51,7 +51,7 @@ function PostCard({ data, setOnePost, setShowDetail, key }) {
   }
 
   const handleUnlike = (postId) => {
-    axios.put("http://localhost:5000/unlike/" + postId, {
+    axios.put("https://besocial-bg2h.onrender.com/unlike/" + postId, {
       userId: userData._id,
       userName: userData.username,
     })

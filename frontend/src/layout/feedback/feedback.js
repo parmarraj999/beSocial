@@ -8,18 +8,22 @@ import { UserDataContext } from '../../context/context';
 function Feedback() {
 
   const [data, setData] = useState([])
+  const [isLoading,setIsLoading] = useState(true)
   const userData = useContext(UserDataContext).userData;
 
   const getData = () => {
-    axios.get("http://localhost:5000/get-feedbacks")
+    axios.get("https://besocial-bg2h.onrender.com/get-feedbacks")
       .then((result) => {
-        setData(result.data)
+        // setData(result.data)
+        const dataArray = result.data;
         console.log(data)
+        setIsLoading(false)
+        setData([...dataArray].reverse())
       })
   }
 
   const handleDeleteFeedback = ( id ) => {
-     axios.delete("http://localhost:5000/delete-feedback/" + id)
+     axios.delete("https://besocial-bg2h.onrender.com/delete-feedback/" + id)
      .then((response)=>{
       console.log(response)
       getData();
