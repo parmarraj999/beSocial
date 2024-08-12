@@ -8,10 +8,18 @@ const cron = require('node-cron');
 require("dotenv").config();
 
 const app = express();
-app.use(cors())
+// app.use(
+//   cors({
+//     credentials: true,
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     origin: ['http://localhost:3000/'], // whatever ports you used in frontend
+//   })
+// );
+// app.use(cors())
 app.use(express.json())
 
-mongoose.connect(process.env.MONGODB_URL)
+mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/beSocial")
   .then(() =>
     console.log("connected to db")
   )
@@ -118,7 +126,7 @@ app.put('/follow/:id', async (req, res) => {
   const followerUsername = req.body.followerUsername;
   const followerId = req.body.followerId
   const followerName = req.body.followerName
-  const { followingId, followingUsername, followingName,profile_picture, timeDate } = req.body;
+  const { followingId, followingUsername, followingName, profile_picture, timeDate } = req.body;
   try {
     await User.findByIdAndUpdate({ _id: id }, { $push: { followers: { followerId: followerId, followerUsername: followerUsername, followerName: followerName } } })
 
@@ -127,17 +135,17 @@ app.put('/follow/:id', async (req, res) => {
         res.json(result)
         console.log(result)
       })
-      await User.findByIdAndUpdate({_id : followingId},{
-        $push: {
-          notifications:{
-            notificationType : "Follow",
-            userId : followerId,
-            username : followerUsername ,
-            profile_picture: profile_picture,
-            timeData : timeDate
-          }
+    await User.findByIdAndUpdate({ _id: followingId }, {
+      $push: {
+        notifications: {
+          notificationType: "Follow",
+          userId: followerId,
+          username: followerUsername,
+          profile_picture: profile_picture,
+          timeData: timeDate
         }
-      })
+      }
+    })
   } catch (error) {
     console.log(error)
   }
@@ -157,17 +165,17 @@ app.put('/unfollow/:id', async (req, res) => {
         console.log(result)
       })
 
-      await User.findByIdAndUpdate({_id : followingId},{
-        $pull: {
-          notifications:{
-            notificationType : "Follow",
-            userId : followerId,
-            username : followerUsername ,
-            profile_picture: profile_picture,
-            timeData : timeDate
-          }
+    await User.findByIdAndUpdate({ _id: followingId }, {
+      $pull: {
+        notifications: {
+          notificationType: "Follow",
+          userId: followerId,
+          username: followerUsername,
+          profile_picture: profile_picture,
+          timeData: timeDate
         }
-      })
+      }
+    })
 
   } catch (error) {
     console.log(error)
@@ -249,24 +257,24 @@ app.put("/comment/:id", async (req, res) => {
     .catch(error => {
       console.log(error)
     })
-    await User.findByIdAndUpdate({_id : authorId},{
-      $push: {
-        notifications:{
-          notificationType : "Comment",
-          userId : userId,
-          username : userName ,
-          postId : id,
-          commentText : commentText,
-          postUrl: postUrl,
-          timeData : timeDate
-        }
+  await User.findByIdAndUpdate({ _id: authorId }, {
+    $push: {
+      notifications: {
+        notificationType: "Comment",
+        userId: userId,
+        username: userName,
+        postId: id,
+        commentText: commentText,
+        postUrl: postUrl,
+        timeData: timeDate
       }
-    })
+    }
+  })
 })
 
 app.put("/commentDeleteOwn/:id", async (req, res) => {
   const { id } = req.params;
-  const { userId, userName, commentText, profileImg,  authorId, postUrl, timeDate  } = req.body;
+  const { userId, userName, commentText, profileImg, authorId, postUrl, timeDate } = req.body;
   await Post.updateOne({ _id: id }, { $pull: { comments: { userId: userId, userName: userName, commentText: commentText, profileImg: profileImg } } })
     .then(result => {
       res.json(result)
@@ -278,7 +286,7 @@ app.put("/commentDeleteOwn/:id", async (req, res) => {
 })
 app.put("/commentDelete/:id", async (req, res) => {
   const { id } = req.params;
-  const { userId, userName, commentText, profileImg,  authorId, postUrl, timeDate  } = req.body;
+  const { userId, userName, commentText, profileImg, authorId, postUrl, timeDate } = req.body;
   await Post.updateOne({ _id: id }, { $pull: { comments: { userId: userId, userName: userName, commentText: commentText, profileImg: profileImg } } })
     .then(result => {
       res.json(result)
@@ -287,23 +295,23 @@ app.put("/commentDelete/:id", async (req, res) => {
     .catch(error => {
       console.log(error)
     })
-    await User.findByIdAndUpdate({_id : authorId},{
-      $pull: {
-        notifications:{
-          notificationType : "Comment",
-          userId : userId,
-          username : userName ,
-          postId : id,
-          commentText : commentText,
-          postUrl: postUrl,
-          timeData : timeDate
-        }
+  await User.findByIdAndUpdate({ _id: authorId }, {
+    $pull: {
+      notifications: {
+        notificationType: "Comment",
+        userId: userId,
+        username: userName,
+        postId: id,
+        commentText: commentText,
+        postUrl: postUrl,
+        timeData: timeDate
       }
-    })
+    }
+  })
 })
 
 app.put("/like/:id", async (req, res) => {
-  const { userId, userName ,authorId, postUrl, timeDate} = req.body;
+  const { userId, userName, authorId, postUrl, timeDate } = req.body;
   const { id } = req.params;
   await Post.findByIdAndUpdate({ _id: id }, {
     $push: {
@@ -320,22 +328,22 @@ app.put("/like/:id", async (req, res) => {
     .catch(error => {
       console.log(error)
     })
-    await User.findByIdAndUpdate({_id : authorId},{
-      $push: {
-        notifications:{
-          notificationType : "Like",
-          userId : userId,
-          username : userName ,
-          postId : id,
-          postUrl: postUrl,
-          timeData : timeDate
-        }
+  await User.findByIdAndUpdate({ _id: authorId }, {
+    $push: {
+      notifications: {
+        notificationType: "Like",
+        userId: userId,
+        username: userName,
+        postId: id,
+        postUrl: postUrl,
+        timeData: timeDate
       }
-    })
+    }
+  })
 })
 
 app.put("/unlike/:id", async (req, res) => {
-  const { userId, userName,authorId, postUrl, timeDate } = req.body;
+  const { userId, userName, authorId, postUrl, timeDate } = req.body;
   const { id } = req.params;
   await Post.findByIdAndUpdate({ _id: id }, {
     $pull: {
@@ -352,18 +360,18 @@ app.put("/unlike/:id", async (req, res) => {
     .catch(error => {
       console.log(error)
     })
-    await User.findByIdAndUpdate({_id : authorId},{
-      $pull: {
-        notifications:{
-          notificationType : "Like",
-          userId : userId,
-          username : userName ,
-          postId : id,
-          postUrl: postUrl,
-          timeData : timeDate
-        }
+  await User.findByIdAndUpdate({ _id: authorId }, {
+    $pull: {
+      notifications: {
+        notificationType: "Like",
+        userId: userId,
+        username: userName,
+        postId: id,
+        postUrl: postUrl,
+        timeData: timeDate
       }
-    })
+    }
+  })
 })
 
 // delete notification after 24 hours
@@ -388,40 +396,40 @@ cron.schedule('0 0 * * *', async () => { // Runs every day at midnight
 
 // feedback section
 
-app.post("/add-feedback",async(req,res)=>{
+app.post("/add-feedback", async (req, res) => {
   const { userId, username, name, feedback, uploadDate, feedbackType, userProfile } = req.body;
   await Feedback.create({
-    userId : userId,
-    username : username,
-    name : name,
-    userProfile : userProfile,
-    feedback : feedback,
-    feedbackType : feedbackType,
-    uploadDate : uploadDate,
-    done : false
+    userId: userId,
+    username: username,
+    name: name,
+    userProfile: userProfile,
+    feedback: feedback,
+    feedbackType: feedbackType,
+    uploadDate: uploadDate,
+    done: false
   })
-  .then((result)=>{
-    res.json(result)
-  })
+    .then((result) => {
+      res.json(result)
+    })
 })
 
-app.get("/get-feedbacks",async(req,res)=>{
+app.get("/get-feedbacks", async (req, res) => {
   Feedback.find({})
-  .then(result=>{
-    res.json(result)
-  })
-  .catch(error=>{
-    console.log(error)
-    res.json({message : "feedback not found"})
-  })
+    .then(result => {
+      res.json(result)
+    })
+    .catch(error => {
+      console.log(error)
+      res.json({ message: "feedback not found" })
+    })
 })
 
-app.delete("/delete-feedback/:id",async(req,res)=>{
-  const {id} = req.params;
+app.delete("/delete-feedback/:id", async (req, res) => {
+  const { id } = req.params;
   Feedback.findByIdAndDelete({ _id: id })
-  .then((result) => {
-    res.json(result)
-  })
+    .then((result) => {
+      res.json(result)
+    })
 
 })
 

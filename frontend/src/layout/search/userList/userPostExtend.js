@@ -57,11 +57,13 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
         return formattedDate;
     }
 
-    const getSinglePost = async () => {
-        const response = await axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + data._id)
-        const postData = response.data;
-        setPostComments(postData[0].comments);
-        setPostLikes(postData[0].like)
+    const getSinglePost = async() => {
+        await axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + data._id)
+        .then((response)=>{
+            const postData = response.data;
+            setPostComments(postData[0].comments);
+            setPostLikes(postData[0].like)
+        })
     }
 
     const likeIds = postLikes?.map((data) => data.userId)
@@ -98,7 +100,6 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
             .then(result => {
                 console.log(result)
                 getSinglePost();
-
             })
     }
 
@@ -111,8 +112,8 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
             profileImg: userData.profile_picture
         })
             .then(result => {
-                getSinglePost();
                 setComment("")
+                getSinglePost();
             })
             .catch((error) => {
                 console.log(error)
