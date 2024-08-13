@@ -29,7 +29,6 @@ function App() {
   const isLoged = window.localStorage.getItem("isLogIn")
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
 
-
   useEffect(() => {
 
     axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)

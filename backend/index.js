@@ -8,15 +8,13 @@ const cron = require('node-cron');
 require("dotenv").config();
 
 const app = express();
-// app.use(
-//   cors({
-//     credentials: true,
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-//     origin: ['http://localhost:3000/'], // whatever ports you used in frontend
-//   })
-// );
-// app.use(cors())
+const corsOptions ={
+  origin:'http://localhost:3000', 
+  credentials:true,            //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions))
+
 app.use(express.json())
 
 mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/beSocial")
@@ -79,7 +77,9 @@ app.put("/add-profile/:id", (req, res) => {
 app.get("/user/:id", (req, res) => {
   const { id } = req.params;
   User.find({ _id: id })
-    .then(result => res.json(result))
+    .then(result => {
+      res.json(result)
+    })
     .catch(error => res.json(error))
 })
 
