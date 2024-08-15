@@ -66,6 +66,8 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
         })
     }
 
+    // access control error 
+
     const likeIds = postLikes?.map((data) => data.userId)
     console.log(likeIds)
 
