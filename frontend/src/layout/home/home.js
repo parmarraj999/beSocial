@@ -51,7 +51,7 @@ function Home() {
 
   const handleGetPost = async () => {
     console.log(followingIds)
-    const response = await axios.post("https://besocial-bg2h.onrender.com/getAllPosts", followingIds)
+    const response = await axios.post("https://besocial-q86i.onrender.com/getAllPosts", followingIds)
     console.log(response.data)
     setData(response.data)
     console.log(data.length)
@@ -63,7 +63,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
+    axios.get("https://besocial-q86i.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         userData.setUserData(result.data[0])
         console.log("data getted")

@@ -31,15 +31,12 @@ function App() {
 
   useEffect(() => {
 
-    axios.get("https://besocial-bg2h.onrender.com/user/" + userIdbyLocalStorage)
+    axios.get("https://besocial-q86i.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         setUserData(result.data[0])
         setIsLoading(false)
         // console.log("data getted")
       })
-    
-      
-
   }, [])
 
   console.log(userData)
