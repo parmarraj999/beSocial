@@ -231,21 +231,19 @@ app.post("/getSearchUser", async (req, res) => {
     })
 })
 
-setTimeout(() => {
-  app.post("/getAllPosts", async (req, res) => {
+app.post("/getAllPosts", async (req, res) => {
 
-    const data = req.body;
-    // console.log(data)
-    try {
-      const posts = await Post.find({ userId: { $in: data } });
-      res.json(posts);
-      // console.log(posts)
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Error fetching posts' });
-    }
-  })
-}, 5000)
+  const data = req.body;
+  // console.log(data)
+  try {
+    const posts = await Post.find({ userId: { $in: data } });
+    res.json(posts);
+    // console.log(posts)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching posts' });
+  }
+})
 
 app.put("/comment/:id", async (req, res) => {
   const { id } = req.params;
