@@ -23,7 +23,7 @@ function FeedbackForm({ setShowForm, getData }) {
     const [feedback, setFeedback] = useState("");
 
     const handleUploadFeedback = async() => {
-        axios.post("https://besocial-bg2h.onrender.com/add-feedback",{
+        axios.post("https://besocial-q86i.onrender.com/add-feedback",{
             userId : userData._id,
             username : userData.username,
             userProfile : userData.profile_picture,

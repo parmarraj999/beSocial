@@ -14,7 +14,7 @@ function MenuExtend({postId, handleDeleteAnime, setPostExtend}) {
     })
 
     const hanldePostDelete = () => {
-        axios.delete("https://besocial-bg2h.onrender.com/deletePost/"+postId)
+        axios.delete("https://besocial-q86i.onrender.com/deletePost/"+postId)
         .then(()=>{
             console.log("post delete successfully")
         })

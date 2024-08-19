@@ -11,14 +11,14 @@ function MyPosts({ id }) {
   const userIdbyLocalStorage = window.localStorage.getItem("userId")
   
   useEffect(() => {
-    axios.get("https://besocial-bg2h.onrender.com/getUserPost/" + userIdbyLocalStorage)
+    axios.get("https://besocial-q86i.onrender.com/getUserPost/" + userIdbyLocalStorage)
     .then((result) => {
       setPostData(result.data)
     })
   }, [])
   const handleRefresh = () => {
     setTimeout(() => {
-      axios.get("https://besocial-bg2h.onrender.com/getUserPost/" + userIdbyLocalStorage)
+      axios.get("https://besocial-q86i.onrender.com/getUserPost/" + userIdbyLocalStorage)
       .then((result) => {
         setPostData(result.data)
       })

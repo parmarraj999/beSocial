@@ -19,7 +19,7 @@ function Search() {
   const handleSearchInput = (e) => {
     searchDataContext.setSearchText(e.target.value)
     setSearchText(e.target.value)
-    axios.post("https://besocial-bg2h.onrender.com/getSearchUser", {
+    axios.post("https://besocial-q86i.onrender.com/getSearchUser", {
       searchText: `${e.target.value}`
     })
       .then(result => {

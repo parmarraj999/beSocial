@@ -104,7 +104,7 @@ function PostExtend({ data, postId, setPostExtend, handleRefresh }) {
     }
 
     const getSinglePost = async () => {
-        const response = await axios.post("http://localhost:5000/getSinglePost/" + postId)
+        const response = await axios.post("https://besocial-q86i.onrender.com/getSinglePost/" + postId)
         const postData = response.data;
         setLikeList(postData[0].like);
         setCommentList(postData[0].comments)
@@ -121,7 +121,7 @@ function PostExtend({ data, postId, setPostExtend, handleRefresh }) {
 
     const handleCommentDelete = (dataUser) => {
         console.log(dataUser)
-        axios.put("http://localhost:5000/commentDeleteOwn/" + postId, {
+        axios.put("https://besocial-q86i.onrender.com/commentDeleteOwn/" + postId, {
             userId: dataUser.userId,
             userName: dataUser.userName,
             commentText: dataUser.commentText,

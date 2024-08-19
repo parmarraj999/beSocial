@@ -12,7 +12,7 @@ function Feedback() {
   const userData = useContext(UserDataContext).userData;
 
   const getData = () => {
-    axios.get("https://besocial-bg2h.onrender.com/get-feedbacks")
+    axios.get("https://besocial-q86i.onrender.com/get-feedbacks")
       .then((result) => {
         // setData(result.data)
         const dataArray = result.data;
@@ -23,7 +23,7 @@ function Feedback() {
   }
 
   const handleDeleteFeedback = ( id ) => {
-     axios.delete("https://besocial-bg2h.onrender.com/delete-feedback/" + id)
+     axios.delete("https://besocial-q86i.onrender.com/delete-feedback/" + id)
      .then((response)=>{
       console.log(response)
       getData();

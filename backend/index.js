@@ -8,15 +8,16 @@ const cron = require('node-cron');
 require("dotenv").config();
 
 const app = express();
-// const corsOptions ={
-//   origin:'http://localhost:3000/', 
-//   credentials:true,           
-//   optionSuccessStatus:200
-// }
+const corsOptions ={
+  origin:'http://localhost:3000', 
+  credentials:true,           
+  optionSuccessStatus:200
+}
 app.use(cors());
 
 app.use(express.json())
 
+// mongoose.connect("mongodb://localhost:27017")
 // mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/beSocial")
 mongoose.connect("mongodb+srv://rajparmar:Forget5122@besocial.lhivreq.mongodb.net/?retryWrites=true&w=majority&appName=beSocial")
   .then(() =>

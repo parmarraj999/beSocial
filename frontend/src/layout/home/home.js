@@ -63,7 +63,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get("http://localhost:5000/user/" + userIdbyLocalStorage)
+    axios.get("https://besocial-q86i.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         userData.setUserData(result.data[0])
         console.log("data getted")

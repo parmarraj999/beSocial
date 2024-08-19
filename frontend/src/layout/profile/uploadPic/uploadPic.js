@@ -93,7 +93,7 @@ function UploadPic({id}) {
                         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                         setPercent(progress)
                         if(progress === 100){
-                            axios.put("https://besocial-bg2h.onrender.com/add-profile/" + id,{
+                            axios.put("https://besocial-q86i.onrender.com/add-profile/" + id,{
                                 profile_picture : url
                             })
                             .then((res)=>{

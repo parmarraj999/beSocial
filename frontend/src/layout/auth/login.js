@@ -20,7 +20,7 @@ function Login({setCurrUi}) {
   
     if(email && password){
       console.log("clicked")
-      axios.post("https://besocial-bg2h.onrender.com/auth/login" ,{
+      axios.post("https://besocial-q86i.onrender.com/auth/login" ,{
         email : email,
         password : password
       })

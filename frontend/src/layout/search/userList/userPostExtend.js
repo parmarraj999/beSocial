@@ -58,7 +58,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
 
     const getSinglePost = async() => {
-        await axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + data._id)
+        await axios.post("https://besocial-q86i.onrender.com/getSinglePost/" + data._id)
         .then((response)=>{
             const postData = response.data;
             setPostComments(postData[0].comments);
@@ -84,7 +84,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     // like section 
     const handleLike = () => {
         console.log(userData.username)
-        axios.put("https://besocial-bg2h.onrender.com/like/" + data._id, {
+        axios.put("https://besocial-q86i.onrender.com/like/" + data._id, {
             userId: userData._id,
             userName: userData.username,
         })
@@ -95,7 +95,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
 
     const handleUnlike = () => {
-        axios.put("https://besocial-bg2h.onrender.com/unlike/" + data._id, {
+        axios.put("https://besocial-q86i.onrender.com/unlike/" + data._id, {
             userId: userData._id,
             userName: userData.username,
         })
@@ -107,7 +107,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
 
     // comment section
     const handleComment = () => {
-        axios.put("https://besocial-bg2h.onrender.com/comment/" + data._id, {
+        axios.put("https://besocial-q86i.onrender.com/comment/" + data._id, {
             userId: userData._id,
             userName: userData.username,
             commentText: comment,
@@ -123,7 +123,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
     }
     const handleCommentDelete = (userId, text, username, profileImg) => {
         console.log(userId, text, username, profileImg)
-        axios.put("https://besocial-bg2h.onrender.com/commentDelete/" + data._id, {
+        axios.put("https://besocial-q86i.onrender.com/commentDelete/" + data._id, {
             userId: userId,
             userName: username,
             commentText: text,

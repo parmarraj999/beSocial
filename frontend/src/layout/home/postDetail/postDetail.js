@@ -84,7 +84,7 @@ function PostDetail({ onePost, setShowDetail }) {
     }
 
     const getSinglePost = async () => {
-        const response = await axios.post("https://besocial-bg2h.onrender.com/getSinglePost/" + onePost._id)
+        const response = await axios.post("https://besocial-q86i.onrender.com/getSinglePost/" + onePost._id)
         const postData = response.data;
         setPostComments(postData[0].comments);
         setPostLikes(postData[0].like)
@@ -114,7 +114,7 @@ function PostDetail({ onePost, setShowDetail }) {
     const timeDate = `${hour}:${minute}, ${date} ${monthName[month]}`
 
     const handleComment = () => {
-        axios.put("https://besocial-bg2h.onrender.com/comment/" + onePost._id, {
+        axios.put("https://besocial-q86i.onrender.com/comment/" + onePost._id, {
             authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
@@ -133,7 +133,7 @@ function PostDetail({ onePost, setShowDetail }) {
     }
     const handleCommentDelete = (userId, text, username, profileImg) => {
         console.log(userId, text, username, profileImg)
-        axios.put("https://besocial-bg2h.onrender.com/commentDelete/" + onePost._id, {
+        axios.put("https://besocial-q86i.onrender.com/commentDelete/" + onePost._id, {
             authorId : onePost.userId,
             userId: userId,
             userName: username,
@@ -155,7 +155,7 @@ function PostDetail({ onePost, setShowDetail }) {
 
     const handleLike = () => {
         // console.log(data.username)
-        axios.put("https://besocial-bg2h.onrender.com/like/" + onePost._id, {
+        axios.put("https://besocial-q86i.onrender.com/like/" + onePost._id, {
             authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
@@ -169,7 +169,7 @@ function PostDetail({ onePost, setShowDetail }) {
     }
     const handleUnlike = () => {
         // console.log(data.username)
-        axios.put("https://besocial-bg2h.onrender.com/unlike/" + onePost._id, {
+        axios.put("https://besocial-q86i.onrender.com/unlike/" + onePost._id, {
             authorId : onePost.userId,
             userId: data._id,
             userName: data.username,
