@@ -52,7 +52,7 @@ function Home() {
   const handleGetPost = async () => {
     console.log(followingIds)
     const response = await axios.post("https://besocial-q86i.onrender.com/getAllPosts", followingIds)
-    console.log(response.data)
+    console.log(response.data)  
     setData(response.data)
     console.log(data.length)
   }
@@ -62,7 +62,6 @@ function Home() {
   const [showPost, setShowPost] = useState(false)
 
   useEffect(() => {
-
     axios.get("https://besocial-q86i.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         userData.setUserData(result.data[0])

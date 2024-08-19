@@ -9,6 +9,7 @@ import PostCard from './postCard'
 function Post({ data, handleGetPost, setOnePost, setShowDetail }) {
 
   useEffect(() => {
+    console.log("data getting of post new")
     handleGetPost() 
   }, [])
 

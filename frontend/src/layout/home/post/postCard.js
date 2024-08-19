@@ -20,7 +20,7 @@ function PostCard({ data, setOnePost, setShowDetail, key }) {
   }
 
   const [postData, setPostData] = useState(data);
-  console.log(postData)
+  // console.log(postData)
 
   const userData = useContext(UserDataContext).userData
 
@@ -64,7 +64,7 @@ function PostCard({ data, setOnePost, setShowDetail, key }) {
 
   const [elementId,setElementId] = useState();
 
-  console.log(data)
+  // console.log(data)
 
   return (
     <div className='post-card' >
