@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom'
 import AddStory from './stories/addStory'
 
 function Home() {
+  
+  const userData = useContext(UserDataContext)
 
   const location = useLocation();
   const { pathname } = location;
@@ -36,7 +38,6 @@ function Home() {
   }
 
   const [data, setData] = useState([])
-  const userData = useContext(UserDataContext)
   const following = userData.userData?.following
 
   const [onePost, setOnePost] = useState({})

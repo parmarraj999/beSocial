@@ -4,7 +4,7 @@ import { UserDataContext } from '../../../context/context'
 import axios from 'axios';
 import PostProfile from './postProfile/postProfile';
 
-function PostCard({ data, setOnePost, setShowDetail, key }) {
+function PostCard({ data, setOnePost, setShowDetail }) {
 
   function ConvertDate(dateText) {
 

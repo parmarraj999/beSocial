@@ -13,7 +13,7 @@ function Post({ data, handleGetPost, setOnePost, setShowDetail }) {
     handleGetPost() 
   }, [])
 
-  const userData = useContext(UserDataContext).userData
+  const userData = useContext(UserDataContext)
 
   return (
     <div className='post-container' >

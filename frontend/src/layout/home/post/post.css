@@ -15,7 +15,7 @@
 .post-card{
     min-width: 100%;
     height: fit-content;
-    background: rgba(176, 176, 176, 0.05);
+    background: rgba(176, 176, 176, 0.09    );
     backdrop-filter: blur(5px);
     padding: 0 .5rem .5rem .5rem;
     display: flex;

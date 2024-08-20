@@ -56,6 +56,7 @@
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.6);
+    /* background: red; */
     backdrop-filter: blur(15px);
     display: flex;
     align-items: center;
@@ -65,7 +66,7 @@
     top: 0;
     left: 0;
     z-index: 999999;
-    /* overflow: scroll; */
+    overflow: scroll;
 }
 
 .extend-post-container {
@@ -79,9 +80,11 @@
     display: flex;
     flex-direction: column;
     gap: .4rem;
-    padding: 1rem 0;
-    height: 94vh;
-    /* overflow: scroll;     */
+    padding: 1.5rem 0;
+    min-height: 94vh;
+    max-height: fit-content;
+    overflow-y: scroll;    
+
 }
 
 .extend-post {
@@ -134,7 +137,7 @@
 
 .extend-post-img {
     width: 100%;
-    max-height: 600px;
+    max-height: 500px;
     border-radius: 1rem;
 }
 
@@ -206,16 +209,16 @@
 
 .analytics-btns {
     display: flex;
-    gap: 1rem;
+    gap: .8rem;
     align-items: center;
     justify-content: space-between;
 }
 
 .analytics-btns button {
-    min-width: 180px;
+    /* width: 180px; */
     width: 100%;
     height: 50px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     background: rgba(73, 73, 73, 0.7);
     color: #80ff00;
@@ -294,6 +297,61 @@
     align-items: center;
     justify-content: center;
 }
+
+.extra-space .detail-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(73, 73, 73, 0.7);
+}
+
+.comment-box-user {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.comment-box-user input {
+    width: 100%;
+    height: 50px;
+    border-radius: 2rem;
+    border: 3px solid white;
+    color: white;
+    font-size: 18px;
+    padding: 0 1rem;
+    background: transparent;
+    outline: none;
+    transition: .3s all;
+}
+
+.comment-box-user input::placeholder {
+    color: white;
+}
+
+.comment-box-user button {
+    min-width: 50px;
+    height: 50px;
+    background: #80ff00;
+    border-radius: 50%;
+    border: none;
+    display: none;
+    opacity: 0;
+}
+
+.cancel-btn-post-extend {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    width: 60px;
+    height: 60px;
+    background: red;
+    color: black;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
 
 @media screen and (max-width:765px) {
     .my-post-container {

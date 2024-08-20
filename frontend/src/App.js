@@ -24,6 +24,9 @@ function App() {
 
   const [isLoading,setIsLoading] = useState(true);
 
+  // variable for post detail boolean 
+  const [showDetailVar,setShowDetailVar] = useState(false)
+
   // console.log(searchData)
 
   const isLoged = window.localStorage.getItem("isLogIn")

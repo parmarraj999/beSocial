@@ -22,7 +22,7 @@
 }
 .nav-icon{
     width: 25px;
-    color: black;
+    color: white;
 }
 .nav-wrapper ul{
     display: flex;
@@ -34,7 +34,7 @@
     align-items: center;
     gap: 1.5rem;
 }
-.nav-mobile{
+/* .nav-mobile{
     width: 95%;
     height: 70px;
     border-radius: 20px;
@@ -48,8 +48,23 @@
     left: 50%;
     transform: translate(-50%,0);
     z-index: 99999;
-    /* padding: 0 1.5rem; */
-}
+} */
+ .nav-mobile{
+    width: 80%;
+    height: 70px;
+    border-radius: 5rem;
+    padding: 0rem .5rem;
+    background: rgb(0, 0, 0);
+    backdrop-filter: blur(35px);
+    display: none;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    transform: translate(-50%,0);
+    z-index: 99999;
+ }
 .nav-mobile .add-icon{
     width: 60px;
     height: 60px;
