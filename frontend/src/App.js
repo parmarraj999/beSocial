@@ -21,6 +21,7 @@ function App() {
   const [userProfile, setUserProfile] = useState("")
   const [searchData, setSearchData] = useState([])
   const [searchText,setSearchText] = useState("")
+  const[showCreateVar,setShowCreateVar] = useState(true)
 
   const [isLoading,setIsLoading] = useState(true);
 
@@ -48,7 +49,7 @@ function App() {
     <div className="App">
       <SearchListData.Provider value={{ searchData, setSearchData, searchText ,setSearchText }}>
         <UserProfileContext.Provider value={{ userProfile, setUserProfile }} >
-          <UserDataContext.Provider value={{ userData, setUserData, isLoading }} >
+          <UserDataContext.Provider value={{ userData, setUserData, isLoading, setShowCreateVar,showCreateVar }} >
             <UserIDContext.Provider value={{ userID, setUserID }} >
               <BrowserRouter>
                 <Nav />

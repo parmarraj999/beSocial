@@ -22,7 +22,7 @@
 }
 .nav-icon{
     width: 25px;
-    color: white;
+    color: black;
 }
 .nav-wrapper ul{
     display: flex;
@@ -58,7 +58,7 @@
     backdrop-filter: blur(35px);
     display: none;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     position: absolute;
     bottom: 1%;
     left: 50%;
@@ -128,6 +128,7 @@
     }
     .nav-icon{
         width: 30px;
+        color: white;
     }
     .search-bar-container2{
         gap: .5rem;
