@@ -3,6 +3,7 @@
     margin: 0 auto;
     height: 100vh;
     margin-top: 80px;
+    padding-bottom: 80px ;
 }
 .post-create-btn-home{
     width: 60px;
@@ -29,19 +30,6 @@
     z-index: 999988;
     border-radius: 50%;
 }
-.post-create-close-btn{
-    width: 60px;
-    min-width: 60px;
-    height: 55px;
-    background: #80ff00;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999988;
-    border-radius: 15px;
-    position: absolute;
-    top: 90%;
-}
 
 @media screen and (max-width:765px) {
     .home-container{
@@ -52,5 +40,8 @@
         /* position: relative;
         border-radius: 50%;
         top: 50%; */
+    }
+    .post-create-btn-home{
+        display: none;
     }
 }

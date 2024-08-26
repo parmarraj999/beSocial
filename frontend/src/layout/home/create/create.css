@@ -123,7 +123,24 @@
     color: red;
     font-weight: 600;
 }
+.post-create-close-btn{
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+    background: #80ff00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999988;
+    border-radius: 15px;
+    position: absolute;
+    top: 90%;
+}
+
 @media screen and (max-width:765px) {
+    .create-container{
+        height: calc(100vh - 50px);
+    }
     .create-card{
         width: 94%;
     }

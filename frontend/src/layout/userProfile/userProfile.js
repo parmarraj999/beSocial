@@ -8,7 +8,6 @@ import gsap from 'gsap';
 import UserPosts from './userPosts/userPost';
 import Loader from '../welcome/loader';
 import { UserDataContext } from '../../context/context';
-import PostDetail from '../home/postDetail/postDetail';
 
 function UserProfilePage() {
 

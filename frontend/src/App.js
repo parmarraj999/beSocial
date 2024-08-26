@@ -21,7 +21,7 @@ function App() {
   const [userProfile, setUserProfile] = useState("")
   const [searchData, setSearchData] = useState([])
   const [searchText,setSearchText] = useState("")
-  const[showCreateVar,setShowCreateVar] = useState(true)
+  const[showCreateVar,setShowCreateVar] = useState(false)
 
   const [isLoading,setIsLoading] = useState(true);
 
