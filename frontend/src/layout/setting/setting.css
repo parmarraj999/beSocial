@@ -1,0 +1,7 @@
+.setting-container{
+    width: 38%;
+    margin: 0 auto;
+    border: 1px solid red;
+    height: 100vh;
+    padding-top: 80px;
+}

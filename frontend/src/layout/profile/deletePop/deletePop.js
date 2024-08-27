@@ -15,17 +15,17 @@ function DeletePop({setShowDelete}) {
     // fileRef.delete().then(()=>{
     //   console.log("fiel delete")
     // })
+    setShowDelete(false)
   }
 
   return (
     <div className='delete-pop-container' >
         <div className='delete-pop-card' >
-          <img src='../../../image/delete-icon.jpg' />
-          <h2>Are you sure You want to Delete your Profile Photo</h2>
-          <div>
-            <button className='delete-btn' onClick={handleDelete} >Yes, Delete</button>
-            <button className='cancel-btn' onClick={()=>setShowDelete(false)} >Keep Photo</button>
-          </div>
+            <h2>Are You Sure ?</h2>
+            <div className='card-btns' >
+              <button onClick={()=>setShowDelete(false)}>Keep</button>
+              <button onClick={handleDelete} style={{color:"red"}}>Delete</button>
+            </div>
         </div>
     </div>
   )

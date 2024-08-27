@@ -13,11 +13,10 @@ function Auth() {
         {
           currUi === "" ?
             <div className='auth-wrapper grid' >
-              <img src='../../../image/auth-bg-2.jpg' />
+              {/* <img src='../../../image/auth-bg-2.jpg' /> */}
+              <img src='../../../image/besocial-logo-2.png' />
               <div className='auth-content' >
                 <h1>Welcome</h1>
-                <h2>to</h2>
-                <h1 style={{ color: "grey" }} >Logo</h1>
               </div>
               <button className='get-start-button' onClick={()=>setCurrUi("login")} >
                 Get Started

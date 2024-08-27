@@ -13,6 +13,7 @@ import axios from "axios";
 import Notification from "./layout/notification/notification";
 import PostExtend from "./layout/profile/myPost/postExtend";
 import Feedback from "./layout/feedback/feedback";
+import Setting from "./layout/setting/setting";
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
                   <Route path="/profile/" element={<Profile />} >
                     <Route path="user-center" element={<UserCenter />} />
                   </Route>
+                  <Route path="/setting" element={<Setting/>} />
                   <Route path="/user-profile/:id" element={<UserProfilePage />} />
                   <Route path="/post/:id" element={<PostExtend/>} />
                   <Route path='/notification' element={<Notification/>}/>

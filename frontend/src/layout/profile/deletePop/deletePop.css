@@ -12,54 +12,32 @@
     justify-content: center;
 }
 .delete-pop-card{
-    width: 450px;
-    padding: 1rem;
-    border-radius: 2rem;
+    width: 350px;
+    border-radius: 1.2rem;
     background: white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 1rem;
-}
-.delete-pop-card img{
-    width: 70%;
+    gap: .5avrem;
+    overflow: hidden;
 }
 .delete-pop-card h2{
     font-size: 18px;
-    line-height: 1.5rem;
-    width: 70%;
-    text-align: center;
-    font-family: "Rubik", sans-serif;
-    font-weight: 700;
-    color: red;
+    color: grey;
+    font-family: 'Montserrat',sans-serif;
 }
-.delete-pop-card > div{
+.card-btns{
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: .5rem;
+    border-top: 1px solid grey;
 }
-.delete-pop-card button{
-    width: 80%;
-    height: 50px;
+.card-btns button{
+    width: 100%;
+    background: transparent;
+    border: none;
+    height: 40px;
     font-size: 18px;
-    font-weight: 600;
-}
-.delete-pop-card .delete-btn{
-    background: rgb(255, 59, 24);
-    color: white;
-    border: none;
-    border-radius: 2rem;
-}
-.cancel-btn{
-    background: none;
-    border: none;
-    color: rgb(255, 59, 24);
-}
-@media screen and (max-width:765px) {
-    .delete-pop-card{
-        width: 90%;
-    }
+    border-left: 1px solid grey;
 }
