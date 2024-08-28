@@ -30,7 +30,29 @@
     z-index: 999988;
     border-radius: 50%;
 }
-
+.tag-container{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem .2rem;
+}
+.tag-container .tag{
+    padding: .5rem 1.2rem;
+    background: rgba(0,0,0,.08);
+    border-radius: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.tag-active{
+    padding: .5rem 1.2rem;
+    background: #80ff00;
+    color: black;
+    border-radius: 2rem;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
 @media screen and (max-width:765px) {
     .home-container{
         margin-top: 0;

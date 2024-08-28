@@ -231,7 +231,7 @@ app.post("/getSearchUser", async (req, res) => {
       console.log(error)
     })
 })
-
+//get following post only
 app.post("/getFollowingPosts", async (req, res) => {
 
   const data = req.body;
@@ -240,6 +240,17 @@ app.post("/getFollowingPosts", async (req, res) => {
     const posts = await Post.find({ userId: { $in: data } });
     res.json(posts);
     // console.log(posts)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching posts' });
+  }
+})
+
+// get all post 
+app.post("/getAllPosts", async (req, res) => {
+  try {
+    const posts = await Post.find({});
+    res.json(posts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error fetching posts' });
