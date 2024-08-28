@@ -21,13 +21,13 @@ function PostDetail({ onePost, setShowDetail }) {
 
     const tl = gsap.timeline();
 
-    useGSAP(()=>{
-        tl.from(".post-detail-container",{
-            background:"rgba(0,0,0,.2)",
-            duration:.4
+    useGSAP(() => {
+        tl.from(".post-detail-container", {
+            background: "rgba(0,0,0,.2)",
+            duration: .4
         })
     })
-    
+
     const hanldeCommentAnime = () => {
         setShowClose(true)
         tl.to(".detail-btn", {
@@ -73,10 +73,10 @@ function PostDetail({ onePost, setShowDetail }) {
     }
 
     const handleClose = () => {
-        tl.to(".post-detail-container",{
-            background:"rgba(0,0,0,.2)",
-            duration:.4,
-            opacity:0
+        tl.to(".post-detail-container", {
+            background: "rgba(0,0,0,.2)",
+            duration: .4,
+            opacity: 0
         })
         setTimeout(() => {
             setShowDetail(false)
@@ -99,7 +99,7 @@ function PostDetail({ onePost, setShowDetail }) {
             // console.log("present")
             setIsLike(true)
             // console.log(isLike)
-        }else{
+        } else {
             setIsLike(false)
         }
     })
@@ -109,38 +109,42 @@ function PostDetail({ onePost, setShowDetail }) {
     const minute = time.getMinutes()
     const date = time.getDate()
     const month = time.getMonth();
-    const monthName = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sep","Oct","Nov","Dec"]
+    const monthName = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     const timeDate = `${hour}:${minute}, ${date} ${monthName[month]}`
 
     const handleComment = () => {
-        axios.put("https://besocial-q86i.onrender.com/comment/" + onePost._id, {
-            authorId : onePost.userId,
-            userId: data._id,
-            userName: data.username,
-            commentText: comment,
-            profileImg: data.profile_picture,
-            postUrl: onePost.mediaUrl,
-            timeDate : timeDate
-        })
-            .then(result => {
-                getSinglePost();
-                setComment("")
+        if (comment === "") {
+            return;
+        } else {
+            axios.put("https://besocial-q86i.onrender.com/comment/" + onePost._id, {
+                authorId: onePost.userId,
+                userId: data._id,
+                userName: data.username,
+                commentText: comment,
+                profileImg: data.profile_picture,
+                postUrl: onePost.mediaUrl,
+                timeDate: timeDate
             })
-            .catch((error) => {
-                console.log(error)
-            })
+                .then(result => {
+                    getSinglePost();
+                    setComment("")
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
     }
     const handleCommentDelete = (userId, text, username, profileImg) => {
         console.log(userId, text, username, profileImg)
         axios.put("https://besocial-q86i.onrender.com/commentDelete/" + onePost._id, {
-            authorId : onePost.userId,
+            authorId: onePost.userId,
             userId: userId,
             userName: username,
             commentText: text,
             profileImg: profileImg,
             postUrl: onePost.mediaUrl,
-            timeDate : timeDate
+            timeDate: timeDate
         })
             .then(result => {
                 console.log(result)
@@ -156,11 +160,11 @@ function PostDetail({ onePost, setShowDetail }) {
     const handleLike = () => {
         // console.log(data.username)
         axios.put("https://besocial-q86i.onrender.com/like/" + onePost._id, {
-            authorId : onePost.userId,
+            authorId: onePost.userId,
             userId: data._id,
             userName: data.username,
-            postUrl : onePost.mediaUrl,
-            timeDate : timeDate
+            postUrl: onePost.mediaUrl,
+            timeDate: timeDate
         })
             .then(result => {
                 console.log(result)
@@ -170,16 +174,16 @@ function PostDetail({ onePost, setShowDetail }) {
     const handleUnlike = () => {
         // console.log(data.username)
         axios.put("https://besocial-q86i.onrender.com/unlike/" + onePost._id, {
-            authorId : onePost.userId,
+            authorId: onePost.userId,
             userId: data._id,
             userName: data.username,
-            postUrl : onePost.mediaUrl,
-            timeDate : timeDate
+            postUrl: onePost.mediaUrl,
+            timeDate: timeDate
         })
             .then(result => {
                 console.log(result)
                 getSinglePost();
-                
+
             })
     }
 
@@ -243,7 +247,7 @@ function PostDetail({ onePost, setShowDetail }) {
                                             {
                                                 data.userId === undefined ? "" :
                                                     <div className='comment-box' >
-                                                        <Link to={"/user-profile/" + data.userId}className='comment-profile'>
+                                                        <Link to={"/user-profile/" + data.userId} className='comment-profile'>
                                                             <img src={data.profileImg} />
                                                         </Link>
                                                         <div className='comment-detail'>

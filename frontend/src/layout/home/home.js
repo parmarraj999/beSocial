@@ -52,11 +52,13 @@ function Home() {
 
   const handleGetPost = async () => {
     console.log(followingIds)
-    const response = await axios.post("https://besocial-q86i.onrender.com/getAllPosts", followingIds)
+    const response = await axios.post("https://besocial-q86i.onrender.com/getFollowingPosts", followingIds)
     console.log(response.data)  
     setData(response.data)
     console.log(data.length)
   }
+
+
 
   // handleGetPost();
 

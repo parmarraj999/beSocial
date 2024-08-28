@@ -232,7 +232,7 @@ app.post("/getSearchUser", async (req, res) => {
     })
 })
 
-app.post("/getAllPosts", async (req, res) => {
+app.post("/getFollowingPosts", async (req, res) => {
 
   const data = req.body;
   // console.log(data)
