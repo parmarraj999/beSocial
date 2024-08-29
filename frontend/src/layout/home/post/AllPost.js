@@ -25,6 +25,9 @@ function AllPost({ data, handleGetPost, setOnePost, setShowDetail }) {
             )
           })
         }
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"50px"}}>
+            <h4 style={{color:"grey",fontSize:"16px"}} >Refresh For New Post</h4>
+        </div>
       </div>
     </div>
   )

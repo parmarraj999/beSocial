@@ -248,8 +248,9 @@ app.post("/getFollowingPosts", async (req, res) => {
 
 // get all post 
 app.post("/getAllPosts", async (req, res) => {
+  
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).limit(20).toArray();
     res.json(posts);
   } catch (error) {
     console.error(error);
