@@ -250,7 +250,7 @@ app.post("/getFollowingPosts", async (req, res) => {
 app.post("/getAllPosts", async (req, res) => {
   
   try {
-    const posts = await Post.find({}).limit(20).toArray();
+    const posts = await Post.find({});
     res.json(posts);
   } catch (error) {
     console.error(error);
