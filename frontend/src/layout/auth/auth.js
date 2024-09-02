@@ -14,7 +14,7 @@ function Auth() {
           currUi === "" ?
             <div className='auth-wrapper grid' >
               {/* <img src='../../../image/auth-bg-2.jpg' /> */}
-              <img src='../../../image/besocial-logo-2.png' />
+              <img alt='authImg' src='../../../image/besocial-logo-2.png' />
               <div className='auth-content' >
                 <h1>Welcome</h1>
               </div>

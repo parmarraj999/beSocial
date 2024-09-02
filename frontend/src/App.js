@@ -27,15 +27,14 @@ function App() {
   const [isLoading,setIsLoading] = useState(true);
 
   // variable for post detail boolean 
-  const [showDetailVar,setShowDetailVar] = useState(false)
+  // const [showDetailVar,setShowDetailVar] = useState(false)
 
   // console.log(searchData)
 
   const isLoged = window.localStorage.getItem("isLogIn")
-  const userIdbyLocalStorage = window.localStorage.getItem("userId")
-
+  
   useEffect(() => {
-
+    const userIdbyLocalStorage = window.localStorage.getItem("userId")
     axios.get("https://besocial-q86i.onrender.com/user/" + userIdbyLocalStorage)
       .then((result) => {
         setUserData(result.data[0])

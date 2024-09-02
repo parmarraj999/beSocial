@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "../../profile/myPost/post.css"
-import axios from 'axios'
 import UserPostExtend from '../../search/userList/userPostExtend'
 import '../userProfile.css'
 

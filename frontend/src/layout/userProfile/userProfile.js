@@ -1,7 +1,6 @@
   import React, { useContext, useEffect, useState } from 'react'
 import "./userProfile.css"
 import { useNavigate, useParams } from 'react-router'
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useGSAP } from "@gsap/react"
 import gsap from 'gsap';
