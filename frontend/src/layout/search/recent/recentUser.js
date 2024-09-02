@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 function RecentUser() {
 
   const [data, setData] = useState([])
+  const recentSingupData = [...data].reverse()
 
   const id = window.localStorage.getItem("userId")
 
@@ -21,7 +22,7 @@ function RecentUser() {
     <div className='recent-user-container' >
       <div className='recent-user-list' >
         {
-          data?.map((data) => {
+          recentSingupData?.map((data) => {
             return (
               <Link to={"/user-profile/" + data._id} className='recent-user' >
                 {

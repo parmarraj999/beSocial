@@ -8,10 +8,10 @@ const cron = require('node-cron');
 require("dotenv").config();
 
 const app = express();
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  credentials:true,           
-  optionSuccessStatus:200
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionSuccessStatus: 200
 }
 app.use(cors());
 
@@ -43,6 +43,24 @@ app.post("/auth/signup", (req, res) => {
 
 })
 
+app.delete("/deleteAccount/:id", async (req, res) => {
+  const { id } = req.params
+  User.findByIdAndDelete({_id : id})
+    .then(user => {
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json({
+        message: 'User deleted successfully'
+      });
+      console.log('delete user')
+    })
+
+    Post.deleteMany({userId : id })
+    .then(result=>{
+      console.log("post delete successfull")
+    })
+})
 
 app.post("/auth/login", (req, res) => {
   const email = req.body.email;
@@ -232,12 +250,12 @@ app.post("/getSearchUser", async (req, res) => {
     })
 })
 
-app.get("/getRecentSignup",async(req,res)=>{
+app.get("/getRecentSignup", async (req, res) => {
   User.find({}).limit(15)
-  .then(result=>{
-    console.log(result)
-    res.json(result)
-  })
+    .then(result => {
+      console.log(result)
+      res.json(result)
+    })
 })
 
 //get following post only
@@ -257,7 +275,7 @@ app.post("/getFollowingPosts", async (req, res) => {
 
 // get all post 
 app.post("/getAllPosts", async (req, res) => {
-  
+
   try {
     const posts = await Post.find({});
     res.json(posts);

@@ -26,6 +26,11 @@ function Login({setCurrUi}) {
       })
       .then(result => {
         console.log(result)
+        if(result.data === 'No user Found !'){
+          console.log("user not found")
+          setErrorMsg("Email or Password is Incorrect")
+          return;
+        }
         if(result.data){
           window.localStorage.setItem("isLogIn",true)
           setSuccMsg("Welcome"+ " " + result.data.name )
@@ -34,7 +39,7 @@ function Login({setCurrUi}) {
           window.localStorage.setItem("userId",result.data._id)
           setErrorMsg("")
           setTimeout(() => {
-            navigate("/")
+            // navigate("/")
           }, 3000);
         }
         if(result.data === "No user Found !"){
