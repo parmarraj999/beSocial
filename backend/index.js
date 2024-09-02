@@ -231,6 +231,15 @@ app.post("/getSearchUser", async (req, res) => {
       console.log(error)
     })
 })
+
+app.get("/getRecentSignup",async(req,res)=>{
+  User.find({}).limit(15)
+  .then(result=>{
+    console.log(result)
+    res.json(result)
+  })
+})
+
 //get following post only
 app.post("/getFollowingPosts", async (req, res) => {
 

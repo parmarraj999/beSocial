@@ -3,7 +3,7 @@ import "./search.css"
 import axios from 'axios'
 import gsap from 'gsap'
 import { useGSAP } from "@gsap/react"
-import RecentSearch from './recent/recentSearch'
+import RecentUser from './recent/recentUser'
 import { Link, useNavigate } from 'react-router-dom'
 import { SearchListData, UserDataContext } from '../../context/context'
 import UserList from './userList/userList'
@@ -71,30 +71,29 @@ function Search() {
   }
 
   return (
-      <div className='search-container'>
-        <div className='search-input-container' >
-          <div className='back-btn' onClick={backClick} >
-            <div>
-              <svg className="back-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
-            </div>
-          </div>
-          <input className='search-bar-nav' value={searchDataContext.searchText} placeholder='Search' onChange={handleSearchInput} />
-        </div>
-        <div className='search-wrapper' >
-          <div className='recent-search' >
-            {
-              searchDataContext.searchText === "" ?
-                <div className='recent-list' >
-                  {/* <h4>Recent Search</h4> */}
-                  <RecentSearch setSearchText={setSearchText} data={data} setData={setData} />
-                </div> : <UserList searchData={searchData} />
-
-            }
+    <div className='search-container'>
+      <div className='search-input-container' >
+        <div className='back-btn' onClick={backClick} >
+          <div>
+            <svg className="back-icon-nav" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
           </div>
         </div>
-        <img className='search-bg-img' src='../../../image/search-bg.jpg' />
-        {/* <UserExpend/> */}
+        <input className='search-bar-nav' value={searchDataContext.searchText} placeholder='Search' onChange={handleSearchInput} />
       </div>
+      <div className='search-wrapper' >
+        <h3 style={{ color: "grey", fontSize: "16px" }} >Recent Signup</h3>
+        {
+          searchDataContext.searchText === "" ?
+            <div className='recent-list' >
+              {/* <h4>Recent Search</h4> */}
+              <RecentUser setSearchText={setSearchText} data={data} setData={setData} />
+            </div> : <UserList searchData={searchData} />
+
+        }
+      </div>
+      <img className='search-bg-img' src='../../../image/search-bg.jpg' />
+      {/* <UserExpend/> */}
+    </div>
   )
 }
 
