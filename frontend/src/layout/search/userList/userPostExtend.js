@@ -50,7 +50,7 @@ function UserPostExtend({ data, setPostExtend, handleRefresh, profileImg, userna
         const date = new Date(dateText);
 
         const day = date.getDate().toString().padStart(2, '0');
-        const month = date.toLocaleString('default', { month: 'long' });
+        const month = date.toLocaleString('default', { month: 'short' });
         const year = date.getFullYear();
 
         const formattedDate = `${day} ${month} ${year}`;

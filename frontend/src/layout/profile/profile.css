@@ -68,11 +68,11 @@
     border-radius: 10px;
 }
 .profile-name{
-    font-size: 18px;
+    font-size: 16px;
     margin-top: .5rem;
     background: #80ff0060;
     border-radius: 2rem;
-    padding: .5rem 1.2rem;
+    padding: .4rem 1rem;
     text-transform: capitalize;
 }
 .profile-box h4{

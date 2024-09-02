@@ -37,19 +37,19 @@ function Search() {
   useGSAP(() => {
     gsap.from(".search-bg-img", {
       opacity: 0,
-      duration: .5,
+      duration: .2,
     })
     gsap.from(".back-btn", {
       opacity: 0,
-      delay: 1.3
+      delay: 1.1
     })
     gsap.from(".search-bar-nav", {
       opacity: 0,
-      delay: 1.5
+      delay: 1.3
     })
     gsap.from(".search-btn", {
       opacity: 0,
-      delay: 1.7
+      delay: 1.5
     })
   })
 
@@ -63,7 +63,7 @@ function Search() {
     })
     gsap.to(".back-btn", {
       opacity: 0,
-      delay: .5
+      delay: .4
     })
     setTimeout(() => {
       navigate("/")
@@ -85,7 +85,7 @@ function Search() {
             {
               searchDataContext.searchText === "" ?
                 <div className='recent-list' >
-                  <h4>Recent Search</h4>
+                  {/* <h4>Recent Search</h4> */}
                   <RecentSearch setSearchText={setSearchText} data={data} setData={setData} />
                 </div> : <UserList searchData={searchData} />
 

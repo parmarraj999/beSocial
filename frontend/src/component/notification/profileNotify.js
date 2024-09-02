@@ -97,7 +97,7 @@ function ProfileNotify() {
                         
                 }
                 {
-                    userData.userData.bio === "null" ? "" :
+                    userData.userData?.bio === "null" ? "" :
                     <li>Add Bio</li>
                 }
             </div>

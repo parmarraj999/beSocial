@@ -104,15 +104,16 @@
         width: 100%;
     }
     .search-input-container{
-        width: 96%;
-        background: white;
-        height: 70px;
-        top: 90%;
+        width: 100%;
+        background: black;
+        height: 80px;
+        top: 89%;
         display: flex;
-        border-radius: 15px;
         padding: 0 .5rem;
     }
     .search-bar-nav,.search-bar-nav2{
         width: 90%;
+        background: rgba(255,255,255,.2);
+        color: white;
     }
 }
