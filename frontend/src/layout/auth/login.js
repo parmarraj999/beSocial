@@ -39,7 +39,7 @@ function Login({setCurrUi}) {
           window.localStorage.setItem("userId",result.data._id)
           setErrorMsg("")
           setTimeout(() => {
-            // navigate("/")
+            navigate("/")
           }, 3000);
         }
         if(result.data === "No user Found !"){
